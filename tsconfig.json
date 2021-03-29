@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "declaration": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "target": "esnext",
+    "outDir": "./lib",
+    "declarationDir": "./typings",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "jsx": "react",
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "typings"
+  ]
+}
