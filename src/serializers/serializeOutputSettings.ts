@@ -18,21 +18,21 @@ const serializeOutputSettings = (
 ): Record<string, any> => {
   switch (widgetType) {
     case 'heatmap':
-      return  chartTransformations.heatmap.serializeOut(chartSettings);
+      return chartTransformations.heatmap.serializeOut(chartSettings);
     case 'choropleth':
-      return  chartTransformations.choropleth.serializeOut(chartSettings);
+      return chartTransformations.choropleth.serializeOut(chartSettings);
     case 'donut':
     case 'pie':
-      return  chartTransformations.circular.serializeOut(chartSettings);
+      return chartTransformations.circular.serializeOut(chartSettings);
     case 'funnel':
-      return  chartTransformations.funnel.serializeOut(chartSettings);
+      return chartTransformations.funnel.serializeOut(chartSettings);
     case 'metric':
-      return  chartTransformations.metric.serializeOut(chartSettings);
+      return chartTransformations.metric.serializeOut(chartSettings);
     case 'line':
     case 'area':
-        return  chartTransformations.line.serializeOut(chartSettings);
+      return chartTransformations.line.serializeOut(chartSettings);
     case 'bar':
-      return  chartTransformations.bar.serializeOut(chartSettings);
+      return chartTransformations.bar.serializeOut(chartSettings);
     default:
       return {};
   }

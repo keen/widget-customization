@@ -4,7 +4,10 @@ import { PickerWidgets } from '@keen.io/widget-picker';
 import HeadingSettings from '../HeadingSettings';
 import FormatValues from '../FormatValues';
 
-import { ChartCustomizationSettings, WidgetCustomizationSettings } from '../../types';
+import {
+  ChartCustomizationSettings,
+  WidgetCustomizationSettings,
+} from '../../types';
 
 type Props = {
   /** Widget type */
@@ -17,7 +20,12 @@ type Props = {
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
 };
 
-const App: FC<Props> = ({ chart, widget, onUpdateChartSettings, onUpdateWidgetSettings }) => {
+const App: FC<Props> = ({
+  chart,
+  widget,
+  onUpdateChartSettings,
+  onUpdateWidgetSettings,
+}) => {
   const { title, subtitle } = widget;
   const { formatValue } = chart;
 
@@ -26,19 +34,28 @@ const App: FC<Props> = ({ chart, widget, onUpdateChartSettings, onUpdateWidgetSe
       <HeadingSettings
         title={title}
         subtitle={subtitle}
-        onUpdateTitleSettings={(settings) => onUpdateWidgetSettings({
-          ...widget,
-          title: settings,
-        })}
-        onUpdateSubtitleSettings={(settings) => onUpdateWidgetSettings({
-          ...widget,
-          subtitle: settings,
-        })}
+        onUpdateTitleSettings={(settings) =>
+          onUpdateWidgetSettings({
+            ...widget,
+            title: settings,
+          })
+        }
+        onUpdateSubtitleSettings={(settings) =>
+          onUpdateWidgetSettings({
+            ...widget,
+            subtitle: settings,
+          })
+        }
       />
-      <FormatValues formatValue={formatValue} onUpdateFormatValue={(settings) => onUpdateChartSettings({
-        ...chart,
-        formatValue: settings,
-      })} />
+      <FormatValues
+        formatValue={formatValue}
+        onUpdateFormatValue={(settings) =>
+          onUpdateChartSettings({
+            ...chart,
+            formatValue: settings,
+          })
+        }
+      />
     </div>
   );
 };
