@@ -6,9 +6,7 @@ type Props = {
   onUpdateFormatValue: (formatValue: string | null) => void;
 };
 
-const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
-
-  return (
+const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => (
     <div>
     <Input
       defaultValue={formatValue}
@@ -20,6 +18,5 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     />
     </div>
   );
-};
 
 export default FormatValues;
