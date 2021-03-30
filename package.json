@@ -1,7 +1,7 @@
 {
   "name": "@keen.io/widget-customization",
   "description": "Widget customization user interface",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "src/index.ts",
@@ -42,6 +42,8 @@
     }
   },
   "peerDependencies": {
+    "@keen.io/ui-core": ">=2",
+    "@keen.io/widgets": ">=2",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": ">=5"
@@ -55,6 +57,10 @@
     "@babel/preset-typescript": "^7.10.4",
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
+    "@keen.io/charts": "^2.12.4",
+    "@keen.io/ui-core": "^2.16.0",
+    "@keen.io/widget-picker": "^1.2.85",
+    "@keen.io/widgets": "^2.3.12",
     "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.1",
     "@testing-library/jest-dom": "^5.8.0",
     "@testing-library/react": "^10.0.4",
@@ -93,6 +99,7 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-styled-components": "^7.0.2",
     "lint-staged": "^10.2.11",
+    "moment-timezone": "^0.5.33",
     "prettier": "^2.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -111,7 +118,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:keen/query-creator.git"
+    "url": "git@github.com:keen/widget-customization.git"
   },
   "bugs": "https://github.com/keen/widget-settings/issues",
   "author": "Keen IO <team@keen.io> (https://keen.io/)",
@@ -126,5 +133,8 @@
     "access": "public"
   },
   "browserslist": "> 0.25%, not dead",
-  "types": "./typings/index.d.ts"
+  "types": "./typings/index.d.ts",
+  "dependencies": {
+    "deepmerge": "^4.2.2"
+  }
 }
