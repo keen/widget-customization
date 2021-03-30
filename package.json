@@ -1,7 +1,7 @@
 {
   "name": "@keen.io/widget-customization",
   "description": "Widget customization user interface",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "src/index.ts",
