@@ -1,7 +1,7 @@
 {
   "name": "@keen.io/widget-customization",
   "description": "Widget customization user interface",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "src/index.ts",
@@ -12,7 +12,7 @@
   "scripts": {
     "start": "concurrently --kill-others \"NODE_ENV=development webpack-dev-server\"",
     "test": "jest",
-    "test:ci": "jest -w 1",
+    "test:ci": "jest -w 1 --passWithNoTests",
     "test:watch": "NODE_ENV=test jest --watch",
     "prebuild": "rimraf dist lib tsconfig.tsbuildinfo",
     "build": "tsc",
