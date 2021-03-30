@@ -23,7 +23,11 @@ const WidgetCustomization: FC<Props> = ({
   onUpdateWidgetSettings,
   onUpdateChartSettings,
 }) => {
-  const { chart, widget } = serializeInputSettings(widgetType, chartSettings, widgetSettings);
+  const { chart, widget } = serializeInputSettings(
+    widgetType,
+    chartSettings,
+    widgetSettings
+  );
 
   return (
     <div>
@@ -32,7 +36,10 @@ const WidgetCustomization: FC<Props> = ({
         chart={chart}
         widget={widget}
         onUpdateChartSettings={(settings) => {
-          const serializedSettings = serializeOutputSettings(widgetType, settings);
+          const serializedSettings = serializeOutputSettings(
+            widgetType,
+            settings
+          );
           onUpdateChartSettings(serializedSettings);
         }}
         onUpdateWidgetSettings={onUpdateWidgetSettings}
