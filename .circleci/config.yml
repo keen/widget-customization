@@ -14,7 +14,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "3e:dc:c9:5f:73:83:17:ff:f0:10:0e:38:28:e8:04:00"
+            - "ce:15:f0:73:81:b2:22:db:8c:ea:7e:98:16:59:05:8f"
       - run:
           name: Setup GIT email
           command: git config --global user.email "developer@keen.io"
