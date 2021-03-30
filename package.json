@@ -118,7 +118,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:keen/query-creator.git"
+    "url": "git@github.com:keen/widget-customization.git"
   },
   "bugs": "https://github.com/keen/widget-settings/issues",
   "author": "Keen IO <team@keen.io> (https://keen.io/)",
