@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
 
+import { Layout, Section } from './App.styles';
+
 import HeadingSettings from '../HeadingSettings';
 import FormatValues from '../FormatValues';
 
@@ -30,33 +32,37 @@ const App: FC<Props> = ({
   const { formatValue } = chart;
 
   return (
-    <div>
-      <HeadingSettings
-        title={title}
-        subtitle={subtitle}
-        onUpdateTitleSettings={(settings) =>
-          onUpdateWidgetSettings({
-            ...widget,
-            title: settings,
-          })
-        }
-        onUpdateSubtitleSettings={(settings) =>
-          onUpdateWidgetSettings({
-            ...widget,
-            subtitle: settings,
-          })
-        }
-      />
-      <FormatValues
-        formatValue={formatValue}
-        onUpdateFormatValue={(settings) =>
-          onUpdateChartSettings({
-            ...chart,
-            formatValue: settings,
-          })
-        }
-      />
-    </div>
+    <Layout>
+      <Section>
+        <HeadingSettings
+          title={title}
+          subtitle={subtitle}
+          onUpdateTitleSettings={(settings) =>
+            onUpdateWidgetSettings({
+              ...widget,
+              title: settings,
+            })
+          }
+          onUpdateSubtitleSettings={(settings) =>
+            onUpdateWidgetSettings({
+              ...widget,
+              subtitle: settings,
+            })
+          }
+        />
+      </Section>
+      <Section>
+        <FormatValues
+          formatValue={formatValue}
+          onUpdateFormatValue={(settings) =>
+            onUpdateChartSettings({
+              ...chart,
+              formatValue: settings,
+            })
+          }
+        />
+      </Section>
+    </Layout>
   );
 };
 
