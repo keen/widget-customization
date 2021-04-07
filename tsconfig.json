@@ -7,7 +7,7 @@
     "removeComments": true,
     "target": "es2019",
     "outDir": "./lib",
-    "declarationDir": "./typings",
+    "declarationDir": "./dist",
     "moduleResolution": "node",
     "allowJs": true,
     "resolveJsonModule": true,

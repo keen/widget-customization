@@ -13,5 +13,8 @@
   },
   "widget_customization_section": {
     "clear_button": "Clear"
+  },
+  "widget_customization": {
+    "settings_disabled": "Run your query first"
   }
 }
