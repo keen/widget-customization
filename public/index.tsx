@@ -42,6 +42,16 @@ const App = () => {
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}
         onUpdateChartSettings={(settings) => setChartSettings(settings)}
+        modalContainer="#modal-root"
+        customizationSections={{
+          headingSettings: {
+            isDisabled: null,
+          },
+          formatValues: {
+            isNotAvailable: null,
+            isDisabled: null,
+          },
+        }}
       />
     </>
   );

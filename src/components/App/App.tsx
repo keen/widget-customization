@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
-import { Headline } from '@keen.io/typography';
 import { PickerWidgets } from '@keen.io/widget-picker';
-import { colors } from '@keen.io/colors';
-import { useTranslation } from 'react-i18next';
 
-import { Layout, Section, CustomizationDisabled } from './App.styles';
+import { Layout, Section } from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
-import FormatValues from '../FormatValues';
+import FormatSettings from '../FormatSettings';
 
 import {
   ChartCustomizationSettings,
   WidgetCustomizationSettings,
+  SectionsConfiguration,
 } from '../../types';
 
 type Props = {
@@ -25,8 +23,8 @@ type Props = {
   onUpdateChartSettings: (chart: ChartCustomizationSettings) => void;
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
-  /** Customization disabled */
-  isCustomizationDisabled: boolean;
+  /** Customization sections configuration */
+  customizationSections: SectionsConfiguration;
 };
 
 const App: FC<Props> = ({
@@ -34,9 +32,9 @@ const App: FC<Props> = ({
   widget,
   onUpdateChartSettings,
   onUpdateWidgetSettings,
-  isCustomizationDisabled,
+  customizationSections,
 }) => {
-  const { t } = useTranslation();
+  const { headingSettings, formatValues } = customizationSections;
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
@@ -47,6 +45,7 @@ const App: FC<Props> = ({
         <HeadingSettings
           title={title}
           subtitle={subtitle}
+          settingsDisabled={headingSettings?.isDisabled}
           onUpdateTitleSettings={(settings) =>
             onUpdateWidgetSettings({
               ...widget,
@@ -62,7 +61,9 @@ const App: FC<Props> = ({
         />
       </Section>
       <Section>
-        <FormatValues
+        <FormatSettings
+          formattingDisabled={formatValues?.isDisabled}
+          formattingNotAvailable={formatValues?.isNotAvailable}
           formatValue={formatValue}
           onUpdateFormatValue={(settings) =>
             onUpdateChartSettings({
@@ -72,13 +73,6 @@ const App: FC<Props> = ({
           }
         />
       </Section>
-      {isCustomizationDisabled && (
-        <CustomizationDisabled onClick={(e) => e.stopPropagation()}>
-          <Headline variant="h3" color={colors.blue[500]} fontWeight={400}>
-            {t('widget_customization.settings_disabled')}
-          </Headline>
-        </CustomizationDisabled>
-      )}
     </Layout>
   );
 };

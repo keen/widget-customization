@@ -2,8 +2,11 @@ import React, { FC, useState, useRef, useEffect } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
 
 import App from './components/App';
+import { AppContext } from './contexts';
 
 import { serializeInputSettings, serializeOutputSettings } from './serializers';
+
+import { SectionsConfiguration } from './types';
 
 type Props = {
   /** Widget type*/
@@ -16,8 +19,10 @@ type Props = {
   onUpdateChartSettings: (settings: Record<string, any>) => void;
   /** Update widget settings */
   onUpdateWidgetSettings: (settings: Record<string, any>) => void;
-  /** Widget customization disabled */
-  isDisabled?: boolean;
+  /** Modal container element */
+  modalContainer?: string;
+  /** Customization sections configuration */
+  customizationSections?: SectionsConfiguration;
 };
 
 const WidgetCustomization: FC<Props> = ({
@@ -26,7 +31,8 @@ const WidgetCustomization: FC<Props> = ({
   widgetSettings = {},
   onUpdateWidgetSettings,
   onUpdateChartSettings,
-  isDisabled,
+  modalContainer,
+  customizationSections = {},
 }) => {
   const widgetRef = useRef<PickerWidgets>(widgetType);
   const { chart, widget } = serializeInputSettings(
@@ -49,12 +55,12 @@ const WidgetCustomization: FC<Props> = ({
   }, [widgetType]);
 
   return (
-    <>
+    <AppContext.Provider value={{ modalContainer }}>
       <App
         widgetType={widgetType}
         chart={chart}
         widget={widget}
-        isCustomizationDisabled={isDisabled}
+        customizationSections={customizationSections}
         onUpdateChartSettings={(settings) => {
           const serializedSettings = serializeOutputSettings(
             widgetType,
@@ -65,7 +71,7 @@ const WidgetCustomization: FC<Props> = ({
         }}
         onUpdateWidgetSettings={onUpdateWidgetSettings}
       />
-    </>
+    </AppContext.Provider>
   );
 };
 
