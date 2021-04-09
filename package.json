@@ -44,8 +44,10 @@
   "peerDependencies": {
     "@keen.io/ui-core": ">=2",
     "@keen.io/widgets": ">=2",
+    "i18next": ">=19",
     "react": ">=16",
     "react-dom": ">=16",
+    "react-i18next": ">=11",
     "styled-components": ">=5"
   },
   "devDependencies": {
@@ -91,6 +93,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
+    "i18next": "^19.9.2",
     "imports-loader": "^0.8.0",
     "jest": "^26.0.1",
     "jest-environment-jsdom-c3": "^2.0.0",
@@ -102,6 +105,7 @@
     "prettier": "^2.0.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-i18next": "^11.7.3",
     "react-test-renderer": "^16.13.1",
     "regenerator-runtime": "^0.13.5",
     "standard-version": "^7.0.1",
@@ -134,6 +138,9 @@
   "browserslist": "> 0.25%, not dead",
   "types": "./typings/index.d.ts",
   "dependencies": {
-    "deepmerge": "^4.2.2"
+    "@keen.io/colors": "^1.1.0",
+    "@keen.io/typography": "^1.2.0",
+    "deepmerge": "^4.2.2",
+    "polished": "^3.4.4"
   }
 }

@@ -4,6 +4,8 @@
 
 The Widget Settings is an open source point-and-click interface used to setup visualization settings. It's maintained by the team at [Keen IO](https://keen.io/).
 
+<img width="100%" src="https://user-images.githubusercontent.com/7753369/114176569-9cef9800-993b-11eb-9c3f-065acc3e305b.png">
+
 ### Install
 
 ```ssh
