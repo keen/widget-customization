@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { PickerWidgets } from '@keen.io/widget-picker';
 
 import WidgetCustomization from '../src/WidgetCustomization';
+import { createWidgetSettings } from '../src/utils';
+import {
+  ChartCustomizationSettings,
+  WidgetCustomizationSettings,
+} from '../src/types';
 
 import createI18n from './i18n';
 import { lineChart as fixture } from './fixtures';
@@ -10,26 +14,19 @@ import { lineChart as fixture } from './fixtures';
 createI18n();
 
 const App = () => {
-  const [widgetType, setWidgetType] = useState<PickerWidgets>('line');
-
-  const [chartSettings, setChartSettings] = useState<Record<string, any>>(
-    fixture.chartSettings
-  );
-  const [widgetSettings, setWidgetSettings] = useState<Record<string, any>>(
-    fixture.widgetSettings
+  const [
+    chartSettings,
+    setChartSettings,
+  ] = useState<ChartCustomizationSettings>(fixture.chartSettings);
+  const [
+    widgetSettings,
+    setWidgetSettings,
+  ] = useState<WidgetCustomizationSettings>(
+    createWidgetSettings(fixture.widgetSettings)
   );
 
   return (
     <>
-      <h4>{widgetType}</h4>
-      <section>
-        <button onClick={() => setWidgetType('table')}>table</button>
-        <button onClick={() => setWidgetType('metric')}>metric</button>
-        <button onClick={() => setWidgetType('line')}>line</button>
-        <button onClick={() => setWidgetType('heatmap')}>heatmap</button>
-        <button onClick={() => setWidgetType('choropleth')}>choropleth</button>
-        <button onClick={() => setWidgetType('bar')}>bar</button>
-      </section>
       <section>
         <h5>Chart Settings</h5>
         <pre>{JSON.stringify(chartSettings)}</pre>
@@ -37,7 +34,6 @@ const App = () => {
         <pre>{JSON.stringify(widgetSettings)}</pre>
       </section>
       <WidgetCustomization
-        widgetType={widgetType}
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}

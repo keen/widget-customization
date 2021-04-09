@@ -1,24 +1,23 @@
-import React, { FC, useState, useRef, useEffect } from 'react';
-import { PickerWidgets } from '@keen.io/widget-picker';
+import React, { FC } from 'react';
 
 import App from './components/App';
 import { AppContext } from './contexts';
 
-import { serializeInputSettings, serializeOutputSettings } from './serializers';
-
-import { SectionsConfiguration } from './types';
+import {
+  SectionsConfiguration,
+  ChartCustomizationSettings,
+  WidgetCustomizationSettings,
+} from './types';
 
 type Props = {
-  /** Widget type*/
-  widgetType: PickerWidgets;
   /** Chart plot settings */
-  chartSettings?: Record<string, any>;
+  chartSettings?: ChartCustomizationSettings;
   /** Widget component settings */
-  widgetSettings?: Record<string, any>;
+  widgetSettings?: WidgetCustomizationSettings;
   /** Update chart settings */
-  onUpdateChartSettings: (settings: Record<string, any>) => void;
+  onUpdateChartSettings: (settings: ChartCustomizationSettings) => void;
   /** Update widget settings */
-  onUpdateWidgetSettings: (settings: Record<string, any>) => void;
+  onUpdateWidgetSettings: (settings: WidgetCustomizationSettings) => void;
   /** Modal container element */
   modalContainer?: string;
   /** Customization sections configuration */
@@ -26,48 +25,21 @@ type Props = {
 };
 
 const WidgetCustomization: FC<Props> = ({
-  widgetType,
-  chartSettings = {},
-  widgetSettings = {},
+  chartSettings,
+  widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
   modalContainer,
   customizationSections = {},
 }) => {
-  const widgetRef = useRef<PickerWidgets>(widgetType);
-  const { chart, widget } = serializeInputSettings(
-    widgetType,
-    chartSettings,
-    widgetSettings
-  );
-
-  const [serializedChartSettings, setSerializedChartSettings] = useState(chart);
-
-  useEffect(() => {
-    if (widgetRef.current !== widgetType) {
-      const serializedSettings = serializeOutputSettings(
-        widgetType,
-        serializedChartSettings
-      );
-      onUpdateChartSettings(serializedSettings);
-      widgetRef.current = widgetType;
-    }
-  }, [widgetType]);
-
   return (
     <AppContext.Provider value={{ modalContainer }}>
       <App
-        widgetType={widgetType}
-        chart={chart}
-        widget={widget}
+        chart={chartSettings}
+        widget={widgetSettings}
         customizationSections={customizationSections}
         onUpdateChartSettings={(settings) => {
-          const serializedSettings = serializeOutputSettings(
-            widgetType,
-            settings
-          );
-          setSerializedChartSettings(settings);
-          onUpdateChartSettings(serializedSettings);
+          onUpdateChartSettings(settings);
         }}
         onUpdateWidgetSettings={onUpdateWidgetSettings}
       />

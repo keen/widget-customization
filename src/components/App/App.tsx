@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { PickerWidgets } from '@keen.io/widget-picker';
 
 import { Layout, Section } from './App.styles';
 
@@ -13,8 +12,6 @@ import {
 } from '../../types';
 
 type Props = {
-  /** Widget type */
-  widgetType: PickerWidgets;
   /** Chart customization settings */
   chart: ChartCustomizationSettings;
   /** Widget customization settings */

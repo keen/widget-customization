@@ -1,12 +1,13 @@
 export const lineChart = {
   widgetSettings: {
     title: {
-      content: 'Monthly MRR'
+      content: 'Monthly MRR',
+    },
+    subtitle: {
+      content: 'Subtitle',
     },
   },
   chartSettings: {
-    yScaleSettings: {
-      formatLabel: '${number; 0.00; multiply; 100}£',
-    }
+    formatValue: null,
   },
 };
