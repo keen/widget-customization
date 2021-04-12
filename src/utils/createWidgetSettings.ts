@@ -14,13 +14,18 @@ import { WidgetCustomizationSettings } from '../types';
 const createWidgetSettings = (
   widgetSettings: Record<string, any> = {}
 ): WidgetCustomizationSettings => {
+  const { title, subtitle } = widgetSettings;
   const baseSettings = {
     ...createHeadingSettings(),
   };
 
-  return deepMerge(baseSettings, widgetSettings, {
-    arrayMerge: (_target, source) => source,
-  }) as WidgetCustomizationSettings;
+  return deepMerge(
+    baseSettings,
+    { title, subtitle },
+    {
+      arrayMerge: (_target, source) => source,
+    }
+  ) as WidgetCustomizationSettings;
 };
 
 export default createWidgetSettings;
