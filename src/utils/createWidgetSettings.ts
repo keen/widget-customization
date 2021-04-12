@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import deepMerge from 'deepmerge';
 
 import createHeadingSettings from './createHeadingSettings';
@@ -14,18 +15,14 @@ import { WidgetCustomizationSettings } from '../types';
 const createWidgetSettings = (
   widgetSettings: Record<string, any> = {}
 ): WidgetCustomizationSettings => {
-  const { title, subtitle } = widgetSettings;
+  const { geographicArea, ...restSettings } = widgetSettings;
   const baseSettings = {
     ...createHeadingSettings(),
   };
 
-  return deepMerge(
-    baseSettings,
-    { title, subtitle },
-    {
-      arrayMerge: (_target, source) => source,
-    }
-  ) as WidgetCustomizationSettings;
+  return deepMerge(baseSettings, restSettings, {
+    arrayMerge: (_target, source) => source,
+  }) as WidgetCustomizationSettings;
 };
 
 export default createWidgetSettings;
