@@ -1,5 +1,6 @@
 import WidgetCustomization from './WidgetCustomization';
 import { serializeInputSettings, serializeOutputSettings } from './serializers';
+import { useCustomizationSections } from './hooks';
 import { createWidgetSettings } from './utils';
 
 import {
@@ -12,6 +13,7 @@ import {
 export default WidgetCustomization;
 
 export {
+  useCustomizationSections,
   serializeInputSettings,
   serializeOutputSettings,
   createWidgetSettings,
