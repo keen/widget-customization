@@ -2,7 +2,7 @@ import { FunnelChartSettings } from '@keen.io/charts';
 
 import transform from './transform';
 
-test('transforms metric chart settings to customization interface', () => {
+test('transforms funnel format settings to customization interface', () => {
   const chartSettings = {
     formatValues: null,
   } as FunnelChartSettings;
@@ -12,7 +12,7 @@ test('transforms metric chart settings to customization interface', () => {
   });
 });
 
-test('transforms metric chart scale label format settings to customization interface', () => {
+test('transforms funnel chart value format settings to customization interface', () => {
   const chartSettings = {
     formatValues: '${number; 0.00}$',
   } as FunnelChartSettings;
@@ -22,7 +22,7 @@ test('transforms metric chart scale label format settings to customization inter
   });
 });
 
-test('transforms customization interface to metric settings ', () => {
+test('transforms customization interface to funnel settings ', () => {
   const settings = {
     formatValue: '${number; 0.00}$',
   };
