@@ -99,6 +99,25 @@ test('allows user to edit widget title', () => {
   });
 });
 
+test('allows user to use saved query name as widget title', () => {
+  const savedQueryName = '@savedQueryName';
+  const {
+    wrapper: { getByTestId },
+    props,
+    title,
+  } = render({
+    savedQueryName,
+  });
+
+  const element = getByTestId('inherit-query-name');
+  fireEvent.click(element);
+
+  expect(props.onUpdateTitleSettings).toHaveBeenCalledWith({
+    ...title,
+    content: savedQueryName,
+  });
+});
+
 test('allows user to edit widget subtitle', () => {
   const {
     wrapper: { getByPlaceholderText },
@@ -115,4 +134,14 @@ test('allows user to edit widget subtitle', () => {
     ...subtitle,
     content: '@subtitle',
   });
+});
+
+test('do not renders saved query name', () => {
+  const {
+    wrapper: { queryByTestId },
+  } = render();
+
+  const element = queryByTestId('inherit-query-name');
+
+  expect(element).not.toBeInTheDocument();
 });

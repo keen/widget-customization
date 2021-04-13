@@ -22,11 +22,14 @@ type Props = {
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Customization sections configuration */
   customizationSections: SectionsConfiguration;
+  /** Connected saved query name */
+  savedQueryName?: string;
 };
 
 const App: FC<Props> = ({
   chart,
   widget,
+  savedQueryName,
   onUpdateChartSettings,
   onUpdateWidgetSettings,
   customizationSections,
@@ -42,6 +45,7 @@ const App: FC<Props> = ({
         <HeadingSettings
           title={title}
           subtitle={subtitle}
+          savedQueryName={savedQueryName}
           settingsDisabled={headingSettings?.isDisabled}
           onUpdateTitleSettings={(settings) =>
             onUpdateWidgetSettings({

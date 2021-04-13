@@ -20,6 +20,8 @@ type Props = {
   onUpdateWidgetSettings: (settings: WidgetCustomizationSettings) => void;
   /** Modal container element */
   modalContainer?: string;
+  /** Connected save query name */
+  savedQueryName?: string;
   /** Customization sections configuration */
   customizationSections?: SectionsConfiguration;
 };
@@ -30,6 +32,7 @@ const WidgetCustomization: FC<Props> = ({
   onUpdateWidgetSettings,
   onUpdateChartSettings,
   modalContainer,
+  savedQueryName,
   customizationSections = {},
 }) => {
   return (
@@ -37,6 +40,7 @@ const WidgetCustomization: FC<Props> = ({
       <App
         chart={chartSettings}
         widget={widgetSettings}
+        savedQueryName={savedQueryName}
         customizationSections={customizationSections}
         onUpdateChartSettings={(settings) => {
           onUpdateChartSettings(settings);
