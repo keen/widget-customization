@@ -93,6 +93,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         </BodyText>
         <ControlContainer>
           <Input
+            data-testid="input-prefix"
             value={prefix || ''}
             variant="solid"
             placeholder={t(
@@ -114,6 +115,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         </BodyText>
         <ControlContainer>
           <Input
+            data-testid="input-suffix"
             value={suffix || ''}
             variant="solid"
             disabled={!precision}
@@ -216,6 +218,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             </Dropdown>
           </ControlContainer>
           <Input
+            data-testid="input-value"
             value={value || ''}
             variant="solid"
             placeholder={t(

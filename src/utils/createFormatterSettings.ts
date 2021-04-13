@@ -32,7 +32,7 @@ const createFormatterSettings = (formatValue: string | null) => {
     );
     precision = formatPrecision ? formatPrecision.trim() : null;
     operation = formatOperation ? formatOperation.trim() : null;
-    value = +formatValue || null;
+    value = formatValue ? formatValue.trim() : null;
   }
 
   return {
