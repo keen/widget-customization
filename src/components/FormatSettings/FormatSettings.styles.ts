@@ -14,6 +14,7 @@ export const Row = styled.div`
   justify-content: space-between;
   column-gap: 10px;
   margin-bottom: 10px;
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -23,6 +24,7 @@ export const MultiControl = styled.div<{ isDisabled: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   ${mixin};
+
   ${({ isDisabled }) =>
     isDisabled &&
     css`

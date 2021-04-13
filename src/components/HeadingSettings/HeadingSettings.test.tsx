@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React from 'react';
-import { render as rtlRender, fireEvent } from '@testing-library/react';
+import {
+  render as rtlRender,
+  fireEvent,
+  cleanup,
+} from '@testing-library/react';
 
 import HeadingSettings from './HeadingSettings';
+import { AppContext } from '../../contexts';
 
 import { createHeadingSettings } from '../../utils';
 
@@ -17,7 +22,11 @@ const render = (overProps: any = {}) => {
     ...overProps,
   };
 
-  const wrapper = rtlRender(<HeadingSettings {...props} />);
+  const wrapper = rtlRender(
+    <AppContext.Provider value={{ modalContainer: '#modal-root' }}>
+      <HeadingSettings {...props} />
+    </AppContext.Provider>
+  );
 
   return {
     props,
@@ -26,6 +35,51 @@ const render = (overProps: any = {}) => {
     subtitle,
   };
 };
+
+afterEach(() => {
+  cleanup();
+});
+
+beforeEach(() => {
+  let modalRoot = document.getElementById('modal-root');
+  if (!modalRoot) {
+    modalRoot = document.createElement('div');
+    modalRoot.setAttribute('id', 'modal-root');
+    document.body.appendChild(modalRoot);
+  }
+});
+
+test('renders section title', () => {
+  const {
+    wrapper: { getByText },
+  } = render();
+
+  expect(
+    getByText('widget_customization_heading_settings.section_title')
+  ).toBeInTheDocument();
+});
+
+test('renders description', () => {
+  const {
+    wrapper: { getByText },
+  } = render();
+
+  expect(
+    getByText('widget_customization_heading_settings.section_description')
+  ).toBeInTheDocument();
+});
+
+test('renders tooltip with message when settings are disabled', () => {
+  const settingsDisabled = '@settingsDisabled';
+  const {
+    wrapper: { getByTestId, getByText },
+  } = render({ settingsDisabled });
+
+  const element = getByTestId('settings-container');
+  fireEvent.mouseEnter(element);
+
+  expect(getByText(settingsDisabled)).toBeInTheDocument();
+});
 
 test('allows user to edit widget title', () => {
   const {

@@ -5,6 +5,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "src/index.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "typings"
@@ -136,11 +137,12 @@
     "access": "public"
   },
   "browserslist": "> 0.25%, not dead",
-  "types": "./typings/index.d.ts",
   "dependencies": {
     "@keen.io/colors": "^1.1.0",
+    "@keen.io/query": "^1.2.0",
     "@keen.io/typography": "^1.2.0",
     "deepmerge": "^4.2.2",
-    "polished": "^3.4.4"
+    "polished": "^3.4.4",
+    "react-use": "^17.2.3"
   }
 }

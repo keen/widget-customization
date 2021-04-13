@@ -9,6 +9,16 @@ export type WidgetCustomizationSettings = {
   subtitle: TextSettings;
 };
 
+export type SectionsConfiguration = {
+  formatValues?: {
+    isNotAvailable: string;
+    isDisabled: string;
+  };
+  headingSettings?: {
+    isDisabled: string;
+  };
+};
+
 export type SerializedSettings = {
   chart: ChartCustomizationSettings;
   widget: WidgetCustomizationSettings;

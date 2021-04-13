@@ -1,5 +1,6 @@
-import React, { FC, useRef, useState, useEffect, useMemo } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDebounce } from 'react-use';
 import {
   Input,
   DropableContainer,
@@ -15,8 +16,6 @@ import {
   MultiControl,
   ControlContainer,
 } from './FormatValues.styles';
-
-import SectionTitle from '../SectionTitle';
 
 import {
   PATTERNS_OPTIONS as patterns,
@@ -45,7 +44,6 @@ const initialState: FormatterSettings = {
 
 const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
-  const inputRef = useRef(null);
 
   const [dropdown, setDropdown] = useState<'precision' | 'operation'>();
   const [state, setState] = useState<FormatterSettings>(initialState);
@@ -56,6 +54,21 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   }, [formatValue]);
 
   const { prefix, suffix, precision, operation, value } = state;
+
+  useDebounce(
+    () => {
+      const settings = serializeFormatterSettings({
+        prefix,
+        suffix,
+        precision,
+        operation,
+        value,
+      });
+      onUpdateFormatValue(settings);
+    },
+    1000,
+    [state]
+  );
 
   const patternsOptions = useMemo(
     () => [
@@ -74,25 +87,6 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   return (
     <Container>
-      <SectionTitle
-        title={t('widget_customization_format_value_settings.section_title')}
-        description={t(
-          'widget_customization_format_value_settings.section_description'
-        )}
-        onClear={() => {
-          onUpdateFormatValue(null);
-          inputRef.current.value = '';
-        }}
-      />
-      <Input
-        value={formatValue || ''}
-        ref={inputRef}
-        variant="solid"
-        onChange={(e) => {
-          const value = e.currentTarget.value ? e.currentTarget.value : null;
-          onUpdateFormatValue(value);
-        }}
-      />
       <Row>
         <BodyText variant="body2" fontWeight="bold">
           {t('widget_customization_format_value_settings.prefix')}
@@ -105,14 +99,11 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               'widget_customization_format_value_settings.text_placeholder'
             )}
             onChange={(e) => {
-              const settings = serializeFormatterSettings({
-                prefix: e.currentTarget.value,
-                suffix,
-                precision,
-                operation,
-                value,
-              });
-              onUpdateFormatValue(settings);
+              const inputValue = e.currentTarget.value;
+              setState((state) => ({
+                ...state,
+                prefix: inputValue,
+              }));
             }}
           />
         </ControlContainer>
@@ -130,14 +121,11 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               'widget_customization_format_value_settings.text_placeholder'
             )}
             onChange={(e) => {
-              const settings = serializeFormatterSettings({
-                prefix,
-                suffix: e.currentTarget.value,
-                precision,
-                operation,
-                value,
-              });
-              onUpdateFormatValue(settings);
+              const inputValue = e.currentTarget.value;
+              setState((state) => ({
+                ...state,
+                suffix: inputValue,
+              }));
             }}
           />
         </ControlContainer>
@@ -172,14 +160,10 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                   items={patternsOptions}
                   setActiveItem={(item) => patternOption.value === item.value}
                   onClick={(_e, { value: precisionValue }) => {
-                    const settings = serializeFormatterSettings({
-                      prefix,
-                      suffix,
+                    setState((state) => ({
+                      ...state,
                       precision: precisionValue,
-                      operation,
-                      value,
-                    });
-                    onUpdateFormatValue(settings);
+                    }));
                   }}
                 />
               )}
@@ -225,16 +209,6 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                         ...state,
                         operation: operationValue,
                       }));
-                      if (operationValue && value) {
-                        const settings = serializeFormatterSettings({
-                          prefix,
-                          suffix,
-                          precision,
-                          operation: operationValue,
-                          value,
-                        });
-                        onUpdateFormatValue(settings);
-                      }
                     }}
                   />
                 )}
@@ -253,18 +227,9 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               const inputValue = e.currentTarget.value;
               setState((state) => ({
                 ...state,
+                operation: inputValue === '' ? null : state.operation,
                 value: inputValue,
               }));
-              if (operation) {
-                const settings = serializeFormatterSettings({
-                  prefix,
-                  suffix,
-                  precision,
-                  operation,
-                  value: inputValue,
-                });
-                onUpdateFormatValue(settings);
-              }
             }}
           />
         </MultiControl>
