@@ -35,7 +35,7 @@ test('allows user to edit widget title', () => {
   } = render();
 
   const input = getByPlaceholderText(
-    'widget_heading_settings.title_placeholder'
+    'widget_customization_heading_settings.title_placeholder'
   );
   fireEvent.change(input, { target: { value: '@title' } });
 
@@ -53,7 +53,7 @@ test('allows user to edit widget subtitle', () => {
   } = render();
 
   const input = getByPlaceholderText(
-    'widget_heading_settings.subtitle_placeholder'
+    'widget_customization_heading_settings.subtitle_placeholder'
   );
   fireEvent.change(input, { target: { value: '@subtitle' } });
 

@@ -1530,7 +1530,29 @@
     "@keen.io/colors" "^1.0.0"
     styled-system "^5.1.5"
 
-"@keen.io/ui-core@^2.16.0", "@keen.io/ui-core@^2.20.3":
+"@keen.io/ui-core@^2.16.0":
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/@keen.io/ui-core/-/ui-core-2.23.0.tgz#a8650b6532b868a967fbec3418429e53ff91fe21"
+  integrity sha512-LRPCIq8jmNFA7dSUyHfv0YGYUOg82HllnRP826GeZmFPGno+6jUz11hJ4DbX2c3La96OQrPJX/DtafSqXCSC3A==
+  dependencies:
+    "@keen.io/colors" "^1.1.0"
+    "@keen.io/icons" "^1.4.1"
+    "@keen.io/query" "^1.2.0"
+    "@keen.io/typography" "^1.3.0"
+    color "^3.1.2"
+    framer-motion "^1.11.1"
+    fuse.js "^6.4.1"
+    polished "^3.4.4"
+    rc-time-picker "^3.7.3"
+    react-column-resizer "^1.1.9"
+    react-dates "^21.8.0"
+    react-select "^3.1.0"
+    react-vtree "2.0.4"
+    react-window "^1.8.6"
+    styled-system "^5.1.5"
+    webfontloader "^1.6.28"
+
+"@keen.io/ui-core@^2.20.3":
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/@keen.io/ui-core/-/ui-core-2.20.3.tgz#a07f3d26abea30ef667bf86a63ecbe2f4fd8dbb7"
   integrity sha512-hrkTLBtff2VsgnJqlc33Mk6z56SJ3PA6byFI+eBV7oVkRvrSfu3ooCyJkEPf0P4yYKbovnpVANTI+r6pCn4Y3Q==
@@ -10237,9 +10259,9 @@ react-with-styles-interface-css@^6.0.0:
     global-cache "^1.2.1"
 
 react-with-styles@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/react-with-styles/-/react-with-styles-4.1.0.tgz#4bfc2daa92dd72033fc19fd861b90225a682a640"
-  integrity sha512-zp05fyA6XFetqr07ox/a0bCFyEj//gUozI9cC1GW59zaGJ38STnxYvzotutgpzMyHOd7TFW9ZiZeBKjsYaS+RQ==
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-with-styles/-/react-with-styles-4.2.0.tgz#0b8a8e5d94d082518b9f564f6fcf6103e28096c5"
+  integrity sha512-tZCTY27KriRNhwHIbg1NkSdTTOSfXDg6Z7s+Q37mtz0Ym7Sc7IOr3PzVt4qJhJMW6Nkvfi3g34FuhtiGAJCBQA==
   dependencies:
     airbnb-prop-types "^2.14.0"
     hoist-non-react-statics "^3.2.1"
