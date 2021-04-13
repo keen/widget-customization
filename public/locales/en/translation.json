@@ -5,7 +5,9 @@
     "title_label": "Chart title",
     "title_placeholder": "Enter title",
     "subtitle_label": "Chart subtitle",
-    "subtitle_placeholder": "Enter subtitle"
+    "subtitle_placeholder": "Enter subtitle",
+    "saved_query_name_label": "Saved Query name:",
+    "saved_query_name_tooltip": "Click to use as Chart Title"
   },
   "widget_customization_format_value_settings": {
     "section_title": "Values Format",

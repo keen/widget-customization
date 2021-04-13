@@ -39,6 +39,7 @@ const App = () => {
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}
         onUpdateChartSettings={(settings) => setChartSettings(settings)}
         modalContainer="#modal-root"
+        savedQueryName="Last purchases"
         customizationSections={{
           headingSettings: {
             isDisabled: null,
