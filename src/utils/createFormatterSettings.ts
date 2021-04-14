@@ -13,6 +13,7 @@ const createFormatterSettings = (formatValue: string | null) => {
   let precision = null;
   let operation = null;
   let value = null;
+  let separator = null;
 
   if (!formatValue) {
     return {
@@ -21,6 +22,7 @@ const createFormatterSettings = (formatValue: string | null) => {
       precision,
       operation,
       value,
+      separator,
     };
   }
 
@@ -30,7 +32,11 @@ const createFormatterSettings = (formatValue: string | null) => {
     const [, formatPrecision, formatOperation, formatValue] = pattern.split(
       ';'
     );
-    precision = formatPrecision ? formatPrecision.trim() : null;
+    if (formatPrecision) {
+      const precisionArr = formatPrecision.trim().split(',');
+      precision = precisionArr[precisionArr.length - 1];
+      separator = precisionArr.length > 1;
+    }
     operation = formatOperation ? formatOperation.trim() : null;
     value = formatValue ? formatValue.trim() : null;
   }
@@ -41,6 +47,7 @@ const createFormatterSettings = (formatValue: string | null) => {
     precision,
     operation,
     value,
+    separator,
   } as FormatterSettings;
 };
 

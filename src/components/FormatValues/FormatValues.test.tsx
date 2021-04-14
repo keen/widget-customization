@@ -10,6 +10,7 @@ import FormatValues from './FormatValues';
 
 import { createFormatterSettings } from '../../utils';
 import { OPERATIONS_OPTIONS } from './constants';
+import { BASIC_FORMATTER_PATTERN } from '../../constants';
 
 const render = (overProps: any = {}) => {
   const props = {
@@ -49,7 +50,7 @@ test('renders formatter options', () => {
 });
 
 test('renders options from formatter', () => {
-  const formatter = `prefix\$\{number; 0a; ${OPERATIONS_OPTIONS[1].value}; 10\}suffix`;
+  const formatter = `prefix\$\{number; 0.0; ${OPERATIONS_OPTIONS[1].value}; 10\}suffix`;
   const { prefix, suffix, precision, value } = createFormatterSettings(
     formatter
   );
@@ -83,6 +84,8 @@ test('calls onUpdateFormatValue on value change', async () => {
   });
 
   await waitFor(() => {
-    expect(props.onUpdateFormatValue).toHaveBeenCalledWith(inputValue);
+    expect(props.onUpdateFormatValue).toHaveBeenCalledWith(
+      `${inputValue}${BASIC_FORMATTER_PATTERN}`
+    );
   });
 });

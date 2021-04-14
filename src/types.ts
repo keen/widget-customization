@@ -35,4 +35,5 @@ export type FormatterSettings = {
   precision?: string;
   operation?: 'add' | 'subtract' | 'multiply' | 'divide';
   value?: string;
+  separator?: boolean;
 };

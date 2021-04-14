@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'react-use';
+import { transparentize } from 'polished';
+import { colors } from '@keen.io/colors';
 import {
   Input,
   DropableContainer,
   DropdownListContainer,
   Dropdown,
   DropdownList,
+  Checkbox,
 } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 
@@ -15,12 +19,15 @@ import {
   Row,
   MultiControl,
   ControlContainer,
+  StyledLabel,
+  LabelText,
 } from './FormatValues.styles';
 
+import { DEFAULT_FORMATTER_PATTERN } from '../../constants';
 import {
   PATTERNS_OPTIONS as patterns,
   OPERATIONS_OPTIONS as operationsOptions,
-  DEFAULT_PATTERN,
+  FULL_NUMBER_PATTERN,
 } from './constants';
 import { createFormatterSettings } from '../../utils';
 import { serializeFormatterSettings } from '../../serializers';
@@ -40,6 +47,7 @@ const initialState: FormatterSettings = {
   precision: '',
   operation: null,
   value: '',
+  separator: true,
 };
 
 const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
@@ -49,11 +57,18 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const [state, setState] = useState<FormatterSettings>(initialState);
 
   useEffect(() => {
-    const settings = createFormatterSettings(formatValue);
-    setState({ ...initialState, ...settings });
+    if (formatValue) {
+      const settings = createFormatterSettings(formatValue);
+      setState(settings);
+    }
+  }, []);
+
+  useEffect(() => {
+    const { separator, ...settings } = createFormatterSettings(formatValue);
+    setState((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 
-  const { prefix, suffix, precision, operation, value } = state;
+  const { prefix, suffix, precision, operation, value, separator } = state;
 
   useDebounce(
     () => {
@@ -63,17 +78,31 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         precision,
         operation,
         value,
+        separator,
       });
       onUpdateFormatValue(settings);
     },
-    1000,
+    300,
     [state]
   );
 
   const patternsOptions = useMemo(
     () => [
-      { label: t(DEFAULT_PATTERN.label), value: DEFAULT_PATTERN.value },
-      ...patterns,
+      {
+        label: t(DEFAULT_FORMATTER_PATTERN.label),
+        value: DEFAULT_FORMATTER_PATTERN.value,
+      },
+      ...patterns.map((pattern) => {
+        if (pattern.value === FULL_NUMBER_PATTERN) {
+          return {
+            ...pattern,
+            label: `${pattern.label} ${t(
+              'widget_customization_format_value_settings.full_number'
+            )}`,
+          };
+        }
+        return pattern;
+      }),
     ],
     [patterns]
   );
@@ -118,7 +147,6 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             data-testid="input-suffix"
             value={suffix || ''}
             variant="solid"
-            disabled={!precision}
             placeholder={t(
               'widget_customization_format_value_settings.text_placeholder'
             )}
@@ -131,6 +159,22 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             }}
           />
         </ControlContainer>
+      </Row>
+      <Row marginTop="5px" marginBottom="5px">
+        <StyledLabel htmlFor="separator">
+          <Checkbox
+            id="separator"
+            onChange={() =>
+              setState((state) => ({ ...state, separator: !separator }))
+            }
+            checked={!!separator}
+          />
+          <LabelText>
+            <BodyText variant="body2" fontWeight="bold">
+              {t('widget_customization_format_value_settings.separator')}
+            </BodyText>
+          </LabelText>
+        </StyledLabel>
       </Row>
       <Row>
         <BodyText variant="body2" fontWeight="bold">
@@ -152,7 +196,16 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             dropIndicator
             onDefocus={() => setDropdown(null)}
           >
-            {patternOption.label}
+            {patternOption.value === DEFAULT_FORMATTER_PATTERN.value ? (
+              <BodyText
+                variant="body2"
+                color={transparentize(0.5, colors.black[100])}
+              >
+                {patternOption.label}
+              </BodyText>
+            ) : (
+              patternOption.label
+            )}
           </DropableContainer>
           <Dropdown isOpen={isPrecisionOpen}>
             <DropdownListContainer scrollToActive maxHeight={150}>

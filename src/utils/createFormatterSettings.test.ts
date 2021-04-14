@@ -9,6 +9,7 @@ test('create formatter settings for null value', () => {
       "operation": null,
       "precision": null,
       "prefix": null,
+      "separator": null,
       "suffix": null,
       "value": null,
     }
@@ -24,6 +25,7 @@ test('create formatter settings for simple string', () => {
       "operation": null,
       "precision": null,
       "prefix": "prefix",
+      "separator": null,
       "suffix": undefined,
       "value": null,
     }
@@ -39,6 +41,7 @@ test('create formatter settings for basic formatter', () => {
       "operation": null,
       "precision": null,
       "prefix": "",
+      "separator": null,
       "suffix": "",
       "value": null,
     }
@@ -54,6 +57,7 @@ test('create formatter settings for basic formatting option', () => {
       "operation": null,
       "precision": "0a",
       "prefix": "",
+      "separator": false,
       "suffix": "",
       "value": null,
     }
@@ -69,6 +73,7 @@ test('create formatter settings for basic formatting option with operation', () 
       "operation": "multiply",
       "precision": "0a",
       "prefix": "",
+      "separator": false,
       "suffix": "",
       "value": "100",
     }
@@ -84,6 +89,7 @@ test('create formatter settings for basic formatting option with prefix and suff
       "operation": "power",
       "precision": "0a",
       "prefix": "prefix",
+      "separator": false,
       "suffix": "suffix",
       "value": "100",
     }
