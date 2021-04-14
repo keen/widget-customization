@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/keen/query-creator/compare/v0.0.14...v0.0.15) (2021-04-14)
+
+
+### Features
+
+* 🎸 add Value Formatter ([2517403](https://github.com/keen/query-creator/commit/251740311cbfc9ce6da6d38177242839c431841b))
+
 ### [0.0.14](https://github.com/keen/query-creator/compare/v0.0.13...v0.0.14) (2021-04-14)
 
 ### [0.0.13](https://github.com/keen/query-creator/compare/v0.0.12...v0.0.13) (2021-04-13)
