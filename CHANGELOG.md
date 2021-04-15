@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/keen/query-creator/compare/v0.0.16...v0.0.17) (2021-04-15)
+
+
+### Bug Fixes
+
+* 🐛 fade mask for formatters ([cffef79](https://github.com/keen/query-creator/commit/cffef79f6ab3cb610943c23b345a49eb0bbbb321))
+
 ### [0.0.16](https://github.com/keen/query-creator/compare/v0.0.15...v0.0.16) (2021-04-14)
 
 ### [0.0.15](https://github.com/keen/query-creator/compare/v0.0.14...v0.0.15) (2021-04-14)
