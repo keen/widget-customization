@@ -11,8 +11,8 @@ type Props = {
 
 const SettingsContainer: FC<Props> = ({ children, isDisabled }) => (
   <Container data-testid="settings-container">
-    {isDisabled && <Mask />}
     {children}
+    {isDisabled && <Mask />}
   </Container>
 );
 
