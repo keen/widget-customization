@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { Query } from '@keen.io/query';
 import { PickerWidgets } from '@keen.io/widget-picker';
 
+import { formatAnalysis } from '../utils';
+
 import {
   HEADING_DISABLED_WIDGETS,
   FORMAT_VALUES_DISABLED_WIDGETS,
@@ -57,7 +59,7 @@ const useCustomizationSections = (
       formatValues: {
         isDisabled: null,
         isNotAvailable: t('widget_customization.format_values_not_avaialble', {
-          analysis: analysisType,
+          analysis: formatAnalysis(analysisType),
         }),
       },
     };
