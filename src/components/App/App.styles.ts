@@ -9,9 +9,14 @@ export const Section = styled.div`
 export const Layout = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   background: ${colors.white[500]};
 
-  ${Section} + ${Section} {
-    border-left: solid 1px ${colors.white[300]};
+  @media (min-width: 600px) {
+    flex-direction: row;
+
+    ${Section} + ${Section} {
+      border-left: solid 1px ${colors.white[300]};
+    }
   }
 `;
