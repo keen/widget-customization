@@ -72,7 +72,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   useDebounce(
     () => {
-      const settings = serializeFormatterSettings({
+      const newFormatValue = serializeFormatterSettings({
         prefix,
         suffix,
         precision,
@@ -80,10 +80,12 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         value,
         separator,
       });
-      onUpdateFormatValue(settings);
+      if (newFormatValue !== formatValue) {
+        onUpdateFormatValue(newFormatValue);
+      }
     },
     300,
-    [state]
+    [state, formatValue]
   );
 
   const patternsOptions = useMemo(
