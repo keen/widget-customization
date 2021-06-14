@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/keen/query-creator/compare/v0.0.18...v0.0.19) (2021-06-14)
+
+
+### Bug Fixes
+
+* 🐛 Preventing onUpdateFormatValue call on initial render ([209f6da](https://github.com/keen/query-creator/commit/209f6da7713457c85f71c1c715f68ed791ee72f8))
+
 ### [0.0.18](https://github.com/keen/query-creator/compare/v0.0.17...v0.0.18) (2021-04-23)
 
 ### [0.0.17](https://github.com/keen/query-creator/compare/v0.0.16...v0.0.17) (2021-04-15)
