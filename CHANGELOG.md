@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/keen/query-creator/compare/v0.0.19...v0.0.20) (2021-06-29)
+
+
+### Features
+
+* 🎸 Metric title & subtitle ([10b1a11](https://github.com/keen/query-creator/commit/10b1a11b32fb0a93685d815eb95175737befafc1))
+
 ### [0.0.19](https://github.com/keen/query-creator/compare/v0.0.18...v0.0.19) (2021-06-14)
 
 
