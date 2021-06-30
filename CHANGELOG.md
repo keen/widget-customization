@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/keen/query-creator/compare/v0.0.19...v0.0.20) (2021-06-29)
+
+
+### Features
+
+* 🎸 Metric title & subtitle ([10b1a11](https://github.com/keen/query-creator/commit/10b1a11b32fb0a93685d815eb95175737befafc1))
+
+### [0.0.19](https://github.com/keen/query-creator/compare/v0.0.18...v0.0.19) (2021-06-14)
+
+
+### Bug Fixes
+
+* 🐛 Preventing onUpdateFormatValue call on initial render ([209f6da](https://github.com/keen/query-creator/commit/209f6da7713457c85f71c1c715f68ed791ee72f8))
+
+### [0.0.18](https://github.com/keen/query-creator/compare/v0.0.17...v0.0.18) (2021-04-23)
+
+### [0.0.17](https://github.com/keen/query-creator/compare/v0.0.16...v0.0.17) (2021-04-15)
+
+
+### Bug Fixes
+
+* 🐛 fade mask for formatters ([cffef79](https://github.com/keen/query-creator/commit/cffef79f6ab3cb610943c23b345a49eb0bbbb321))
+
 ### [0.0.16](https://github.com/keen/query-creator/compare/v0.0.15...v0.0.16) (2021-04-14)
 
 ### [0.0.15](https://github.com/keen/query-creator/compare/v0.0.14...v0.0.15) (2021-04-14)
