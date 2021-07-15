@@ -11,7 +11,6 @@ export type WidgetCustomizationSettings = {
   title: TextSettings;
   subtitle: TextSettings;
   legend: Partial<LegendSettings>;
-
   card: Partial<CardSettings>;
 };
 

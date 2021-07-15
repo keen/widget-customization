@@ -1,14 +1,13 @@
-import { BarChartSettings, Theme } from '@keen.io/charts';
+import { BarChartSettings } from '@keen.io/charts';
 
 import { WidgetTransform } from '../../types';
 import { Grid } from '@keen.io/charts/dist/types';
 
-type PartialTheme = Omit<Theme, 'gridY' | 'gridX'> & {
-  gridX: Partial<Grid>;
-  gridY: Partial<Grid>;
-};
 export type PartialBarChartSettings = Omit<BarChartSettings, 'theme'> & {
-  theme: Partial<PartialTheme>;
+  theme: {
+    gridX: Partial<Grid>;
+    gridY: Partial<Grid>;
+  };
 };
 
 const transform: WidgetTransform<PartialBarChartSettings> = {

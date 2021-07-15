@@ -21,6 +21,7 @@ export const barChart = {
       backgroundColor: '#fff',
       borderRadius: 0,
       hasShadow: true,
+      enabled: true,
     },
     subtitle: {
       content: 'Subtitle test',
