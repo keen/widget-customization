@@ -12,7 +12,7 @@ const createCardSettings = () => {
   } = widgetSettings;
 
   return {
-    legend: {
+    card: {
       enabled,
       backgroundColor,
       borderRadius,
