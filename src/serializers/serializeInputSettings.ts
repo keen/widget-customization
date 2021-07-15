@@ -1,6 +1,5 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
 import {
-  BarChartSettings,
   LineChartSettings,
   MetricChartSettings,
   FunnelChartSettings,
@@ -13,6 +12,7 @@ import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
 
 import { SerializedSettings } from '../types';
+import { PartialBarChartSettings } from '../charts/bar/transform';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -24,7 +24,7 @@ import { SerializedSettings } from '../types';
  */
 const serializeInputSettings = (
   widgetType: PickerWidgets,
-  chartSettings: Record<string, any>,
+  chartSettings: Record<string, any>, //theme -> grid
   widgetSettings: Record<string, any>
 ): SerializedSettings => {
   switch (widgetType) {
@@ -75,13 +75,17 @@ const serializeInputSettings = (
     case 'bar':
       return {
         chart: chartTransformations.bar.serializeIn(
-          chartSettings as BarChartSettings
+          chartSettings as PartialBarChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
     default:
       return {
-        chart: { formatValue: null },
+        chart: {
+          formatValue: null,
+          verticalGrid: false,
+          horizontalGrid: false,
+        },
         widget: createWidgetSettings(widgetSettings),
       };
   }

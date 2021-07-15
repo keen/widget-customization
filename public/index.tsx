@@ -9,7 +9,7 @@ import {
 } from '../src/types';
 
 import createI18n from './i18n';
-import { lineChart as fixture } from './fixtures';
+import { barChart as fixture } from './fixtures';
 
 createI18n();
 
@@ -27,12 +27,6 @@ const App = () => {
 
   return (
     <>
-      <section>
-        <h5>Chart Settings</h5>
-        <pre>{JSON.stringify(chartSettings)}</pre>
-        <h5>Widget Settings</h5>
-        <pre>{JSON.stringify(widgetSettings)}</pre>
-      </section>
       <WidgetCustomization
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
@@ -50,6 +44,12 @@ const App = () => {
           },
         }}
       />
+      <section>
+        <h5>Chart Settings</h5>
+        <pre>{JSON.stringify(chartSettings, null, 2)}</pre>
+        <h5>Widget Settings</h5>
+        <pre>{JSON.stringify(widgetSettings, null, 2)}</pre>
+      </section>
     </>
   );
 };
