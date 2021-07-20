@@ -24,7 +24,7 @@ import { PartialBarChartSettings } from '../charts/bar/transform';
  */
 const serializeInputSettings = (
   widgetType: PickerWidgets,
-  chartSettings: Record<string, any>, //theme -> grid
+  chartSettings: Record<string, any>,
   widgetSettings: Record<string, any>
 ): SerializedSettings => {
   switch (widgetType) {

@@ -1501,10 +1501,10 @@
     d3-time "^2.0.0"
     d3-time-format "^2.2.3"
 
-"@keen.io/charts@^2.12.4", "@keen.io/charts@^2.27.2":
-  version "2.27.2"
-  resolved "https://registry.yarnpkg.com/@keen.io/charts/-/charts-2.27.2.tgz#a9764143cf16d81f63850f2f74fdc60e5eb8d609"
-  integrity sha512-tlc1/5rRtLqIxTVrW1+myecEe4lRW1Y17uJfTLOf/Bki97hHnG9KCge9FR/LT4gwTOhNNGn80m+jqM4RNbHn/g==
+"@keen.io/charts@^2.12.4", "@keen.io/charts@^2.28.0":
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/@keen.io/charts/-/charts-2.28.0.tgz#b0e4c3b1d4e362637bcddaa5140d51431127bc8e"
+  integrity sha512-wTJ0PRM/5+SN/22HPZV3tr8sUvYPd3YMM/igWMEp1jZq+MXDZMnP0O296p+esySyowBlwg6ork5aUlL0GrknTw==
   dependencies:
     "@keen.io/charts-utils" "^1.10.0"
     "@keen.io/colors" "^1.1.0"
@@ -1590,20 +1590,20 @@
     webfontloader "^1.6.28"
 
 "@keen.io/widget-picker@^1.2.85":
-  version "1.2.152"
-  resolved "https://registry.yarnpkg.com/@keen.io/widget-picker/-/widget-picker-1.2.152.tgz#714ff6fb7347392b916d6c2a32abed9e0b6622db"
-  integrity sha512-8ifOwY5/XkBJHjYu45kwnsq02Xu/pT/O3+oiZQEc6+U7ora3rPJAZFfiiABUdl9PqpZWH3MJwn4DTbk/dA8yvA==
+  version "1.2.153"
+  resolved "https://registry.yarnpkg.com/@keen.io/widget-picker/-/widget-picker-1.2.153.tgz#4569ab9fc5b725f7026753989f3c6bc88b03d209"
+  integrity sha512-tfErIXuPMy4vtYh/A7xJg3LjMghXiH566xWSm9ItQj+Mg0soPQ+L/CFKlIw89Hqrzxo12zE+bcWEb//XQRYfbA==
   dependencies:
     "@keen.io/colors" "^1.0.0"
     "@keen.io/icons" "^1.5.0"
     framer-motion "^1.11.1"
 
 "@keen.io/widgets@^2.3.12":
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/@keen.io/widgets/-/widgets-2.13.2.tgz#72198d5cc55af5239d583ba4654cc01abb5ceb83"
-  integrity sha512-Hzgv5xddY6EMlb6QxTgnDmhaOEeV74gOHqjOsd8wP/qUtKb618OhFwdcgh6nyLc5tNHkaGOmK2EfZClFjJNQlQ==
+  version "2.13.3"
+  resolved "https://registry.yarnpkg.com/@keen.io/widgets/-/widgets-2.13.3.tgz#edd08f48ff38f6cadac952a68b248378ee7a683a"
+  integrity sha512-dwKZw4iOW7pRnwkjZT6s3OAaZGlbQxGGGyT5iQrlL4hrHZSP4SSypyH5Cdfy+O1js7EX/vkJpIH7HXn2ezzrjQ==
   dependencies:
-    "@keen.io/charts" "^2.27.2"
+    "@keen.io/charts" "^2.28.0"
     "@keen.io/charts-utils" "^1.10.0"
     "@keen.io/colors" "^1.1.0"
     "@keen.io/react-hooks" "^1.2.0"

@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
-import SectionTitle from '../../../SectionTitle';
+import { useTranslation } from 'react-i18next';
 import { Toggle } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 import { Row } from './Bar.styles';
+import SectionTitle from '../../../SectionTitle';
 import {
   ChartCustomizationSettings,
   ComponentSettingsConfig,
   WidgetCustomizationSettings,
 } from '../../../../types';
-import { useTranslation } from 'react-i18next';
 
 type Props = {
   /** Chart customization settings */

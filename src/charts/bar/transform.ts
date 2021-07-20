@@ -1,7 +1,6 @@
-import { BarChartSettings } from '@keen.io/charts';
+import { BarChartSettings, Grid } from '@keen.io/charts';
 
 import { WidgetTransform } from '../../types';
-import { Grid } from '@keen.io/charts/dist/types';
 
 export type PartialBarChartSettings = Omit<BarChartSettings, 'theme'> & {
   theme: {
