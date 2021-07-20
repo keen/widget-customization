@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://github.com/keen/query-creator/compare/v0.0.20...v0.0.21) (2021-07-20)
+
+
+### Features
+
+* 🎸 Bar chart settings ([84cfefc](https://github.com/keen/query-creator/commit/84cfefc0bbc540ad249326d1d4a9e565edc51a1a))
+* 🎸 Disabling card settings added ([f813002](https://github.com/keen/query-creator/commit/f8130024716d58527a7d445a2b7b2c3db7e7b295))
+
+
+### Bug Fixes
+
+* 🐛 CR fixes ([87d59ad](https://github.com/keen/query-creator/commit/87d59ada859283a1fd0157ec961cdfec96525059))
+* 🐛 CR fixes ([a94c2a5](https://github.com/keen/query-creator/commit/a94c2a533482ef3fb246764c6feb0882bbe427b0))
+* 🐛 Typo fix ([a77d026](https://github.com/keen/query-creator/commit/a77d026892c43cce58b2f95009f074d805a1d515))
+
 ### [0.0.20](https://github.com/keen/query-creator/compare/v0.0.19...v0.0.20) (2021-06-29)
 
 
