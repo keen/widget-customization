@@ -6,7 +6,7 @@ import { createWidgetSettings } from '../src/utils';
 import {
   ChartCustomizationSettings,
   WidgetCustomizationSettings,
-} from '../src/types';
+} from '../src';
 
 import createI18n from './i18n';
 import { barChart as fixture } from './fixtures';
@@ -43,7 +43,7 @@ const App = () => {
             isDisabled: null,
           },
           componentSettings: {
-            cardSettingsDisabled: false,
+            isDisabled: null,
           },
         }}
       />
