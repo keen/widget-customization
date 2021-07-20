@@ -4,10 +4,13 @@
     "formatting": "Formatting",
     "components": "Components"
   },
+  "widget_customization_legend_settings": {
+    "label": "Legend",
+    "positionLabel": "Legend Position"
+  },
   "widget_customization_bar_settings": {
     "title": "Bar Chart Components",
     "card": "Card",
-    "legend": "Legend",
     "vertical_grid": "Vertical Grid",
     "horizontal_grid": "Horizontal Grid"
   },
