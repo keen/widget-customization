@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import deepMerge from 'deepmerge';
+import { PickerWidgets } from '@keen.io/widget-picker';
 
 import createHeadingSettings from './createHeadingSettings';
 
@@ -15,12 +16,13 @@ import createCardSettings from './createCardSettings';
  *
  */
 const createWidgetSettings = (
-  widgetSettings: Record<string, any> = {}
+  widgetSettings: Record<string, any> = {},
+  widgetType?: PickerWidgets
 ): WidgetCustomizationSettings => {
   const { geographicArea, ...restSettings } = widgetSettings;
   const baseSettings = {
     ...createHeadingSettings(),
-    ...createLegendSettings(),
+    ...createLegendSettings(widgetType),
     ...createCardSettings(),
   };
 

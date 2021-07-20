@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Toggle } from '@keen.io/ui-core';
-import { BodyText } from '@keen.io/typography';
-import { Row } from './Bar.styles';
+
+import LegendSettings from '../../../LegendSettings';
 import SectionTitle from '../../../SectionTitle';
+import Label from '../../../Label';
+import Row from '../../../Row';
+
 import {
   ChartCustomizationSettings,
   ComponentSettingsConfig,
@@ -37,9 +40,7 @@ const BarSettings: FC<Props> = ({
       <SectionTitle title={t('widget_customization_bar_settings.title')} />
       {!componentSettingsConfig?.cardSettingsDisabled && (
         <Row data-testid="card-settings">
-          <BodyText variant="body2" fontWeight="bold">
-            {t('widget_customization_bar_settings.card')}
-          </BodyText>
+          <Label>{t('widget_customization_bar_settings.card')}</Label>
           <Toggle
             isOn={widgetSettings.card.enabled}
             onChange={(cardEnabled) => {
@@ -51,24 +52,21 @@ const BarSettings: FC<Props> = ({
           />
         </Row>
       )}
+      <LegendSettings
+        label={t('widget_customization_legend_settings.label')}
+        positionLabel={t('widget_customization_legend_settings.positionLabel')}
+        isEnabled={widgetSettings.legend.enabled}
+        position={widgetSettings.legend.position}
+        alignment={widgetSettings.legend.alignment}
+        onChange={(legendSettings) => {
+          onUpdateWidgetSettings({
+            ...widgetSettings,
+            legend: { ...widgetSettings.legend, ...legendSettings },
+          });
+        }}
+      />
       <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_bar_settings.legend')}
-        </BodyText>
-        <Toggle
-          isOn={widgetSettings.legend.enabled}
-          onChange={(legendEnabled) => {
-            onUpdateWidgetSettings({
-              ...widgetSettings,
-              legend: { ...widgetSettings.legend, enabled: legendEnabled },
-            });
-          }}
-        />
-      </Row>
-      <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_bar_settings.vertical_grid')}
-        </BodyText>
+        <Label>{t('widget_customization_bar_settings.vertical_grid')}</Label>
         <Toggle
           isOn={chartSettings.verticalGrid}
           onChange={(verticalGrid) => {
@@ -77,9 +75,7 @@ const BarSettings: FC<Props> = ({
         />
       </Row>
       <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_bar_settings.horizontal_grid')}
-        </BodyText>
+        <Label>{t('widget_customization_bar_settings.horizontal_grid')}</Label>
         <Toggle
           isOn={chartSettings.horizontalGrid}
           onChange={(horizontalGrid) => {
