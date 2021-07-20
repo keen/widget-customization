@@ -1,5 +1,3 @@
-import { widgetSettings } from '@keen.io/widgets';
-
 /**
  * Creates basic settings for heading widget section.
  *
@@ -7,19 +5,12 @@ import { widgetSettings } from '@keen.io/widgets';
  *
  */
 const createHeadingSettings = () => {
-  const {
-    title: defaultTitleSettings,
-    subtitle: defaultSubtitleSettings,
-  } = widgetSettings;
-
   return {
     title: {
       content: '',
-      ...defaultTitleSettings,
     },
     subtitle: {
       content: '',
-      ...defaultSubtitleSettings,
     },
   };
 };

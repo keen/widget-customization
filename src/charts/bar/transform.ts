@@ -1,19 +1,27 @@
-import { BarChartSettings } from '@keen.io/charts';
+import { BarChartSettings, Grid } from '@keen.io/charts';
 
 import { WidgetTransform } from '../../types';
 
-const transform: WidgetTransform<BarChartSettings> = {
-  serializeIn: (settings) => {
-    const { yScaleSettings } = settings;
+export type PartialBarChartSettings = Omit<BarChartSettings, 'theme'> & {
+  theme: {
+    gridX: Partial<Grid>;
+    gridY: Partial<Grid>;
+  };
+};
 
+const transform: WidgetTransform<PartialBarChartSettings> = {
+  serializeIn: (settings) => {
+    const { yScaleSettings, theme } = settings;
     return {
+      verticalGrid: theme.gridX.enabled,
+      horizontalGrid: theme.gridY.enabled,
       formatValue:
         typeof yScaleSettings?.formatLabel === 'string'
           ? yScaleSettings.formatLabel
           : null,
     };
   },
-  serializeOut: ({ formatValue }) => {
+  serializeOut: ({ formatValue, verticalGrid, horizontalGrid }) => {
     return {
       yScaleSettings: {
         type: 'linear',
@@ -21,6 +29,14 @@ const transform: WidgetTransform<BarChartSettings> = {
       },
       tooltipSettings: {
         formatValue,
+      },
+      theme: {
+        gridY: {
+          enabled: verticalGrid,
+        },
+        gridX: {
+          enabled: horizontalGrid,
+        },
       },
     };
   },

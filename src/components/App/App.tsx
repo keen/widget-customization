@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
-import { Layout, Section } from './App.styles';
+import { Layout, Section, SideMenuWrapper } from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
 import FormatSettings from '../FormatSettings';
@@ -10,6 +10,9 @@ import {
   WidgetCustomizationSettings,
   SectionsConfiguration,
 } from '../../types';
+import { SideMenu } from '@keen.io/ui-core';
+import ComponentSettings from '../ComponentSettings/ComponentSettings';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   /** Chart customization settings */
@@ -34,46 +37,91 @@ const App: FC<Props> = ({
   onUpdateWidgetSettings,
   customizationSections,
 }) => {
-  const { headingSettings, formatValues } = customizationSections;
+  const { t } = useTranslation();
+
+  const {
+    headingSettings,
+    formatValues,
+    componentSettings,
+  } = customizationSections;
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
 
+  const [activeMenuItemId, setActiveMenuItemId] = useState('titles');
+
+  const MENU_ITEMS = [
+    {
+      id: 'titles',
+      label: t('widget_customization_sections.titles'),
+    },
+    {
+      id: 'formatting',
+      label: t('widget_customization_sections.formatting'),
+    },
+    {
+      id: 'components',
+      label: t('widget_customization_sections.components'),
+    },
+  ];
+
   return (
     <Layout>
-      <Section>
-        <HeadingSettings
-          title={title}
-          subtitle={subtitle}
-          savedQueryName={savedQueryName}
-          settingsDisabled={headingSettings?.isDisabled}
-          onUpdateTitleSettings={(settings) =>
-            onUpdateWidgetSettings({
-              ...widget,
-              title: settings,
-            })
-          }
-          onUpdateSubtitleSettings={(settings) =>
-            onUpdateWidgetSettings({
-              ...widget,
-              subtitle: settings,
-            })
-          }
+      <SideMenuWrapper>
+        <SideMenu
+          menuItems={MENU_ITEMS}
+          onChange={(itemId) => setActiveMenuItemId(itemId)}
+          activeItemId={activeMenuItemId}
         />
-      </Section>
-      <Section>
-        <FormatSettings
-          formattingDisabled={formatValues?.isDisabled}
-          formattingNotAvailable={formatValues?.isNotAvailable}
-          formatValue={formatValue}
-          onUpdateFormatValue={(settings) =>
-            onUpdateChartSettings({
-              ...chart,
-              formatValue: settings,
-            })
-          }
-        />
-      </Section>
+      </SideMenuWrapper>
+      {activeMenuItemId === 'titles' && (
+        <Section>
+          <HeadingSettings
+            title={title}
+            subtitle={subtitle}
+            savedQueryName={savedQueryName}
+            settingsDisabled={headingSettings?.isDisabled}
+            onUpdateTitleSettings={(settings) =>
+              onUpdateWidgetSettings({
+                ...widget,
+                title: settings,
+              })
+            }
+            onUpdateSubtitleSettings={(settings) =>
+              onUpdateWidgetSettings({
+                ...widget,
+                subtitle: settings,
+              })
+            }
+          />
+        </Section>
+      )}
+      {activeMenuItemId === 'formatting' && (
+        <Section>
+          <FormatSettings
+            formattingDisabled={formatValues?.isDisabled}
+            formattingNotAvailable={formatValues?.isNotAvailable}
+            formatValue={formatValue}
+            onUpdateFormatValue={(settings) =>
+              onUpdateChartSettings({
+                ...chart,
+                formatValue: settings,
+              })
+            }
+          />
+        </Section>
+      )}
+      {activeMenuItemId === 'components' && (
+        <Section>
+          <ComponentSettings
+            chartSettings={chart}
+            widgetSettings={widget}
+            onUpdateWidgetSettings={onUpdateWidgetSettings}
+            onUpdateChartSettings={onUpdateChartSettings}
+            componentSettingsConfig={componentSettings}
+          />
+        </Section>
+      )}
     </Layout>
   );
 };

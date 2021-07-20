@@ -4,6 +4,8 @@ import deepMerge from 'deepmerge';
 import createHeadingSettings from './createHeadingSettings';
 
 import { WidgetCustomizationSettings } from '../types';
+import createLegendSettings from './createLegendSettings';
+import createCardSettings from './createCardSettings';
 
 /**
  * Creates widget settings for chart editor.
@@ -18,6 +20,8 @@ const createWidgetSettings = (
   const { geographicArea, ...restSettings } = widgetSettings;
   const baseSettings = {
     ...createHeadingSettings(),
+    ...createLegendSettings(),
+    ...createCardSettings(),
   };
 
   return deepMerge(baseSettings, restSettings, {

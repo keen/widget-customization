@@ -1,12 +1,17 @@
-import { TextSettings } from '@keen.io/widgets';
+import { LegendSettings, TextSettings } from '@keen.io/widgets';
+import { CardSettings } from '@keen.io/ui-core';
 
 export type ChartCustomizationSettings = {
   formatValue: string | null;
+  verticalGrid?: boolean;
+  horizontalGrid?: boolean;
 };
 
 export type WidgetCustomizationSettings = {
   title: TextSettings;
   subtitle: TextSettings;
+  legend: Partial<LegendSettings>;
+  card: Partial<CardSettings>;
 };
 
 export type SectionsConfiguration = {
@@ -17,6 +22,11 @@ export type SectionsConfiguration = {
   headingSettings?: {
     isDisabled: string;
   };
+  componentSettings?: ComponentSettingsConfig;
+};
+
+export type ComponentSettingsConfig = {
+  cardSettingsDisabled: boolean;
 };
 
 export type SerializedSettings = {
