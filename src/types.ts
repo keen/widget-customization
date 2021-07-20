@@ -22,6 +22,11 @@ export type SectionsConfiguration = {
   headingSettings?: {
     isDisabled: string;
   };
+  componentSettings?: ComponentSettingsConfig;
+};
+
+export type ComponentSettingsConfig = {
+  cardSettingsDisabled: boolean;
 };
 
 export type SerializedSettings = {

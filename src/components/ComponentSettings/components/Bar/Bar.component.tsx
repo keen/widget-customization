@@ -5,6 +5,7 @@ import { BodyText } from '@keen.io/typography';
 import { Row } from './Bar.styles';
 import {
   ChartCustomizationSettings,
+  ComponentSettingsConfig,
   WidgetCustomizationSettings,
 } from '../../../../types';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,8 @@ type Props = {
   onUpdateChartSettings: (chart: ChartCustomizationSettings) => void;
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
+  /** Component settings configuration */
+  componentSettingsConfig: ComponentSettingsConfig;
 };
 
 const BarSettings: FC<Props> = ({
@@ -25,26 +28,29 @@ const BarSettings: FC<Props> = ({
   widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
+  componentSettingsConfig,
 }) => {
   const { t } = useTranslation();
 
   return (
     <div>
       <SectionTitle title={t('widget_customization_bar_settings.title')} />
-      <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_bar_settings.card')}
-        </BodyText>
-        <Toggle
-          isOn={widgetSettings.card.enabled}
-          onChange={(cardEnabled) => {
-            onUpdateWidgetSettings({
-              ...widgetSettings,
-              card: { ...widgetSettings.card, enabled: cardEnabled },
-            });
-          }}
-        />
-      </Row>
+      {!componentSettingsConfig?.cardSettingsDisabled && (
+        <Row data-testid="card-settings">
+          <BodyText variant="body2" fontWeight="bold">
+            {t('widget_customization_bar_settings.card')}
+          </BodyText>
+          <Toggle
+            isOn={widgetSettings.card.enabled}
+            onChange={(cardEnabled) => {
+              onUpdateWidgetSettings({
+                ...widgetSettings,
+                card: { ...widgetSettings.card, enabled: cardEnabled },
+              });
+            }}
+          />
+        </Row>
+      )}
       <Row>
         <BodyText variant="body2" fontWeight="bold">
           {t('widget_customization_bar_settings.legend')}

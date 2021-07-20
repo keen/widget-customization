@@ -42,6 +42,9 @@ const App = () => {
             isNotAvailable: null,
             isDisabled: null,
           },
+          componentSettings: {
+            cardSettingsDisabled: false,
+          },
         }}
       />
       <section>

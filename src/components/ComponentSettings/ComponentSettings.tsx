@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { BarSettings } from './components';
 import {
   ChartCustomizationSettings,
+  ComponentSettingsConfig,
   WidgetCustomizationSettings,
 } from '../../types';
 
@@ -14,6 +15,8 @@ type Props = {
   onUpdateChartSettings: (chart: ChartCustomizationSettings) => void;
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
+  /** Component settings configuration */
+  componentSettingsConfig: ComponentSettingsConfig;
 };
 
 const ComponentSettings: FC<Props> = ({
@@ -21,6 +24,7 @@ const ComponentSettings: FC<Props> = ({
   widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
+  componentSettingsConfig,
 }) => {
   return (
     <BarSettings
@@ -28,6 +32,7 @@ const ComponentSettings: FC<Props> = ({
       widgetSettings={widgetSettings}
       onUpdateWidgetSettings={onUpdateWidgetSettings}
       onUpdateChartSettings={onUpdateChartSettings}
+      componentSettingsConfig={componentSettingsConfig}
     />
   );
 };

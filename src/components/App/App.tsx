@@ -39,7 +39,11 @@ const App: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { headingSettings, formatValues } = customizationSections;
+  const {
+    headingSettings,
+    formatValues,
+    componentSettings,
+  } = customizationSections;
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
@@ -114,6 +118,7 @@ const App: FC<Props> = ({
             widgetSettings={widget}
             onUpdateWidgetSettings={onUpdateWidgetSettings}
             onUpdateChartSettings={onUpdateChartSettings}
+            componentSettingsConfig={componentSettings}
           />
         </Section>
       )}
