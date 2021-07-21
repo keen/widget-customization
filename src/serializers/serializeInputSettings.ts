@@ -1,6 +1,5 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
 import {
-  LineChartSettings,
   MetricChartSettings,
   FunnelChartSettings,
   PieChartSettings,
@@ -12,7 +11,9 @@ import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
 
 import { SerializedSettings } from '../types';
+
 import { PartialBarChartSettings } from '../charts/bar/transform';
+import { PartialLineChartSettings } from '../charts/line/transform';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -68,7 +69,7 @@ const serializeInputSettings = (
     case 'area':
       return {
         chart: chartTransformations.line.serializeIn(
-          chartSettings as LineChartSettings
+          chartSettings as PartialLineChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
@@ -83,8 +84,8 @@ const serializeInputSettings = (
       return {
         chart: {
           formatValue: null,
-          verticalGrid: false,
-          horizontalGrid: false,
+          verticalGrid: chartSettings.theme.gridX.enabled,
+          horizontalGrid: chartSettings.theme.gridY.enabled,
         },
         widget: createWidgetSettings(widgetSettings),
       };

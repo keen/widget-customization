@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { PickerWidgets } from '@keen.io/widget-picker';
 
 import App from './components/App';
 import { AppContext } from './contexts';
@@ -24,6 +25,8 @@ type Props = {
   savedQueryName?: string;
   /** Customization sections configuration */
   customizationSections?: SectionsConfiguration;
+  /** Widget type */
+  widgetType?: PickerWidgets;
 };
 
 const WidgetCustomization: FC<Props> = ({
@@ -33,6 +36,7 @@ const WidgetCustomization: FC<Props> = ({
   onUpdateChartSettings,
   modalContainer,
   savedQueryName,
+  widgetType,
   customizationSections = {},
 }) => {
   return (
@@ -40,6 +44,7 @@ const WidgetCustomization: FC<Props> = ({
       <App
         chart={chartSettings}
         widget={widgetSettings}
+        widgetType={widgetType}
         savedQueryName={savedQueryName}
         customizationSections={customizationSections}
         onUpdateChartSettings={(settings) => {

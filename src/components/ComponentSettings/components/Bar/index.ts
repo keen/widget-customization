@@ -1,3 +1,3 @@
-import BarSettings from './Bar.component';
+import BarSettings from './Bar';
 
 export default BarSettings;

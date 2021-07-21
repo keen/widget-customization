@@ -9,7 +9,7 @@ import {
   FORMAT_VALUES_DISABLED_WIDGETS,
 } from '../constants';
 
-import { SectionsConfiguration } from '../types';
+import { HiddenOptions, SectionsConfiguration } from '../types';
 
 /**
  * Creates sections configuration based on query semantic and widget type
@@ -17,13 +17,15 @@ import { SectionsConfiguration } from '../types';
  * @param isQueryBootstrapped - query run indicator
  * @param query - query settings
  * @param widgetType - widget type
+ * @param hiddenOptions - allows to not show specified settings
  * @return widget customization sections configuration
  *
  */
 const useCustomizationSections = (
   isQueryBootstrapped: boolean,
   query: Query,
-  widgetType: PickerWidgets
+  widgetType: PickerWidgets,
+  hiddenOptions?: HiddenOptions
 ): SectionsConfiguration => {
   let sectionsConfig: SectionsConfiguration = {
     headingSettings: {
@@ -32,6 +34,10 @@ const useCustomizationSections = (
     formatValues: {
       isNotAvailable: null,
       isDisabled: null,
+    },
+    componentSettings: {
+      isDisabled: null,
+      hiddenOptions,
     },
   };
 
@@ -45,6 +51,10 @@ const useCustomizationSections = (
       formatValues: {
         isNotAvailable: null,
         isDisabled: t('widget_customization.settings_disabled'),
+      },
+      componentSettings: {
+        isDisabled: t('widget_customization.settings_disabled'),
+        hiddenOptions,
       },
     };
   }
