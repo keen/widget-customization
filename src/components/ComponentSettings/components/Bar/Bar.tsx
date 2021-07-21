@@ -13,7 +13,7 @@ const BarSettings: FC<SettingsModifier> = ({
   widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
-  componentSettingsConfig,
+  hiddenOptions,
 }) => {
   const { t } = useTranslation();
   const { legend } = widgetSettings;
@@ -21,7 +21,7 @@ const BarSettings: FC<SettingsModifier> = ({
   return (
     <div>
       <SectionTitle title={t('widget_customization_bar_settings.title')} />
-      {!componentSettingsConfig?.cardSettingsDisabled && (
+      {!hiddenOptions?.card && (
         <CardSettings
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {

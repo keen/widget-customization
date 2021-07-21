@@ -13,15 +13,15 @@ const LineSettings: FC<SettingsModifier> = ({
   widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
-  componentSettingsConfig,
+  hiddenOptions,
 }) => {
   const { t } = useTranslation();
   const { legend } = widgetSettings;
 
   return (
     <div>
-      <SectionTitle title={t('widget_customization_bar_settings.title')} />
-      {!componentSettingsConfig?.cardSettingsDisabled && (
+      <SectionTitle title={t('widget_customization_line_settings.title')} />
+      {!hiddenOptions?.card && (
         <CardSettings
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {

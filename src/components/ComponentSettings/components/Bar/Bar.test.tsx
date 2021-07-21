@@ -5,8 +5,8 @@ import BarSettings from './Bar';
 
 const render = (overProps: any = {}) => {
   const props = {
-    componentSettingsConfig: {
-      cardSettingsDisabled: true,
+    hiddenOptions: {
+      card: true,
     },
     widgetSettings: {
       legend: {},

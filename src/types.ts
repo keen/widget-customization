@@ -14,6 +14,15 @@ export type WidgetCustomizationSettings = {
   card: Partial<CardSettings>;
 };
 
+export type HiddenOptions = {
+  card: boolean;
+};
+
+export type ComponentSettings = {
+  isDisabled: string;
+  hiddenOptions?: HiddenOptions;
+};
+
 export type SectionsConfiguration = {
   formatValues?: {
     isNotAvailable: string;
@@ -22,11 +31,7 @@ export type SectionsConfiguration = {
   headingSettings?: {
     isDisabled: string;
   };
-  componentSettings?: ComponentSettingsConfig;
-};
-
-export type ComponentSettingsConfig = {
-  cardSettingsDisabled: boolean;
+  componentSettings?: ComponentSettings;
 };
 
 export type SerializedSettings = {

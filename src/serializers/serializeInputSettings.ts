@@ -84,8 +84,8 @@ const serializeInputSettings = (
       return {
         chart: {
           formatValue: null,
-          verticalGrid: false,
-          horizontalGrid: false,
+          verticalGrid: chartSettings.theme.gridX.enabled,
+          horizontalGrid: chartSettings.theme.gridY.enabled,
         },
         widget: createWidgetSettings(widgetSettings),
       };

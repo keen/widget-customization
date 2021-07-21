@@ -1,6 +1,6 @@
 import {
   ChartCustomizationSettings,
-  ComponentSettingsConfig,
+  HiddenOptions,
   WidgetCustomizationSettings,
 } from '../../../types';
 
@@ -14,5 +14,5 @@ export type SettingsModifier = {
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Component settings configuration */
-  componentSettingsConfig: ComponentSettingsConfig;
+  hiddenOptions: HiddenOptions;
 };
