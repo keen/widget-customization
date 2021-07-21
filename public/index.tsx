@@ -28,6 +28,7 @@ const App = () => {
   return (
     <>
       <WidgetCustomization
+        widgetType="bar"
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}

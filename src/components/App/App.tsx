@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { PickerWidgets } from '@keen.io/widget-picker';
 
 import { Layout, Section, SideMenuWrapper } from './App.styles';
 
@@ -27,11 +28,14 @@ type Props = {
   customizationSections: SectionsConfiguration;
   /** Connected saved query name */
   savedQueryName?: string;
+  /** Widget type */
+  widgetType?: PickerWidgets;
 };
 
 const App: FC<Props> = ({
   chart,
   widget,
+  widgetType,
   savedQueryName,
   onUpdateChartSettings,
   onUpdateWidgetSettings,
@@ -114,6 +118,7 @@ const App: FC<Props> = ({
       {activeMenuItemId === 'components' && (
         <Section>
           <ComponentSettings
+            widgetType={widgetType}
             chartSettings={chart}
             widgetSettings={widget}
             onUpdateWidgetSettings={onUpdateWidgetSettings}

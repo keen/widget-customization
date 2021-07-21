@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
-import BarSettings from './Bar.component';
+import BarSettings from './Bar';
 
 const render = (overProps: any = {}) => {
   const props = {
