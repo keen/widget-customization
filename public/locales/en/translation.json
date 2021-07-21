@@ -15,11 +15,20 @@
     "vertical_grid": "Vertical Grid",
     "horizontal_grid": "Horizontal Grid"
   },
+  "widget_customization_slider_settings": {
+    "label": "Slider"
+  },
+  "widget_customization_reverse_axes_settings": {
+    "label": "Reverse Axes"
+  },
   "widget_customization_bar_settings": {
     "title": "Bar Chart Components"
   },
   "widget_customization_line_settings": {
     "title": "Area & Line Chart Components"
+  },
+  "widget_customization_heatmap_settings": {
+    "title": "Heatmap Chart Components"
   },
   "widget_customization_heading_settings": {
     "section_title": "Basic Info",

@@ -4,7 +4,7 @@ import { MousePositionedTooltip } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
 
-import { BarSettings, LineSettings } from './components';
+import { BarSettings, LineSettings, HeatmapSettings } from './components';
 
 import {
   ChartCustomizationSettings,
@@ -38,6 +38,8 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
     case 'line':
     case 'area':
       return LineSettings;
+    case 'heatmap':
+      return HeatmapSettings;
     default:
       return null;
   }
