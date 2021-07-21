@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import { BarSettings } from './components';
 import {
   ChartCustomizationSettings,
-  ComponentSettingsConfig,
+  ComponentSettings,
   WidgetCustomizationSettings,
 } from '../../types';
+import { BodyText } from '@keen.io/typography';
 
 type Props = {
   /** Chart customization settings */
@@ -16,7 +17,7 @@ type Props = {
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Component settings configuration */
-  componentSettingsConfig: ComponentSettingsConfig;
+  componentSettingsConfig: ComponentSettings;
 };
 
 const ComponentSettings: FC<Props> = ({
@@ -26,13 +27,15 @@ const ComponentSettings: FC<Props> = ({
   onUpdateChartSettings,
   componentSettingsConfig,
 }) => {
-  return (
+  return componentSettingsConfig.isDisabled ? (
+    <BodyText variant="body1">{componentSettingsConfig.isDisabled}</BodyText>
+  ) : (
     <BarSettings
       chartSettings={chartSettings}
       widgetSettings={widgetSettings}
       onUpdateWidgetSettings={onUpdateWidgetSettings}
       onUpdateChartSettings={onUpdateChartSettings}
-      componentSettingsConfig={componentSettingsConfig}
+      hiddenOptions={componentSettingsConfig?.hiddenOptions}
     />
   );
 };

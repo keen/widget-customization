@@ -9,7 +9,7 @@ import Row from '../../../Row';
 
 import {
   ChartCustomizationSettings,
-  ComponentSettingsConfig,
+  HiddenOptions,
   WidgetCustomizationSettings,
 } from '../../../../types';
 
@@ -22,8 +22,7 @@ type Props = {
   onUpdateChartSettings: (chart: ChartCustomizationSettings) => void;
   /** Update widget settings event handler */
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
-  /** Component settings configuration */
-  componentSettingsConfig: ComponentSettingsConfig;
+  hiddenOptions: HiddenOptions;
 };
 
 const BarSettings: FC<Props> = ({
@@ -31,14 +30,14 @@ const BarSettings: FC<Props> = ({
   widgetSettings,
   onUpdateWidgetSettings,
   onUpdateChartSettings,
-  componentSettingsConfig,
+  hiddenOptions,
 }) => {
   const { t } = useTranslation();
 
   return (
     <div>
       <SectionTitle title={t('widget_customization_bar_settings.title')} />
-      {!componentSettingsConfig?.cardSettingsDisabled && (
+      {!hiddenOptions?.card && (
         <Row data-testid="card-settings">
           <Label>{t('widget_customization_bar_settings.card')}</Label>
           <Toggle

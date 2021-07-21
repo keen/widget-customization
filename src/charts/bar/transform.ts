@@ -32,10 +32,10 @@ const transform: WidgetTransform<PartialBarChartSettings> = {
       },
       theme: {
         gridY: {
-          enabled: verticalGrid,
+          enabled: horizontalGrid,
         },
         gridX: {
-          enabled: horizontalGrid,
+          enabled: verticalGrid,
         },
       },
     };
