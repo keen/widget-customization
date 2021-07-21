@@ -18,6 +18,10 @@
   "widget_customization_bar_settings": {
     "title": "Bar Chart Components"
   },
+  "widget_customization_funnel_settings": {
+    "title": "Funnel Chart Components",
+    "percentages": "Percentages"
+  },
   "widget_customization_line_settings": {
     "title": "Area & Line Chart Components"
   },

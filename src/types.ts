@@ -5,6 +5,7 @@ export type ChartCustomizationSettings = {
   formatValue: string | null;
   verticalGrid?: boolean;
   horizontalGrid?: boolean;
+  funnelPercentages?: boolean;
 };
 
 export type WidgetCustomizationSettings = {

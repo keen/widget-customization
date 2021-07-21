@@ -1,7 +1,6 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
 import {
   MetricChartSettings,
-  FunnelChartSettings,
   PieChartSettings,
   ChoroplethChartSettings,
   HeatmapChartSettings,
@@ -14,6 +13,7 @@ import { SerializedSettings } from '../types';
 
 import { PartialBarChartSettings } from '../charts/bar/transform';
 import { PartialLineChartSettings } from '../charts/line/transform';
+import { PartialFunnelChartSettings } from '../charts/funnel/transform';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -54,7 +54,7 @@ const serializeInputSettings = (
     case 'funnel':
       return {
         chart: chartTransformations.funnel.serializeIn(
-          chartSettings as FunnelChartSettings
+          chartSettings as PartialFunnelChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
@@ -84,6 +84,7 @@ const serializeInputSettings = (
       return {
         chart: {
           formatValue: null,
+          funnelPercentages: chartSettings.theme.funnel.header.badge.enabled,
           verticalGrid: chartSettings.theme.gridX.enabled,
           horizontalGrid: chartSettings.theme.gridY.enabled,
         },
