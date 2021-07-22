@@ -9,6 +9,8 @@ import {
   LineSettings,
   FunnelSettings,
   ChoroplethSettings,
+  TableSettings,
+  MetricSettings,
 } from './components';
 
 import {
@@ -38,6 +40,10 @@ type Props = {
 
 const getSettingsComponent = (widgetType: PickerWidgets) => {
   switch (widgetType) {
+    case 'table':
+      return TableSettings;
+    case 'metric':
+      return MetricSettings;
     case 'bar':
       return BarSettings;
     case 'line':

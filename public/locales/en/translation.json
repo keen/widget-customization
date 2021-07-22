@@ -11,6 +11,9 @@
   "widget_customization_card_settings": {
     "label": "Card"
   },
+  "widget_customization_metric_settings": {
+    "title": "Metric Chart Settings"
+  },
   "widget_customization_grid_settings": {
     "vertical_grid": "Vertical Grid",
     "horizontal_grid": "Horizontal Grid"
@@ -28,6 +31,9 @@
   },
   "widget_customization_line_settings": {
     "title": "Area & Line Chart Components"
+  },
+  "widget_customization_table_settings": {
+    "title": "Table Chart Components"
   },
   "widget_customization_heading_settings": {
     "section_title": "Basic Info",
