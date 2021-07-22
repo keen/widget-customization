@@ -7,9 +7,10 @@ import { colors } from '@keen.io/colors';
 import {
   BarSettings,
   LineSettings,
+  FunnelSettings,
+  ChoroplethSettings,
   TableSettings,
   MetricSettings,
-  FunnelSettings,
 } from './components';
 
 import {
@@ -50,6 +51,8 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
       return LineSettings;
     case 'funnel':
       return FunnelSettings;
+    case 'choropleth':
+      return ChoroplethSettings;
     default:
       return null;
   }

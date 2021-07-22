@@ -28,7 +28,7 @@ const App = () => {
   return (
     <>
       <WidgetCustomization
-        widgetType="bar"
+        widgetType="choropleth"
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}

@@ -2,7 +2,6 @@ import { PickerWidgets } from '@keen.io/widget-picker';
 import {
   MetricChartSettings,
   PieChartSettings,
-  ChoroplethChartSettings,
   HeatmapChartSettings,
 } from '@keen.io/charts';
 
@@ -14,6 +13,7 @@ import { SerializedSettings } from '../types';
 import { PartialBarChartSettings } from '../charts/bar/transform';
 import { PartialLineChartSettings } from '../charts/line/transform';
 import { PartialFunnelChartSettings } from '../charts/funnel/transform';
+import { PartialChoroplethChartSettings } from '../charts/choropleth/transform';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -39,7 +39,7 @@ const serializeInputSettings = (
     case 'choropleth':
       return {
         chart: chartTransformations.choropleth.serializeIn(
-          chartSettings as ChoroplethChartSettings
+          chartSettings as PartialChoroplethChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
