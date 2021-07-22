@@ -16,7 +16,8 @@
     "horizontal_grid": "Horizontal Grid"
   },
   "widget_customization_slider_settings": {
-    "label": "Slider"
+    "label": "Slider",
+    "positionLabel": "Slider Position"
   },
   "widget_customization_reverse_axes_settings": {
     "label": "Reverse Axes"

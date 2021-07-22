@@ -15,6 +15,7 @@ const HeatmapSettings: FC<SettingsModifier> = ({
 }) => {
   const { t } = useTranslation();
   const { legend } = widgetSettings;
+  const { layout } = chartSettings;
 
   return (
     <div>
@@ -31,26 +32,25 @@ const HeatmapSettings: FC<SettingsModifier> = ({
           }}
         />
       )}
-      <SettingsItem
-        label={t('widget_customization_reverse_axes_settings.label')}
-        isEnabled={chartSettings.layout === 'horizontal'}
-        onChange={(option) => {
-          onUpdateChartSettings({
-            ...chartSettings,
-            layout: option ? 'horizontal' : 'vertical',
-          });
-        }}
-      />
       <LegendSettings
-        label={t('widget_customization_legend_settings.label')}
-        positionLabel={t('widget_customization_legend_settings.positionLabel')}
+        label={t('widget_customization_slider_settings.label')}
+        positionLabel={t('widget_customization_slider_settings.positionLabel')}
         isEnabled={legend.enabled}
         position={legend.position}
-        alignment={legend.alignment}
         onChange={(legendSettings) => {
           onUpdateWidgetSettings({
             ...widgetSettings,
             legend: { ...widgetSettings.legend, ...legendSettings },
+          });
+        }}
+      />
+      <SettingsItem
+        label={t('widget_customization_reverse_axes_settings.label')}
+        isEnabled={layout && layout === 'horizontal'}
+        onChange={(option) => {
+          onUpdateChartSettings({
+            ...chartSettings,
+            layout: option ? 'horizontal' : 'vertical',
           });
         }}
       />

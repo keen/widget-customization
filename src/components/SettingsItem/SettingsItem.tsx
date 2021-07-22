@@ -14,7 +14,7 @@ type Props = {
 };
 
 const SettingsItem: FC<Props> = ({ label, isEnabled, onChange }) => (
-  <Row data-testid="settings-item">
+  <Row>
     <Label>{label}</Label>
     <Toggle
       isOn={isEnabled}

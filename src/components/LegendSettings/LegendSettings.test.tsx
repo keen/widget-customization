@@ -76,3 +76,11 @@ test('allows user to set legend alignment', () => {
 
   expect(props.onChange).toHaveBeenCalledWith({ alignment: 'center' });
 });
+
+test('do not renders alignment options when alignment is not provided', () => {
+  const {
+    wrapper: { queryByText },
+  } = render({ alignment: undefined, isEnabled: true });
+
+  expect(queryByText('Center')).not.toBeInTheDocument();
+});

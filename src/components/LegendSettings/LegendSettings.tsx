@@ -21,7 +21,7 @@ type Props = {
   /** Component position */
   position: Position;
   /** Alignment settings */
-  alignment: Alignment;
+  alignment?: Alignment;
   /** Update settings event handler */
   onChange: (settings: Partial<LegendSettings>) => void;
 };
@@ -53,14 +53,16 @@ const LegendSettings: FC<Props> = ({
             onChange({ position, layout: getLayoutForPosition(position) });
           }}
         />
-        <RadioSelect
-          activeItem={alignment}
-          items={ALIGNMENT_SETTINGS}
-          onClick={({ value }) => {
-            const alignment = value as Alignment;
-            onChange({ alignment });
-          }}
-        />
+        {alignment && (
+          <RadioSelect
+            activeItem={alignment}
+            items={ALIGNMENT_SETTINGS}
+            onClick={({ value }) => {
+              const alignment = value as Alignment;
+              onChange({ alignment });
+            }}
+          />
+        )}
       </Row>
     )}
   </Container>
