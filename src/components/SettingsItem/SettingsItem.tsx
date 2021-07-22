@@ -5,6 +5,8 @@ import Label from '../Label';
 import Row from '../Row';
 
 type Props = {
+  /* Component id */
+  id: string;
   /* Component label */
   label: string;
   /* Component state */
@@ -13,8 +15,8 @@ type Props = {
   onChange: (isEnabled: boolean) => void;
 };
 
-const SettingsItem: FC<Props> = ({ label, isEnabled, onChange }) => (
-  <Row>
+const SettingsItem: FC<Props> = ({ id, label, isEnabled, onChange }) => (
+  <Row data-testid={id}>
     <Label>{label}</Label>
     <Toggle
       isOn={isEnabled}

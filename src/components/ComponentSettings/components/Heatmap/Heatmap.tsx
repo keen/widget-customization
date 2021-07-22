@@ -22,6 +22,7 @@ const HeatmapSettings: FC<SettingsModifier> = ({
       <SectionTitle title={t('widget_customization_heatmap_settings.title')} />
       {!hiddenOptions?.card && (
         <SettingsItem
+          id="heatmap-card"
           label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
@@ -45,6 +46,7 @@ const HeatmapSettings: FC<SettingsModifier> = ({
         }}
       />
       <SettingsItem
+        id="heatmap-axes"
         label={t('widget_customization_reverse_axes_settings.label')}
         isEnabled={layout && layout === 'horizontal'}
         onChange={(option) => {
