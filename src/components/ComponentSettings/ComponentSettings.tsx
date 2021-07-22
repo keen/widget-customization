@@ -4,7 +4,15 @@ import { MousePositionedTooltip } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
 
-import { BarSettings, LineSettings, HeatmapSettings } from './components';
+import {
+  BarSettings,
+  LineSettings,
+  FunnelSettings,
+  ChoroplethSettings,
+  TableSettings,
+  MetricSettings,
+  HeatmapSettings,
+} from './components';
 
 import {
   ChartCustomizationSettings,
@@ -33,6 +41,10 @@ type Props = {
 
 const getSettingsComponent = (widgetType: PickerWidgets) => {
   switch (widgetType) {
+    case 'table':
+      return TableSettings;
+    case 'metric':
+      return MetricSettings;
     case 'bar':
       return BarSettings;
     case 'line':
@@ -40,6 +52,10 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
       return LineSettings;
     case 'heatmap':
       return HeatmapSettings;
+    case 'funnel':
+      return FunnelSettings;
+    case 'choropleth':
+      return ChoroplethSettings;
     default:
       return null;
   }

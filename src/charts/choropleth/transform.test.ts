@@ -1,11 +1,9 @@
-import { ChoroplethChartSettings } from '@keen.io/charts';
-
-import transform from './transform';
+import transform, { PartialChoroplethChartSettings } from './transform';
 
 test('transforms choropleth chart settings to customization interface', () => {
   const chartSettings = {
     tooltipSettings: { formatValue: null },
-  } as ChoroplethChartSettings;
+  } as PartialChoroplethChartSettings;
 
   expect(transform.serializeIn(chartSettings)).toEqual({
     formatValue: null,
@@ -15,7 +13,7 @@ test('transforms choropleth chart settings to customization interface', () => {
 test('transforms choropleth chart scale label format settings to customization interface', () => {
   const chartSettings = {
     tooltipSettings: { formatValue: '${number; 0.00}$' },
-  } as ChoroplethChartSettings;
+  } as PartialChoroplethChartSettings;
 
   expect(transform.serializeIn(chartSettings)).toEqual({
     formatValue: '${number; 0.00}$',
