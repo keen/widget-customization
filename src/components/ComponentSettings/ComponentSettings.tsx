@@ -4,7 +4,12 @@ import { MousePositionedTooltip } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
 
-import { BarSettings, LineSettings, FunnelSettings } from './components';
+import {
+  BarSettings,
+  LineSettings,
+  FunnelSettings,
+  ChoroplethSettings,
+} from './components';
 
 import {
   ChartCustomizationSettings,
@@ -40,6 +45,8 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
       return LineSettings;
     case 'funnel':
       return FunnelSettings;
+    case 'choropleth':
+      return ChoroplethSettings;
     default:
       return null;
   }

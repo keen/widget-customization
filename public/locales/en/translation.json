@@ -22,6 +22,10 @@
     "title": "Funnel Chart Components",
     "percentages": "Percentages"
   },
+  "widget_customization_choropleth_settings": {
+    "title": "Choropleth Chart Components",
+    "slider": "Slider"
+  },
   "widget_customization_line_settings": {
     "title": "Area & Line Chart Components"
   },
