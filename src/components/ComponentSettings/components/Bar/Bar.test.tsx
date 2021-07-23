@@ -23,7 +23,7 @@ const render = (overProps: any = {}) => {
   };
 };
 
-test('do not renders card settings when card settings disabled', () => {
+test('do not renders card settings when card settings are disabled', () => {
   const {
     wrapper: { queryByTestId },
   } = render();

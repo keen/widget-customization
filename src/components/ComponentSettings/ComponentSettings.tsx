@@ -12,6 +12,7 @@ import {
   TableSettings,
   MetricSettings,
   HeatmapSettings,
+  CircularSettings
 } from './components';
 
 import {
@@ -54,6 +55,9 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
       return HeatmapSettings;
     case 'funnel':
       return FunnelSettings;
+    case 'pie':
+    case 'donut':
+      return CircularSettings;
     case 'choropleth':
       return ChoroplethSettings;
     default:
