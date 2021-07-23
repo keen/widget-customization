@@ -1,9 +1,5 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
-import {
-  MetricChartSettings,
-  PieChartSettings,
-  HeatmapChartSettings,
-} from '@keen.io/charts';
+import { MetricChartSettings, PieChartSettings } from '@keen.io/charts';
 
 import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
@@ -12,6 +8,7 @@ import { SerializedSettings } from '../types';
 
 import { PartialBarChartSettings } from '../charts/bar/transform';
 import { PartialLineChartSettings } from '../charts/line/transform';
+import { PartialHeatmapChartSettings } from '../charts/heatmap/transform';
 import { PartialFunnelChartSettings } from '../charts/funnel/transform';
 import { PartialChoroplethChartSettings } from '../charts/choropleth/transform';
 
@@ -32,7 +29,7 @@ const serializeInputSettings = (
     case 'heatmap':
       return {
         chart: chartTransformations.heatmap.serializeIn(
-          chartSettings as HeatmapChartSettings
+          chartSettings as PartialHeatmapChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };

@@ -1,4 +1,5 @@
 import { HeatmapChartSettings } from '@keen.io/charts';
+import { Layout } from '@keen.io/ui-core';
 
 import transform from './transform';
 
@@ -24,11 +25,13 @@ test('transforms heatmap chart scale label format settings to customization inte
 
 test('transforms customization interface to heatmap settings ', () => {
   const settings = {
+    layout: 'horizontal' as Layout,
     formatValue: '${number; 0.00}$',
   };
 
   expect(transform.serializeOut(settings)).toMatchInlineSnapshot(`
     Object {
+      "layout": "horizontal",
       "tooltipSettings": Object {
         "formatValue": "\${number; 0.00}$",
       },

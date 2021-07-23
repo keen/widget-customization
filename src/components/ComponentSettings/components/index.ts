@@ -1,5 +1,6 @@
 import BarSettings from './Bar';
 import LineSettings from './Line';
+import HeatmapSettings from './Heatmap';
 import FunnelSettings from './Funnel';
 import ChoroplethSettings from './Choropleth';
 import MetricSettings from './Metric';
@@ -12,4 +13,5 @@ export {
   ChoroplethSettings,
   MetricSettings,
   TableSettings,
+  HeatmapSettings,
 };

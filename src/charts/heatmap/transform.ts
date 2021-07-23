@@ -2,17 +2,22 @@ import { HeatmapChartSettings } from '@keen.io/charts';
 
 import { WidgetTransform } from '../../types';
 
-const transform: WidgetTransform<HeatmapChartSettings> = {
+export type PartialHeatmapChartSettings = Omit<HeatmapChartSettings, 'theme'>;
+
+const transform: WidgetTransform<PartialHeatmapChartSettings> = {
   serializeIn: (settings) => {
+    const { tooltipSettings, layout } = settings;
     return {
+      layout,
       formatValue:
-        typeof settings?.tooltipSettings?.formatValue === 'string'
-          ? settings.tooltipSettings.formatValue
+        tooltipSettings && typeof tooltipSettings.formatValue === 'string'
+          ? tooltipSettings.formatValue
           : null,
     };
   },
-  serializeOut: ({ formatValue }) => {
+  serializeOut: ({ formatValue, layout }) => {
     return {
+      layout,
       tooltipSettings: {
         formatValue,
       },

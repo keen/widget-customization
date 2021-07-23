@@ -11,6 +11,7 @@ import {
   ChoroplethSettings,
   TableSettings,
   MetricSettings,
+  HeatmapSettings,
 } from './components';
 
 import {
@@ -49,6 +50,8 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
     case 'line':
     case 'area':
       return LineSettings;
+    case 'heatmap':
+      return HeatmapSettings;
     case 'funnel':
       return FunnelSettings;
     case 'choropleth':

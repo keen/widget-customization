@@ -1,10 +1,11 @@
 import { LegendSettings, TextSettings } from '@keen.io/widgets';
-import { CardSettings } from '@keen.io/ui-core';
+import { CardSettings, Layout } from '@keen.io/ui-core';
 
 export type ChartCustomizationSettings = {
   formatValue: string | null;
   verticalGrid?: boolean;
   horizontalGrid?: boolean;
+  layout?: Layout;
   funnelPercentages?: boolean;
 };
 
