@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CardSettings from '../../../CardSettings';
+import SettingsItem from '../../../SettingsItem';
 import LegendSettings from '../../../LegendSettings';
 import GridSettings from '../../../GridSettings';
 import SectionTitle from '../../../SectionTitle';
@@ -22,7 +22,9 @@ const LineSettings: FC<SettingsModifier> = ({
     <div>
       <SectionTitle title={t('widget_customization_line_settings.title')} />
       {!hiddenOptions?.card && (
-        <CardSettings
+        <SettingsItem
+          id="line-card"
+          label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
             onUpdateWidgetSettings({

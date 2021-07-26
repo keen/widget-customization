@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import LegendSettings from '../../../LegendSettings';
 import GridSettings from '../../../GridSettings';
-import CardSettings from '../../../CardSettings';
+import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
@@ -22,7 +22,9 @@ const BarSettings: FC<SettingsModifier> = ({
     <div>
       <SectionTitle title={t('widget_customization_bar_settings.title')} />
       {!hiddenOptions?.card && (
-        <CardSettings
+        <SettingsItem
+          id="bar-card"
+          label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
             onUpdateWidgetSettings({

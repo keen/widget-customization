@@ -33,7 +33,7 @@ test('allows user to enable card component', () => {
     props,
   } = render();
 
-  const section = getByTestId('card-settings');
+  const section = getByTestId('funnel-card');
   const toggle = within(section).getByText('off');
 
   fireEvent.click(toggle);

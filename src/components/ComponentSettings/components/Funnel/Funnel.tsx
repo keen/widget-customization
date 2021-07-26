@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Toggle } from '@keen.io/ui-core';
 
-import CardSettings from '../../../CardSettings';
+import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import Label from '../../../Label';
@@ -24,7 +24,9 @@ const FunnelSettings: FC<SettingsModifier> = ({
     <div>
       <SectionTitle title={t('widget_customization_funnel_settings.title')} />
       {!hiddenOptions?.card && (
-        <CardSettings
+        <SettingsItem
+          id="funnel-card"
+          label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
             onUpdateWidgetSettings({
