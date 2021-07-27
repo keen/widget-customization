@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.23](https://github.com/keen/query-creator/compare/v0.0.22...v0.0.23) (2021-07-27)
+
+
+### Features
+
+* 🎸 choropleth settings ([82e6b50](https://github.com/keen/query-creator/commit/82e6b509652b093cef359aa78d39bebb59646ee5))
+* 🎸 funnel percentages ([bc5ea78](https://github.com/keen/query-creator/commit/bc5ea78bf996c8c36f4d81c9b9409dcdddee4ebe))
+* 🎸 heatmap chart settings ([27f06d6](https://github.com/keen/query-creator/commit/27f06d61e088501e472498fbd145e8dafcbf6c75))
+* 🎸 metric and table settings ([9bbed69](https://github.com/keen/query-creator/commit/9bbed695e6cdfcc070dacaa2db2784cef060f4be))
+* 🎸 Pie/Donut chart settigns ([d5517e4](https://github.com/keen/query-creator/commit/d5517e4ad4ee75661533b0384388d00c696e86b9))
+
 ### [0.0.22](https://github.com/keen/query-creator/compare/v0.0.21...v0.0.22) (2021-07-21)
 
 
