@@ -15,5 +15,5 @@ export {
   MetricSettings,
   TableSettings,
   HeatmapSettings,
-  CircularSettings
+  CircularSettings,
 };
