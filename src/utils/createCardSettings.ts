@@ -8,16 +8,11 @@ import { widgetSettings } from '@keen.io/widgets';
  */
 const createCardSettings = () => {
   const {
-    card: { enabled, backgroundColor, borderRadius, hasShadow },
+    card: { enabled },
   } = widgetSettings;
 
   return {
-    card: {
-      enabled,
-      backgroundColor,
-      borderRadius,
-      hasShadow,
-    },
+    card: { enabled },
   };
 };
 
