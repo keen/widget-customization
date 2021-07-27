@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/keen/query-creator/compare/v0.0.23...v0.0.24) (2021-07-27)
+
+
+### Bug Fixes
+
+* 🐛 card interface changed ([088a43f](https://github.com/keen/query-creator/commit/088a43fffc3e92f1363a0ae269c479acba25cfaf))
+
 ### [0.0.23](https://github.com/keen/query-creator/compare/v0.0.22...v0.0.23) (2021-07-27)
 
 
