@@ -1,11 +1,5 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
-import {
-  MetricChartSettings,
-  FunnelChartSettings,
-  PieChartSettings,
-  ChoroplethChartSettings,
-  HeatmapChartSettings,
-} from '@keen.io/charts';
+import { MetricChartSettings, PieChartSettings } from '@keen.io/charts';
 
 import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
@@ -14,6 +8,9 @@ import { SerializedSettings } from '../types';
 
 import { PartialBarChartSettings } from '../charts/bar/transform';
 import { PartialLineChartSettings } from '../charts/line/transform';
+import { PartialHeatmapChartSettings } from '../charts/heatmap/transform';
+import { PartialFunnelChartSettings } from '../charts/funnel/transform';
+import { PartialChoroplethChartSettings } from '../charts/choropleth/transform';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -32,14 +29,14 @@ const serializeInputSettings = (
     case 'heatmap':
       return {
         chart: chartTransformations.heatmap.serializeIn(
-          chartSettings as HeatmapChartSettings
+          chartSettings as PartialHeatmapChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
     case 'choropleth':
       return {
         chart: chartTransformations.choropleth.serializeIn(
-          chartSettings as ChoroplethChartSettings
+          chartSettings as PartialChoroplethChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
@@ -54,7 +51,7 @@ const serializeInputSettings = (
     case 'funnel':
       return {
         chart: chartTransformations.funnel.serializeIn(
-          chartSettings as FunnelChartSettings
+          chartSettings as PartialFunnelChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
@@ -84,6 +81,7 @@ const serializeInputSettings = (
       return {
         chart: {
           formatValue: null,
+          funnelPercentages: chartSettings.theme.funnel.header.badge.enabled,
           verticalGrid: chartSettings.theme.gridX.enabled,
           horizontalGrid: chartSettings.theme.gridY.enabled,
         },

@@ -2,17 +2,14 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LegendSettings from '../../../LegendSettings';
-import GridSettings from '../../../GridSettings';
 import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
 
-const BarSettings: FC<SettingsModifier> = ({
-  chartSettings,
+const CircularSettings: FC<SettingsModifier> = ({
   widgetSettings,
   onUpdateWidgetSettings,
-  onUpdateChartSettings,
   hiddenOptions,
 }) => {
   const { t } = useTranslation();
@@ -20,10 +17,10 @@ const BarSettings: FC<SettingsModifier> = ({
 
   return (
     <div>
-      <SectionTitle title={t('widget_customization_bar_settings.title')} />
+      <SectionTitle title={t('widget_customization_circular_settings.title')} />
       {!hiddenOptions?.card && (
         <SettingsItem
-          id="bar-card"
+          id="circular-card"
           label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
@@ -47,15 +44,8 @@ const BarSettings: FC<SettingsModifier> = ({
           });
         }}
       />
-      <GridSettings
-        verticalGrid={chartSettings.verticalGrid}
-        horizontalGrid={chartSettings.horizontalGrid}
-        onChange={(settings) =>
-          onUpdateChartSettings({ ...chartSettings, ...settings })
-        }
-      />
     </div>
   );
 };
 
-export default BarSettings;
+export default CircularSettings;

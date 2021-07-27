@@ -2,7 +2,12 @@ import { ChoroplethChartSettings } from '@keen.io/charts';
 
 import { WidgetTransform } from '../../types';
 
-const transform: WidgetTransform<ChoroplethChartSettings> = {
+export type PartialChoroplethChartSettings = Omit<
+  ChoroplethChartSettings,
+  'theme'
+>;
+
+const transform: WidgetTransform<PartialChoroplethChartSettings> = {
   serializeIn: (settings) => {
     return {
       formatValue:

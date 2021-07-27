@@ -1,16 +1,17 @@
 import React from 'react';
 import { render as rtlRender, fireEvent } from '@testing-library/react';
 
-import CardSettings from './CardSettings';
+import SettingsItem from './SettingsItem';
 
 const render = (overProps: any = {}) => {
   const props = {
+    label: 'Option',
     isEnabled: false,
     onChange: jest.fn(),
     ...overProps,
   };
 
-  const wrapper = rtlRender(<CardSettings {...props} />);
+  const wrapper = rtlRender(<SettingsItem {...props} />);
 
   return {
     props,
@@ -18,7 +19,7 @@ const render = (overProps: any = {}) => {
   };
 };
 
-test('allows user to enable card', () => {
+test('allows user to enable settings item', () => {
   const {
     wrapper: { getByText },
     props,

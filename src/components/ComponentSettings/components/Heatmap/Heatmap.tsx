@@ -2,13 +2,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LegendSettings from '../../../LegendSettings';
-import GridSettings from '../../../GridSettings';
-import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
-
+import SettingsItem from '../../../SettingsItem';
 import { SettingsModifier } from '../types';
 
-const BarSettings: FC<SettingsModifier> = ({
+const HeatmapSettings: FC<SettingsModifier> = ({
   chartSettings,
   widgetSettings,
   onUpdateWidgetSettings,
@@ -17,13 +15,14 @@ const BarSettings: FC<SettingsModifier> = ({
 }) => {
   const { t } = useTranslation();
   const { legend } = widgetSettings;
+  const { layout } = chartSettings;
 
   return (
     <div>
-      <SectionTitle title={t('widget_customization_bar_settings.title')} />
+      <SectionTitle title={t('widget_customization_heatmap_settings.title')} />
       {!hiddenOptions?.card && (
         <SettingsItem
-          id="bar-card"
+          id="heatmap-card"
           label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
@@ -35,11 +34,10 @@ const BarSettings: FC<SettingsModifier> = ({
         />
       )}
       <LegendSettings
-        label={t('widget_customization_legend_settings.label')}
-        positionLabel={t('widget_customization_legend_settings.positionLabel')}
+        label={t('widget_customization_slider_settings.label')}
+        positionLabel={t('widget_customization_slider_settings.positionLabel')}
         isEnabled={legend.enabled}
         position={legend.position}
-        alignment={legend.alignment}
         onChange={(legendSettings) => {
           onUpdateWidgetSettings({
             ...widgetSettings,
@@ -47,15 +45,19 @@ const BarSettings: FC<SettingsModifier> = ({
           });
         }}
       />
-      <GridSettings
-        verticalGrid={chartSettings.verticalGrid}
-        horizontalGrid={chartSettings.horizontalGrid}
-        onChange={(settings) =>
-          onUpdateChartSettings({ ...chartSettings, ...settings })
-        }
+      <SettingsItem
+        id="heatmap-axes"
+        label={t('widget_customization_reverse_axes_settings.label')}
+        isEnabled={layout && layout === 'horizontal'}
+        onChange={(option) => {
+          onUpdateChartSettings({
+            ...chartSettings,
+            layout: option ? 'horizontal' : 'vertical',
+          });
+        }}
       />
     </div>
   );
 };
 
-export default BarSettings;
+export default HeatmapSettings;
