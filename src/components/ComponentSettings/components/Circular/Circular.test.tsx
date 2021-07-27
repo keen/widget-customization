@@ -44,7 +44,7 @@ test('do not renders card settings when card settings are disabled', () => {
     wrapper: { queryByTestId },
   } = render(props);
 
-  const element = queryByTestId('card-settings');
+  const element = queryByTestId('circular-card');
   expect(element).not.toBeInTheDocument();
 });
 
@@ -54,7 +54,7 @@ test('allows user to enable card component', () => {
     props,
   } = render();
 
-  const section = getByTestId('card-settings');
+  const section = getByTestId('circular-card');
   const toggle = within(section).getByText('off');
 
   fireEvent.click(toggle);

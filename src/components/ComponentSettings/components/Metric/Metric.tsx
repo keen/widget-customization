@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CardSettings from '../../../CardSettings';
+import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
@@ -17,7 +17,9 @@ const MetricSettings: FC<SettingsModifier> = ({
     <div>
       <SectionTitle title={t('widget_customization_metric_settings.title')} />
       {!hiddenOptions?.card && (
-        <CardSettings
+        <SettingsItem
+          id="metric-card"
+          label={t('widget_customization_card_settings.label')}
           isEnabled={widgetSettings.card.enabled}
           onChange={(cardEnabled) => {
             onUpdateWidgetSettings({

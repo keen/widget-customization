@@ -12,7 +12,7 @@ import {
   TableSettings,
   MetricSettings,
   HeatmapSettings,
-  CircularSettings
+  CircularSettings,
 } from './components';
 
 import {
