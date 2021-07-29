@@ -3,7 +3,7 @@ import { colors } from '@keen.io/colors';
 
 export const Section = styled.div`
   padding: 10px 20px;
-  flex-basis: 50%;
+  width: 100%;
 `;
 
 export const Layout = styled.div`
