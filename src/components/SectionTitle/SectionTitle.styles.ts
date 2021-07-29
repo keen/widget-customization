@@ -9,5 +9,6 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 28px;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
 `;
