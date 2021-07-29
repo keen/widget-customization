@@ -13,6 +13,7 @@ import {
   MetricSettings,
   HeatmapSettings,
   CircularSettings,
+  ComponentSettingsNotAvailable,
 } from './components';
 
 import {
@@ -79,8 +80,10 @@ const ComponentSettings: FC<Props> = ({
   const { hiddenOptions } = componentSettingsConfig;
 
   const settingsComponent = getSettingsComponent(widgetType);
+  const settingsAreAvailable =
+    !hiddenOptions?.card || !['table', 'metric'].includes(widgetType);
 
-  return (
+  return settingsComponent && settingsAreAvailable ? (
     <MousePositionedTooltip
       isActive={!!isDisabled}
       tooltipPortal={modalContainer}
@@ -103,6 +106,8 @@ const ComponentSettings: FC<Props> = ({
           : null}
       </SettingsContainer>
     </MousePositionedTooltip>
+  ) : (
+    <ComponentSettingsNotAvailable widgetType={widgetType} />
   );
 };
 

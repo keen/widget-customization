@@ -64,7 +64,7 @@ const App: FC<Props> = ({
       label: t('widget_customization_sections.formatting'),
     },
     {
-      id: 'components',
+      id: 'chartElements',
       label: t('widget_customization_sections.components'),
     },
   ];
@@ -115,7 +115,7 @@ const App: FC<Props> = ({
           />
         </Section>
       )}
-      {activeMenuItemId === 'components' && (
+      {activeMenuItemId === 'chartElements' && (
         <Section>
           <ComponentSettings
             widgetType={widgetType}

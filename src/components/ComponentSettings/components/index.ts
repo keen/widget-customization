@@ -6,6 +6,7 @@ import CircularSettings from './Circular';
 import ChoroplethSettings from './Choropleth';
 import MetricSettings from './Metric';
 import TableSettings from './Table';
+import ComponentSettingsNotAvailable from './ComponentSettingsNotAvailable';
 
 export {
   BarSettings,
@@ -16,4 +17,5 @@ export {
   TableSettings,
   HeatmapSettings,
   CircularSettings,
+  ComponentSettingsNotAvailable,
 };
