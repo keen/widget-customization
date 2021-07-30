@@ -10,6 +10,7 @@ export const Layout = styled.div`
   position: relative;
   display: flex;
   background: ${colors.white[500]};
+  min-height: 350px;
 `;
 
 export const SideMenuWrapper = styled.div`
