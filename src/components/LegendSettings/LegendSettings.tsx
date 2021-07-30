@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { LegendSettings } from '@keen.io/widgets';
 import { Toggle, RadioSelect, Position, Alignment } from '@keen.io/ui-core';
 
@@ -11,9 +12,14 @@ import {
 import Row from '../Row';
 import Label from '../Label';
 
+import { legendMotion } from './motion';
 import { getLayoutForPosition } from './utils';
 
-import { POSITION_SETTINGS, ALIGNMENT_SETTINGS } from './constants';
+import {
+  POSITION_SETTINGS,
+  VERTICAL_ALIGNMENT_SETTINGS,
+  HORIZONTAL_ALIGNMENT_SETTINGS,
+} from './constants';
 
 type Props = {
   /* Settings title */
@@ -46,33 +52,44 @@ const LegendSettings: FC<Props> = ({
         onChange={(legendEnabled) => onChange({ enabled: legendEnabled })}
       />
     </Row>
-    {isEnabled && (
-      <Row>
-        <Label>{positionLabel}</Label>
-        <PositionContainer>
-          <RadioSelect
-            activeItem={position}
-            items={POSITION_SETTINGS}
-            onClick={({ value }) => {
-              const position = value as Position;
-              onChange({ position, layout: getLayoutForPosition(position) });
-            }}
-          />
-        </PositionContainer>
-        {alignment && (
-          <AlignmentContainer>
-            <RadioSelect
-              activeItem={alignment}
-              items={ALIGNMENT_SETTINGS}
-              onClick={({ value }) => {
-                const alignment = value as Alignment;
-                onChange({ alignment });
-              }}
-            />
-          </AlignmentContainer>
-        )}
-      </Row>
-    )}
+    <AnimatePresence initial={false}>
+      {isEnabled && (
+        <motion.div {...legendMotion} style={{ overflow: 'hidden' }}>
+          <Row>
+            <Label>{positionLabel}</Label>
+            <PositionContainer>
+              <RadioSelect
+                activeItem={position}
+                items={POSITION_SETTINGS}
+                onClick={({ value }) => {
+                  const position = value as Position;
+                  onChange({
+                    position,
+                    layout: getLayoutForPosition(position),
+                  });
+                }}
+              />
+            </PositionContainer>
+            {alignment && (
+              <AlignmentContainer>
+                <RadioSelect
+                  activeItem={alignment}
+                  items={
+                    ['left', 'right'].includes(position)
+                      ? VERTICAL_ALIGNMENT_SETTINGS
+                      : HORIZONTAL_ALIGNMENT_SETTINGS
+                  }
+                  onClick={({ value }) => {
+                    const alignment = value as Alignment;
+                    onChange({ alignment });
+                  }}
+                />
+              </AlignmentContainer>
+            )}
+          </Row>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </Container>
 );
 
