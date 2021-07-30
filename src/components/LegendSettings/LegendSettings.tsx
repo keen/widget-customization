@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { LegendSettings } from '@keen.io/widgets';
 import { Toggle, RadioSelect, Position, Alignment } from '@keen.io/ui-core';
 
 import { Container } from './LegendSettings.styles';
+import { legendMotion } from './motion';
 
 import Row from '../Row';
 import Label from '../Label';
@@ -42,29 +44,33 @@ const LegendSettings: FC<Props> = ({
         onChange={(legendEnabled) => onChange({ enabled: legendEnabled })}
       />
     </Row>
-    {isEnabled && (
-      <Row>
-        <Label>{positionLabel}</Label>
-        <RadioSelect
-          activeItem={position}
-          items={POSITION_SETTINGS}
-          onClick={({ value }) => {
-            const position = value as Position;
-            onChange({ position, layout: getLayoutForPosition(position) });
-          }}
-        />
-        {alignment && (
-          <RadioSelect
-            activeItem={alignment}
-            items={ALIGNMENT_SETTINGS}
-            onClick={({ value }) => {
-              const alignment = value as Alignment;
-              onChange({ alignment });
-            }}
-          />
-        )}
-      </Row>
-    )}
+    <AnimatePresence initial={false}>
+      {isEnabled && (
+        <motion.div {...legendMotion} style={{ overflow: 'hidden' }}>
+          <Row>
+            <Label>{positionLabel}</Label>
+            <RadioSelect
+              activeItem={position}
+              items={POSITION_SETTINGS}
+              onClick={({ value }) => {
+                const position = value as Position;
+                onChange({ position, layout: getLayoutForPosition(position) });
+              }}
+            />
+            {alignment && (
+              <RadioSelect
+                activeItem={alignment}
+                items={ALIGNMENT_SETTINGS}
+                onClick={({ value }) => {
+                  const alignment = value as Alignment;
+                  onChange({ alignment });
+                }}
+              />
+            )}
+          </Row>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </Container>
 );
 
