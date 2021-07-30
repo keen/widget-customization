@@ -11,7 +11,11 @@ import Label from '../Label';
 
 import { getLayoutForPosition } from './utils';
 
-import { POSITION_SETTINGS, ALIGNMENT_SETTINGS } from './constants';
+import {
+  POSITION_SETTINGS,
+  VERTICAL_ALIGNMENT_SETTINGS,
+  HORIZONTAL_ALIGNMENT_SETTINGS,
+} from './constants';
 
 type Props = {
   /* Settings title */
@@ -60,7 +64,11 @@ const LegendSettings: FC<Props> = ({
             {alignment && (
               <RadioSelect
                 activeItem={alignment}
-                items={ALIGNMENT_SETTINGS}
+                items={
+                  ['left', 'right'].includes(position)
+                    ? VERTICAL_ALIGNMENT_SETTINGS
+                    : HORIZONTAL_ALIGNMENT_SETTINGS
+                }
                 onClick={({ value }) => {
                   const alignment = value as Alignment;
                   onChange({ alignment });
