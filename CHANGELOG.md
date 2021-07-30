@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/keen/query-creator/compare/v0.0.26...v0.0.27) (2021-07-30)
+
+
+### Bug Fixes
+
+* 🐛 update translation ([b92fd7b](https://github.com/keen/query-creator/commit/b92fd7b1635c528d432c8a13ef0671241538c19b))
+
 ### [0.0.26](https://github.com/keen/query-creator/compare/v0.0.25...v0.0.26) (2021-07-29)
 
 ### [0.0.25](https://github.com/keen/query-creator/compare/v0.0.24...v0.0.25) (2021-07-29)
