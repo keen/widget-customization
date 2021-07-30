@@ -2,7 +2,11 @@ import React, { FC } from 'react';
 import { LegendSettings } from '@keen.io/widgets';
 import { Toggle, RadioSelect, Position, Alignment } from '@keen.io/ui-core';
 
-import { Container } from './LegendSettings.styles';
+import {
+  Container,
+  PositionContainer,
+  AlignmentContainer,
+} from './LegendSettings.styles';
 
 import Row from '../Row';
 import Label from '../Label';
@@ -45,23 +49,27 @@ const LegendSettings: FC<Props> = ({
     {isEnabled && (
       <Row>
         <Label>{positionLabel}</Label>
-        <RadioSelect
-          activeItem={position}
-          items={POSITION_SETTINGS}
-          onClick={({ value }) => {
-            const position = value as Position;
-            onChange({ position, layout: getLayoutForPosition(position) });
-          }}
-        />
-        {alignment && (
+        <PositionContainer>
           <RadioSelect
-            activeItem={alignment}
-            items={ALIGNMENT_SETTINGS}
+            activeItem={position}
+            items={POSITION_SETTINGS}
             onClick={({ value }) => {
-              const alignment = value as Alignment;
-              onChange({ alignment });
+              const position = value as Position;
+              onChange({ position, layout: getLayoutForPosition(position) });
             }}
           />
+        </PositionContainer>
+        {alignment && (
+          <AlignmentContainer>
+            <RadioSelect
+              activeItem={alignment}
+              items={ALIGNMENT_SETTINGS}
+              onClick={({ value }) => {
+                const alignment = value as Alignment;
+                onChange({ alignment });
+              }}
+            />
+          </AlignmentContainer>
         )}
       </Row>
     )}
