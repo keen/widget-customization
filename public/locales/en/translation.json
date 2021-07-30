@@ -1,7 +1,7 @@
 {
   "widget_customization_sections": {
     "titles": "Titles",
-    "formatting": "Formatting",
+    "formatting": "Value Format",
     "components": "Chart Elements"
   },
   "widget_customization_legend_settings": {
