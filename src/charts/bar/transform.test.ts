@@ -22,6 +22,7 @@ test('transforms bar chart settings to customization interface', () => {
 
 test('transforms bar chart scale label format settings to customization interface', () => {
   const chartSettings = {
+    yAxisTitle: 'Revenue',
     yScaleSettings: {
       type: 'linear',
       formatLabel: '${number; 0.00; multiply; 100}£',
@@ -38,6 +39,7 @@ test('transforms bar chart scale label format settings to customization interfac
 
   expect(transform.serializeIn(chartSettings)).toEqual({
     formatValue: '${number; 0.00; multiply; 100}£',
+    yAxisTitle: 'Revenue',
     horizontalGrid: true,
     verticalGrid: true,
   });
@@ -46,6 +48,7 @@ test('transforms bar chart scale label format settings to customization interfac
 test('transforms customization interface to bar settings ', () => {
   const settings = {
     formatValue: '${number; 0.00}$',
+    xAxisTitle: 'Time',
     theme: {
       gridX: {
         enabled: true,
@@ -69,6 +72,8 @@ test('transforms customization interface to bar settings ', () => {
       "tooltipSettings": Object {
         "formatValue": "\${number; 0.00}$",
       },
+      "xAxisTitle": "Time",
+      "yAxisTitle": undefined,
       "yScaleSettings": Object {
         "formatLabel": "\${number; 0.00}$",
         "type": "linear",
