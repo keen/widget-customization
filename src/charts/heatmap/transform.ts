@@ -9,14 +9,18 @@ const transform: WidgetTransform<PartialHeatmapChartSettings> = {
     const { tooltipSettings, layout } = settings;
     return {
       layout,
+      xAxisTitle: settings.xAxisTitle,
+      yAxisTitle: settings.yAxisTitle,
       formatValue:
         tooltipSettings && typeof tooltipSettings.formatValue === 'string'
           ? tooltipSettings.formatValue
           : null,
     };
   },
-  serializeOut: ({ formatValue, layout }) => {
+  serializeOut: ({ formatValue, xAxisTitle, yAxisTitle, layout }) => {
     return {
+      xAxisTitle,
+      yAxisTitle,
       layout,
       tooltipSettings: {
         formatValue,

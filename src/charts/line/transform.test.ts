@@ -3,6 +3,7 @@ import transform, { PartialLineChartSettings } from './transform';
 test('transforms line chart settings to customization interface', () => {
   const chartSettings = {
     yScaleSettings: { type: 'linear', formatLabel: null },
+    yAxisTitle: 'Revenue',
     theme: {
       gridX: {
         enabled: true,
@@ -15,6 +16,7 @@ test('transforms line chart settings to customization interface', () => {
 
   expect(transform.serializeIn(chartSettings)).toEqual({
     formatValue: null,
+    yAxisTitle: 'Revenue',
     horizontalGrid: true,
     verticalGrid: true,
   });
@@ -48,6 +50,8 @@ test('transforms customization interface to line settings ', () => {
     formatValue: '${number; 0.00}$',
     horizontalGrid: true,
     verticalGrid: false,
+    yAxisTitle: 'Revenue',
+    xAxisTitle: 'Time',
   };
 
   expect(transform.serializeOut(settings)).toMatchInlineSnapshot(`
@@ -63,6 +67,8 @@ test('transforms customization interface to line settings ', () => {
       "tooltipSettings": Object {
         "formatValue": "\${number; 0.00}$",
       },
+      "xAxisTitle": "Time",
+      "yAxisTitle": "Revenue",
       "yScaleSettings": Object {
         "formatLabel": "\${number; 0.00}$",
         "type": "linear",

@@ -8,15 +8,14 @@ import { Icon } from '@keen.io/icons';
 import { colors } from '@keen.io/colors';
 
 import {
-  Container,
   InputContainer,
-  FieldGroup,
   QueryIcon,
   UseQueryName,
 } from './HeadingSettings.styles';
 
 import SectionTitle from '../SectionTitle';
 import SettingsContainer from '../SettingsContainer';
+import FieldGroup from '../FieldGroup';
 
 import { AppContext } from '../../contexts';
 
@@ -49,7 +48,7 @@ const HeadingSettings: FC<Props> = ({
   const titleInput = useRef(null);
 
   return (
-    <Container>
+    <>
       <SectionTitle
         title={t('widget_customization_heading_settings.section_title')}
         description={t(
@@ -155,7 +154,7 @@ const HeadingSettings: FC<Props> = ({
           </FieldGroup>
         </SettingsContainer>
       </MousePositionedTooltip>
-    </Container>
+    </>
   );
 };
 

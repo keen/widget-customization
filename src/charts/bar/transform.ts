@@ -15,14 +15,24 @@ const transform: WidgetTransform<PartialBarChartSettings> = {
     return {
       verticalGrid: theme.gridX.enabled,
       horizontalGrid: theme.gridY.enabled,
+      xAxisTitle: settings.xAxisTitle,
+      yAxisTitle: settings.yAxisTitle,
       formatValue:
         typeof yScaleSettings?.formatLabel === 'string'
           ? yScaleSettings.formatLabel
           : null,
     };
   },
-  serializeOut: ({ formatValue, verticalGrid, horizontalGrid }) => {
+  serializeOut: ({
+    formatValue,
+    xAxisTitle,
+    yAxisTitle,
+    verticalGrid,
+    horizontalGrid,
+  }) => {
     return {
+      xAxisTitle,
+      yAxisTitle,
       yScaleSettings: {
         type: 'linear',
         formatLabel: formatValue,

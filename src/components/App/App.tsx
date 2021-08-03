@@ -1,10 +1,16 @@
 import React, { FC, useState } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
 
-import { Layout, Section, SideMenuWrapper } from './App.styles';
+import {
+  Layout,
+  Section,
+  SideMenuWrapper,
+  HeadingSettingsContainer,
+} from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
 import FormatSettings from '../FormatSettings';
+import AxesTitles, { AXES_TITLES_WIDGETS } from '../AxesTitles';
 
 import {
   ChartCustomizationSettings,
@@ -80,24 +86,39 @@ const App: FC<Props> = ({
       </SideMenuWrapper>
       {activeMenuItemId === 'titles' && (
         <Section>
-          <HeadingSettings
-            title={title}
-            subtitle={subtitle}
-            savedQueryName={savedQueryName}
-            settingsDisabled={headingSettings?.isDisabled}
-            onUpdateTitleSettings={(settings) =>
-              onUpdateWidgetSettings({
-                ...widget,
-                title: settings,
-              })
-            }
-            onUpdateSubtitleSettings={(settings) =>
-              onUpdateWidgetSettings({
-                ...widget,
-                subtitle: settings,
-              })
-            }
-          />
+          <HeadingSettingsContainer>
+            <HeadingSettings
+              title={title}
+              subtitle={subtitle}
+              savedQueryName={savedQueryName}
+              settingsDisabled={headingSettings?.isDisabled}
+              onUpdateTitleSettings={(settings) =>
+                onUpdateWidgetSettings({
+                  ...widget,
+                  title: settings,
+                })
+              }
+              onUpdateSubtitleSettings={(settings) =>
+                onUpdateWidgetSettings({
+                  ...widget,
+                  subtitle: settings,
+                })
+              }
+            />
+            {AXES_TITLES_WIDGETS.includes(widgetType) && (
+              <AxesTitles
+                settingsDisabled={headingSettings?.isDisabled}
+                xAxisTitle={chart.xAxisTitle}
+                yAxisTitle={chart.yAxisTitle}
+                onUpdateAxesTitles={(axesTitles) =>
+                  onUpdateChartSettings({
+                    ...chart,
+                    ...axesTitles,
+                  })
+                }
+              />
+            )}
+          </HeadingSettingsContainer>
         </Section>
       )}
       {activeMenuItemId === 'formatting' && (
