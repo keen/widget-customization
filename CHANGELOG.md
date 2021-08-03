@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.28](https://github.com/keen/query-creator/compare/v0.0.27...v0.0.28) (2021-08-03)
+
+
+### Features
+
+* 🎸 axes titles ([54a84a0](https://github.com/keen/query-creator/commit/54a84a0c1c494111f1ecf6c54c9e252102c2ea6c))
+
 ### [0.0.27](https://github.com/keen/query-creator/compare/v0.0.26...v0.0.27) (2021-07-30)
 
 
