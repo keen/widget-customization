@@ -16,14 +16,24 @@ const transform: WidgetTransform<PartialLineChartSettings> = {
     return {
       verticalGrid: theme.gridX.enabled,
       horizontalGrid: theme.gridY.enabled,
+      xAxisTitle: settings.xAxisTitle,
+      yAxisTitle: settings.yAxisTitle,
       formatValue:
         typeof yScaleSettings?.formatLabel === 'string'
           ? yScaleSettings.formatLabel
           : null,
     };
   },
-  serializeOut: ({ formatValue, horizontalGrid, verticalGrid }) => {
+  serializeOut: ({
+    formatValue,
+    xAxisTitle,
+    yAxisTitle,
+    horizontalGrid,
+    verticalGrid,
+  }) => {
     return {
+      xAxisTitle,
+      yAxisTitle,
       yScaleSettings: {
         type: 'linear',
         formatLabel: formatValue,

@@ -6,6 +6,8 @@ export type ChartCustomizationSettings = {
   verticalGrid?: boolean;
   horizontalGrid?: boolean;
   layout?: Layout;
+  xAxisTitle?: string;
+  yAxisTitle?: string;
   funnelPercentages?: boolean;
 };
 
