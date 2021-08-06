@@ -4,6 +4,7 @@ import {
   fireEvent,
   act,
   waitFor,
+  within,
 } from '@testing-library/react';
 
 import FormatValues from './FormatValues';
@@ -88,4 +89,26 @@ test('calls onUpdateFormatValue on value change', async () => {
       `${inputValue}${BASIC_FORMATTER_PATTERN}`
     );
   });
+});
+
+test('thousands separator is disabled when precision is not set', () => {
+  const formatter = null;
+  const {
+    wrapper: { getByTestId },
+  } = render({ formatValue: formatter });
+
+  const separatorContainer = getByTestId('separator');
+  const separatorCheckbox = within(separatorContainer).getByRole('checkbox');
+  expect(separatorCheckbox).toBeDisabled();
+});
+
+test('thousands separator is enabled when precision is set', () => {
+  const formatter = `prefix\$\{number; 0.0; ${OPERATIONS_OPTIONS[1].value}; 10\}suffix`;
+  const {
+    wrapper: { getByTestId },
+  } = render({ formatValue: formatter });
+
+  const separatorContainer = getByTestId('separator');
+  const separatorCheckbox = within(separatorContainer).getByRole('checkbox');
+  expect(separatorCheckbox).not.toBeDisabled();
 });
