@@ -9,6 +9,7 @@ export type ChartCustomizationSettings = {
   xAxisTitle?: string;
   yAxisTitle?: string;
   funnelPercentages?: boolean;
+  valueMode?: CircularChartValueMode;
 };
 
 export type WidgetCustomizationSettings = {
@@ -56,3 +57,5 @@ export type FormatterSettings = {
   value?: string;
   separator?: boolean;
 };
+
+export type CircularChartValueMode = 'percentage' | 'numeric';
