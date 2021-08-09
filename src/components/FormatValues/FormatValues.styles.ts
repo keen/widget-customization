@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  max-width: 320px;
 `;
 
 const mixin = css`
@@ -12,14 +13,20 @@ const mixin = css`
   max-width: 240px;
 `;
 
-export const Row = styled.div<SpaceProps>`
+export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
   display: flex;
-  max-width: 320px;
   align-items: center;
   justify-content: space-between;
   column-gap: 10px;
 
   ${space};
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `};
 `;
 
 export const MultiControl = styled.div<{ isDisabled: boolean }>`
