@@ -11,6 +11,7 @@ import {
   Dropdown,
   DropdownList,
   Checkbox,
+  MousePositionedTooltip,
 } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 
@@ -47,7 +48,7 @@ const initialState: FormatterSettings = {
   precision: '',
   operation: null,
   value: '',
-  separator: true,
+  separator: false,
 };
 
 const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
@@ -116,6 +117,19 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const isPrecisionOpen = dropdown === 'precision';
   const isOperationOpen = dropdown === 'operation';
 
+  const onPrecisionChange = (_e, { value: precisionValue }) => {
+    if (patternOption.value === DEFAULT_FORMATTER_PATTERN.value) {
+      setState((state) => ({ ...state, separator: true }));
+    }
+    if (precisionValue === DEFAULT_FORMATTER_PATTERN.value) {
+      setState((state) => ({ ...state, separator: false }));
+    }
+    setState((state) => ({
+      ...state,
+      precision: precisionValue,
+    }));
+  };
+
   return (
     <Container>
       <Row>
@@ -162,22 +176,6 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
           />
         </ControlContainer>
       </Row>
-      <Row marginTop="5px" marginBottom="5px">
-        <StyledLabel htmlFor="separator">
-          <Checkbox
-            id="separator"
-            onChange={() =>
-              setState((state) => ({ ...state, separator: !separator }))
-            }
-            checked={!!separator}
-          />
-          <LabelText>
-            <BodyText variant="body2" fontWeight="bold">
-              {t('widget_customization_format_value_settings.separator')}
-            </BodyText>
-          </LabelText>
-        </StyledLabel>
-      </Row>
       <Row>
         <BodyText variant="body2" fontWeight="bold">
           {t('widget_customization_format_value_settings.precision')}
@@ -216,82 +214,105 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                   ref={activeItemRef}
                   items={patternsOptions}
                   setActiveItem={(item) => patternOption.value === item.value}
-                  onClick={(_e, { value: precisionValue }) => {
-                    setState((state) => ({
-                      ...state,
-                      precision: precisionValue,
-                    }));
-                  }}
+                  onClick={onPrecisionChange}
                 />
               )}
             </DropdownListContainer>
           </Dropdown>
         </ControlContainer>
       </Row>
-      <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_format_value_settings.calculate')}
-        </BodyText>
-        <MultiControl isDisabled={!precision}>
-          <ControlContainer>
-            <DropableContainer
-              variant="secondary"
-              placeholder={t(
-                'widget_customization_format_value_settings.select_operations_placeholder'
-              )}
-              onClick={() =>
-                dropdown === 'operation'
-                  ? setDropdown(null)
-                  : setDropdown('operation')
-              }
-              isActive={isOperationOpen}
-              value={operationOption?.value}
-              dropIndicator
-              onDefocus={() => setDropdown(null)}
-              borderRadius="4px 0 0 4px"
-            >
-              {operationOption?.label}
-            </DropableContainer>
-            <Dropdown isOpen={isOperationOpen}>
-              <DropdownListContainer scrollToActive maxHeight={150}>
-                {(activeItemRef) => (
-                  <DropdownList
-                    ref={activeItemRef}
-                    items={operationsOptions}
-                    setActiveItem={(item) =>
-                      operationOption?.value === item.value
-                    }
-                    onClick={(_e, { value: operationValue }) => {
-                      setState((state) => ({
-                        ...state,
-                        operation: operationValue,
-                      }));
-                    }}
-                  />
-                )}
-              </DropdownListContainer>
-            </Dropdown>
-          </ControlContainer>
-          <Input
-            data-testid="input-value"
-            value={value || ''}
-            variant="solid"
-            placeholder={t(
-              'widget_customization_format_value_settings.value_placeholder'
+      <MousePositionedTooltip
+        isActive={!precision}
+        renderContent={() => (
+          <BodyText variant="body2" color={colors.black[100]}>
+            {t(
+              'widget_customization_format_value_settings.select_precision_first'
             )}
-            borderRadius="0 4px 4px 0"
-            type="number"
-            onChange={(e) => {
-              const inputValue = e.currentTarget.value;
-              setState((state) => ({
-                ...state,
-                operation: inputValue === '' ? null : state.operation,
-                value: inputValue,
-              }));
-            }}
-          />
-        </MultiControl>
-      </Row>
+          </BodyText>
+        )}
+      >
+        <Row isDisabled={!precision}>
+          <BodyText variant="body2" fontWeight="bold">
+            {t('widget_customization_format_value_settings.calculate')}
+          </BodyText>
+          <MultiControl isDisabled={!precision}>
+            <ControlContainer>
+              <DropableContainer
+                variant="secondary"
+                placeholder={t(
+                  'widget_customization_format_value_settings.select_operations_placeholder'
+                )}
+                onClick={() =>
+                  dropdown === 'operation'
+                    ? setDropdown(null)
+                    : setDropdown('operation')
+                }
+                isActive={isOperationOpen}
+                value={operationOption?.value}
+                dropIndicator
+                onDefocus={() => setDropdown(null)}
+                borderRadius="4px 0 0 4px"
+              >
+                {operationOption?.label}
+              </DropableContainer>
+              <Dropdown isOpen={isOperationOpen}>
+                <DropdownListContainer scrollToActive maxHeight={150}>
+                  {(activeItemRef) => (
+                    <DropdownList
+                      ref={activeItemRef}
+                      items={operationsOptions}
+                      setActiveItem={(item) =>
+                        operationOption?.value === item.value
+                      }
+                      onClick={(_e, { value: operationValue }) => {
+                        setState((state) => ({
+                          ...state,
+                          operation: operationValue,
+                        }));
+                      }}
+                    />
+                  )}
+                </DropdownListContainer>
+              </Dropdown>
+            </ControlContainer>
+            <Input
+              data-testid="input-value"
+              value={value || ''}
+              variant="solid"
+              placeholder={t(
+                'widget_customization_format_value_settings.value_placeholder'
+              )}
+              borderRadius="0 4px 4px 0"
+              type="number"
+              onChange={(e) => {
+                const inputValue = e.currentTarget.value;
+                setState((state) => ({
+                  ...state,
+                  operation: inputValue === '' ? null : state.operation,
+                  value: inputValue,
+                }));
+              }}
+            />
+          </MultiControl>
+        </Row>
+        <Row marginTop="20px" marginBottom="5px" isDisabled={!precision}>
+          <StyledLabel htmlFor="separator" data-testid="separator">
+            <Checkbox
+              id="separator"
+              disabled={!precision}
+              onChange={() =>
+                setState((state) => ({ ...state, separator: !separator }))
+              }
+              checked={!!separator}
+            />
+            <LabelText>
+              <BodyText variant="body2" fontWeight="bold">
+                {t('widget_customization_format_value_settings.separator')}
+              </BodyText>
+            </LabelText>
+          </StyledLabel>
+        </Row>
+      </MousePositionedTooltip>
     </Container>
   );
 };
