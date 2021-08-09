@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.30](https://github.com/keen/query-creator/compare/v0.0.29...v0.0.30) (2021-08-09)
+
+
+### Features
+
+* 🎸 Circular chart value mode ([a2483b5](https://github.com/keen/query-creator/commit/a2483b5ea60f6c10f050d5c76385f68d6f5b09b1))
+
 ### [0.0.29](https://github.com/keen/query-creator/compare/v0.0.28...v0.0.29) (2021-08-09)
 
 
