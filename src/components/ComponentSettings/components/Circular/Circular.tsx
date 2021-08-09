@@ -4,12 +4,15 @@ import { useTranslation } from 'react-i18next';
 import LegendSettings from '../../../LegendSettings';
 import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
+import ValueMode from '../../../ValueMode';
 
 import { SettingsModifier } from '../types';
 
 const CircularSettings: FC<SettingsModifier> = ({
   widgetSettings,
+  chartSettings,
   onUpdateWidgetSettings,
+  onUpdateChartSettings,
   hiddenOptions,
 }) => {
   const { t } = useTranslation();
@@ -41,6 +44,16 @@ const CircularSettings: FC<SettingsModifier> = ({
           onUpdateWidgetSettings({
             ...widgetSettings,
             legend: { ...widgetSettings.legend, ...legendSettings },
+          });
+        }}
+      />
+      <ValueMode
+        label={t('widget_customization_circular_settings.label')}
+        valueMode={chartSettings.valueMode}
+        onChange={(circularSettings) => {
+          onUpdateChartSettings({
+            ...chartSettings,
+            valueMode: circularSettings.valueMode,
           });
         }}
       />
