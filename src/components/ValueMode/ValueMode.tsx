@@ -26,7 +26,7 @@ const ValueMode: FC<Props> = ({ label, valueMode, onChange }) => {
         <Label>{label}</Label>
         <ValueModeContainer>
           <RadioSelect
-            activeItem={valueMode}
+            activeItem={valueMode ? valueMode : VALUE_MODE_SETTINGS[0].value}
             items={VALUE_MODE_SETTINGS}
             onClick={({ value }) => {
               const valueMode = value as CircularChartValueMode;
