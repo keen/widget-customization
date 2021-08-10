@@ -84,6 +84,7 @@ const serializeInputSettings = (
           funnelPercentages: chartSettings.theme.funnel.header.badge.enabled,
           verticalGrid: chartSettings.theme.gridX.enabled,
           horizontalGrid: chartSettings.theme.gridY.enabled,
+          valueMode: chartSettings.valueMode,
         },
         widget: createWidgetSettings(widgetSettings),
       };
