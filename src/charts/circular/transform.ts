@@ -17,7 +17,7 @@ const transform: WidgetTransform<PieChartSettings & DonutChartSettings> = {
       tooltipSettings: {
         formatValue,
       },
-      valueMode: valueMode,
+      valueMode,
     };
   },
 };
