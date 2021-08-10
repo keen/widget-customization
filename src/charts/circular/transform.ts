@@ -9,13 +9,15 @@ const transform: WidgetTransform<PieChartSettings & DonutChartSettings> = {
         typeof settings?.tooltipSettings?.formatValue === 'string'
           ? settings.tooltipSettings.formatValue
           : null,
+      valueMode: settings.valueMode,
     };
   },
-  serializeOut: ({ formatValue }) => {
+  serializeOut: ({ formatValue, valueMode }) => {
     return {
       tooltipSettings: {
         formatValue,
       },
+      valueMode,
     };
   },
 };
