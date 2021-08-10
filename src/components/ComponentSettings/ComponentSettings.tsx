@@ -96,7 +96,7 @@ const ComponentSettings: FC<Props> = ({
     >
       <SettingsContainer isDisabled={!!isDisabled}>
         {settingsComponent
-          ? React.createElement(getSettingsComponent('pie'), {
+          ? React.createElement(getSettingsComponent(widgetType), {
               chartSettings,
               widgetSettings,
               onUpdateWidgetSettings,
