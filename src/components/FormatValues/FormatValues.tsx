@@ -28,7 +28,6 @@ import { DEFAULT_FORMATTER_PATTERN } from '../../constants';
 import {
   PATTERNS_OPTIONS as patterns,
   OPERATIONS_OPTIONS as operationsOptions,
-  FULL_NUMBER_PATTERN,
 } from './constants';
 import { createFormatterSettings } from '../../utils';
 import { serializeFormatterSettings } from '../../serializers';
@@ -95,17 +94,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         label: t(DEFAULT_FORMATTER_PATTERN.label),
         value: DEFAULT_FORMATTER_PATTERN.value,
       },
-      ...patterns.map((pattern) => {
-        if (pattern.value === FULL_NUMBER_PATTERN) {
-          return {
-            ...pattern,
-            label: `${pattern.label} ${t(
-              'widget_customization_format_value_settings.full_number'
-            )}`,
-          };
-        }
-        return pattern;
-      }),
+      ...patterns,
     ],
     [patterns]
   );
