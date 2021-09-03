@@ -61,6 +61,7 @@
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "@keen.io/charts": "^2.12.4",
+    "@keen.io/dataviz": "^2.13.13",
     "@keen.io/ui-core": "^2.16.0",
     "@keen.io/widget-picker": "^1.2.85",
     "@keen.io/widgets": "^2.3.12",
@@ -138,6 +139,7 @@
   },
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
+    "@keen.io/charts-utils": "^1.11.0",
     "@keen.io/colors": "^1.1.0",
     "@keen.io/query": "^1.2.0",
     "@keen.io/typography": "^1.2.0",

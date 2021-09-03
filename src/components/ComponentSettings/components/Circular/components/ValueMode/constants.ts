@@ -1,4 +1,4 @@
-import { CircularChartValueMode } from '../../types';
+import { CircularChartValueMode } from '../../../../../../types';
 
 type AlignmentSettings = {
   id: string;

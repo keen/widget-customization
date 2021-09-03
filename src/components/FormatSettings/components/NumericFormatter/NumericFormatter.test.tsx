@@ -7,11 +7,12 @@ import {
   within,
 } from '@testing-library/react';
 
-import FormatValues from './FormatValues';
+import NumericFormatter from './NumericFormatter';
 
-import { createFormatterSettings } from '../../utils';
+import { createFormatterSettings } from '../../../../utils';
+import { BASIC_FORMATTER_PATTERN } from '../../../../constants';
+
 import { OPERATIONS_OPTIONS } from './constants';
-import { BASIC_FORMATTER_PATTERN } from '../../constants';
 
 const render = (overProps: any = {}) => {
   const props = {
@@ -20,7 +21,7 @@ const render = (overProps: any = {}) => {
     ...overProps,
   };
 
-  const wrapper = rtlRender(<FormatValues {...props} />);
+  const wrapper = rtlRender(<NumericFormatter {...props} />);
 
   return {
     props,

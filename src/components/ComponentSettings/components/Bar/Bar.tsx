@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import LegendSettings from '../../../LegendSettings';
-import GridSettings from '../../../GridSettings';
 import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
+import GridSettings from '../GridSettings';
+import LegendSettings from '../LegendSettings';
 
 const BarSettings: FC<SettingsModifier> = ({
   chartSettings,

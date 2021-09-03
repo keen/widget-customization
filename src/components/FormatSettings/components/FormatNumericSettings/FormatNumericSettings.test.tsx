@@ -6,8 +6,8 @@ import {
   cleanup,
 } from '@testing-library/react';
 
-import FormatSettings from './FormatSettings';
-import { AppContext } from '../../contexts';
+import FormatNumericSettings from '../../FormatSettings';
+import { AppContext } from '../../../../contexts';
 
 const render = (overProps: any = {}) => {
   const props = {
@@ -18,7 +18,7 @@ const render = (overProps: any = {}) => {
 
   const wrapper = rtlRender(
     <AppContext.Provider value={{ modalContainer: '#modal-root' }}>
-      <FormatSettings {...props} />
+      <FormatNumericSettings {...props} />
     </AppContext.Provider>
   );
 

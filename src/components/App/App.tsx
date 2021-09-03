@@ -1,5 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { PickerWidgets } from '@keen.io/widget-picker';
+import { SideMenu } from '@keen.io/ui-core';
 
 import {
   Layout,
@@ -9,7 +12,6 @@ import {
 } from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
-import FormatSettings from '../FormatSettings';
 import AxesTitles, { AXES_TITLES_WIDGETS } from '../AxesTitles';
 
 import {
@@ -17,9 +19,8 @@ import {
   WidgetCustomizationSettings,
   SectionsConfiguration,
 } from '../../types';
-import { SideMenu } from '@keen.io/ui-core';
 import ComponentSettings from '../ComponentSettings/ComponentSettings';
-import { useTranslation } from 'react-i18next';
+import FormatSettings from '../FormatSettings/FormatSettings';
 
 type Props = {
   /** Chart customization settings */
@@ -124,15 +125,17 @@ const App: FC<Props> = ({
       {activeMenuItemId === 'formatting' && (
         <Section>
           <FormatSettings
+            widgetType={widgetType}
             formattingDisabled={formatValues?.isDisabled}
             formattingNotAvailable={formatValues?.isNotAvailable}
             formatValue={formatValue}
-            onUpdateFormatValue={(settings) =>
+            onUpdateFormatValue={(formatSettings) => {
+              console.log('fir', formatSettings);
               onUpdateChartSettings({
                 ...chart,
-                formatValue: settings,
-              })
-            }
+                ...formatSettings,
+              });
+            }}
           />
         </Section>
       )}

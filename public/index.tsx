@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import WidgetCustomization from '../src/WidgetCustomization';
@@ -9,7 +9,9 @@ import {
 } from '../src';
 
 import createI18n from './i18n';
-import { barChart as fixture } from './fixtures';
+import { barChart as fixture, tableData } from './fixtures';
+import { KeenDataviz } from '@keen.io/dataviz';
+import { PubSub } from '@keen.io/pubsub';
 
 createI18n();
 
@@ -25,10 +27,38 @@ const App = () => {
     createWidgetSettings(fixture.widgetSettings)
   );
 
+  const datavizRef = useRef(null);
+  const visualizationContainer = useRef(null);
+
+  const pubSub = new PubSub();
+
+  useEffect(() => {
+    datavizRef.current = new KeenDataviz({
+      container: visualizationContainer.current,
+      type: 'table',
+      eventBus: pubSub,
+      inEditMode: true,
+      widget: {
+        title: {
+          content: 'Book purchases',
+        },
+        subtitle: {
+          content: 'hourly',
+        },
+      },
+      settings: {
+        margins: { top: 30, left: 45, right: 30, bottom: 60 },
+      },
+    });
+    datavizRef.current.render(tableData);
+  }, [chartSettings, widgetSettings]);
+
   return (
     <>
+      <div ref={visualizationContainer} />
       <WidgetCustomization
-        widgetType="choropleth"
+        widgetType="table"
+        pubSub={pubSub}
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}

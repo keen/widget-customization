@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SettingsItem from '../../../SettingsItem';
-import LegendSettings from '../../../LegendSettings';
-import GridSettings from '../../../GridSettings';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
+import LegendSettings from '../LegendSettings';
+import GridSettings from '../GridSettings';
 
 const LineSettings: FC<SettingsModifier> = ({
   chartSettings,

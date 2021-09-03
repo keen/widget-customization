@@ -9,8 +9,8 @@ import {
   AlignmentContainer,
 } from './LegendSettings.styles';
 
-import Row from '../Row';
-import Label from '../Label';
+import Row from '../../../Row';
+import Label from '../../../Label';
 
 import { legendMotion } from './motion';
 import { getLayoutForPosition } from './utils';

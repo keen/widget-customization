@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
+import { PubSub } from '@keen.io/Pubsub';
 
 import App from './components/App';
 import { AppContext } from './contexts';
@@ -27,6 +28,7 @@ type Props = {
   customizationSections?: SectionsConfiguration;
   /** Widget type */
   widgetType?: PickerWidgets;
+  pubSub?: PubSub;
 };
 
 const WidgetCustomization: FC<Props> = ({
@@ -38,9 +40,10 @@ const WidgetCustomization: FC<Props> = ({
   savedQueryName,
   widgetType,
   customizationSections = {},
+  pubSub,
 }) => {
   return (
-    <AppContext.Provider value={{ modalContainer }}>
+    <AppContext.Provider value={{ modalContainer, pubSub }}>
       <App
         chart={chartSettings}
         widget={widgetSettings}

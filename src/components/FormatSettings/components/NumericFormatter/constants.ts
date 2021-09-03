@@ -1,4 +1,7 @@
-import { SUPPORTED_FORMATTER_PATTERNS, OPERATIONS } from '../../constants';
+import {
+  OPERATIONS,
+  SUPPORTED_FORMATTER_PATTERNS,
+} from '../../../../constants';
 
 export const PATTERNS_OPTIONS = SUPPORTED_FORMATTER_PATTERNS.map((pattern) => ({
   label: pattern,

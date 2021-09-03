@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { RadioSelect } from '@keen.io/ui-core';
 
-import Row from '../Row';
-import Label from '../Label';
+import Row from '../../../../../Row';
+import Label from '../../../../../Label';
 
 import { Container, ValueModeContainer } from './ValueMode.styles';
 
-import { CircularChartValueMode } from '../../types';
+import { CircularChartValueMode } from '../../../../../../types';
 
 import { VALUE_MODE_SETTINGS } from './constants';
 

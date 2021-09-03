@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 export const lineChart = {
   widgetSettings: {
     title: {
@@ -44,4 +46,54 @@ export const barChart = {
       },
     },
   },
+};
+
+export const tableData = {
+  query: {
+    analysis_type: 'extraction',
+    event_collection: 'book_purchase',
+    timeframe: {
+      start: '2020-02-01T00:00:00.000-00:00',
+      end: '2020-02-01T16:00:00.000-00:00',
+    },
+    timezone: 7200,
+  },
+  result: [
+    {
+      date: '2020-12-02',
+      name: 'Harry Potter',
+      author: 'J.K. Rowling',
+      number: 243534,
+    },
+    {
+      date: '2020-12-02',
+      name: 'Game of Thrones',
+      author: 'George R. R. Martin',
+      number: 243534,
+    },
+    {
+      date: '2020-12-02',
+      name: 'Love, Anger, Madness',
+      author: 'Edwidge Danticat',
+      number: 243534,
+    },
+    {
+      date: '2020-12-02',
+      name: 'Love, Anger, Madness',
+      author: 'Edwidge Danticat',
+      number: 243534,
+    },
+    {
+      date: '2020-12-02',
+      name: 'Game of Thrones',
+      author: 'George R. R. Martin',
+      number: 243534,
+    },
+    {
+      date: '2020-12-02',
+      name: 'Game of Thrones',
+      author: 'George R. R. Martin',
+      number: 243534,
+    },
+  ],
 };

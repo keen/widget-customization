@@ -2,7 +2,7 @@ import { LegendSettings, TextSettings } from '@keen.io/widgets';
 import { CardSettings, Layout } from '@keen.io/ui-core';
 
 export type ChartCustomizationSettings = {
-  formatValue: string | null;
+  formatValue?: string | null;
   verticalGrid?: boolean;
   horizontalGrid?: boolean;
   layout?: Layout;
@@ -10,6 +10,7 @@ export type ChartCustomizationSettings = {
   yAxisTitle?: string;
   funnelPercentages?: boolean;
   valueMode?: CircularChartValueMode;
+  formatTableColumns?: Record<string, any>;
 };
 
 export type WidgetCustomizationSettings = {
@@ -50,12 +51,15 @@ export type WidgetTransform<S> = {
 };
 
 export type FormatterSettings = {
+  variableType?: string | 'datetime' | 'number'; // todo
   prefix?: string;
   suffix?: string;
   precision?: string;
   operation?: 'add' | 'subtract' | 'multiply' | 'divide';
   value?: string;
   separator?: boolean;
+  dateFormat?: string;
+  timeFormat?: string;
 };
 
 export type CircularChartValueMode = 'percentage' | 'numeric';
