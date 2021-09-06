@@ -6,8 +6,8 @@ import {
   cleanup,
 } from '@testing-library/react';
 
-import FormatNumericSettings from '../../FormatSettings';
 import { AppContext } from '../../../../contexts';
+import FormatNumericSettings from './FormatNumericSettings';
 
 const render = (overProps: any = {}) => {
   const props = {
@@ -74,33 +74,11 @@ test('allows user to clear formatting settings', () => {
 });
 
 test('do not allows user to clear settings when formatting is not available', () => {
-  const formattingNotAvailable = '@formattingNotAvailable';
   const {
     wrapper: { queryByText },
-  } = render({ formattingNotAvailable });
+  } = render({ isDisabled: true });
 
   expect(
     queryByText('widget_customization_section.clear_button')
   ).not.toBeInTheDocument();
-});
-
-test('renders message when formatting settings are not available', () => {
-  const formattingNotAvailable = '@formattingNotAvailable';
-  const {
-    wrapper: { getByText },
-  } = render({ formattingNotAvailable });
-
-  expect(getByText(formattingNotAvailable)).toBeInTheDocument();
-});
-
-test('renders tooltip when formatting settings are disabled', () => {
-  const formattingDisabled = '@formattingDisabled';
-  const {
-    wrapper: { getByTestId, getByText },
-  } = render({ formattingDisabled });
-
-  const element = getByTestId('settings-container');
-  fireEvent.mouseEnter(element);
-
-  expect(getByText(formattingDisabled)).toBeInTheDocument();
 });

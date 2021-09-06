@@ -72,6 +72,7 @@ const FormatSettings: FC<Props> = ({
             ) : (
               <FormatNumericSettings
                 formatValue={chartSettings.formatValue}
+                isDisabled={!!formattingDisabled || !!formattingNotAvailable}
                 onUpdateFormatValue={(settings) =>
                   onUpdateFormatValue({ formatValue: settings })
                 }

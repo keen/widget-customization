@@ -53,9 +53,12 @@ test('renders formatter options', () => {
 
 test('renders options from formatter', () => {
   const formatter = `prefix\$\{number; 0.0; ${OPERATIONS_OPTIONS[1].value}; 10\}suffix`;
+
   const { prefix, suffix, precision, value } = createFormatterSettings(
-    formatter
+    formatter,
+    'number'
   ) as NumericFormatterType;
+
   const {
     wrapper: { getByText, getByTestId },
   } = render({ formatValue: formatter });
