@@ -47,10 +47,16 @@ export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
     `};
 `;
 
-export const ControlContainer = styled.div`
+export const ControlContainer = styled.div<{ isDisabled?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `};
 `;
 
 export const SelectColumnInfo = styled.div`

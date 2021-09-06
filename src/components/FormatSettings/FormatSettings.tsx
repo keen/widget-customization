@@ -22,6 +22,7 @@ type Props = {
     formatValue,
     formatTableColumns,
   }: FormatSettings) => void;
+  onUpdateColumnNamesMapping: ({ columnsNamesMapping }) => void;
   /** Settings disabled for customization */
   formattingDisabled?: string;
   /** Settings are not available */
@@ -39,6 +40,7 @@ const FormatSettings: FC<Props> = ({
   onUpdateFormatValue,
   formattingDisabled,
   formattingNotAvailable,
+  onUpdateColumnNamesMapping,
 }) => {
   const { modalContainer } = useContext(AppContext);
 
@@ -60,6 +62,15 @@ const FormatSettings: FC<Props> = ({
           <SettingsContainer isDisabled={!!formattingDisabled}>
             {widgetType === 'table' ? (
               <FormatTableSettings
+                onUpdateColumnName={(columnMap) => {
+                  const columnNamesMap = {
+                    columnsNamesMapping: {
+                      ...chartSettings.columnsNamesMapping,
+                      ...columnMap,
+                    },
+                  };
+                  onUpdateColumnNamesMapping(columnNamesMap);
+                }}
                 onUpdateFormatValue={(settings) =>
                   onUpdateFormatValue({
                     formatTableColumns: {

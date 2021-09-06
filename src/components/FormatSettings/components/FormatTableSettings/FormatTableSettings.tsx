@@ -42,13 +42,18 @@ import {
 type Props = {
   /** Update formatter event handler */
   onUpdateFormatValue: (formatValue: Record<string, any>) => void;
+  /** Update column name */
+  onUpdateColumnName: (column: Record<string, any>) => void;
   /** Settings disabled for customization */
   formattingDisabled?: string;
   /** Settings are not available */
   formattingNotAvailable?: string;
 };
 
-const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
+const FormatTableSettings: FC<Props> = ({
+  onUpdateFormatValue,
+  onUpdateColumnName,
+}) => {
   const chartEventsRef = useRef<ChartEvents<TableEvents>>();
   const { t } = useTranslation();
 
@@ -161,17 +166,21 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
                 </Button>
               </TitleActions>
             </TitleWrapper>
-            <ControlContainer>
+            <ControlContainer isDisabled={selectedColumns.length > 1}>
               <Label variant="secondary">
                 {t('widget_customization_format_value_settings.column_name')}
               </Label>
               <InputWrapper>
-                {/*todo*/}
                 <Input
-                  defaultValue={'Column name'}
-                  placeholder={'Column name'}
                   variant="solid"
-                  onChange={(e) => console.log(e)}
+                  value={
+                    selectedColumns.length > 1 ? '' : selectedColumns[0].name
+                  }
+                  onChange={(e) =>
+                    onUpdateColumnName({
+                      [selectedColumns[0].name]: e.target.value,
+                    })
+                  }
                 />
               </InputWrapper>
             </ControlContainer>

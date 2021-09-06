@@ -130,6 +130,12 @@ const App: FC<Props> = ({
             formattingDisabled={formatValues?.isDisabled}
             formattingNotAvailable={formatValues?.isNotAvailable}
             formatValue={formatValue}
+            onUpdateColumnNamesMapping={(columns) => {
+              onUpdateChartSettings({
+                ...chart,
+                ...columns,
+              });
+            }}
             onUpdateFormatValue={(formatSettings) => {
               onUpdateChartSettings({
                 ...chart,

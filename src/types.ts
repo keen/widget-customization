@@ -10,6 +10,7 @@ export type ChartCustomizationSettings = {
   yAxisTitle?: string;
   funnelPercentages?: boolean;
   valueMode?: CircularChartValueMode;
+  columnsNamesMapping?: Record<string, string>;
   formatTableColumns?: Record<string, any>;
 };
 
