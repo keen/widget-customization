@@ -10,6 +10,7 @@ import {
   DropdownListContainer,
   Input,
   Label,
+  Title,
 } from '@keen.io/ui-core';
 import { BodyText, Headline } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
@@ -21,13 +22,15 @@ import { AppContext } from '../../../../contexts';
 
 import {
   InputWrapper,
-  SettingsColumn,
+  SettingsColumnLeft,
+  SettingsColumnRight,
   Container,
   ControlContainer,
   SelectColumnInfo,
   FormatInfo,
   TitleWrapper,
   TitleActions,
+  DropdownInfo,
 } from './FormatTableSettings.styles';
 import { DATA_TYPES, DataTypes } from './constants';
 import {
@@ -56,6 +59,13 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [formatValue, setFormatValue] = useState(null);
 
+  const selectedColumnsAreEqual = (selectedColumns) => {
+    const [firstSelectedColumn] = selectedColumns;
+    return selectedColumns.every(
+      (column) => column.dataType === firstSelectedColumn.dataType
+    );
+  };
+
   const onChartEvent = (tableEvent) => {
     if (tableEvent.eventName === '@table/columns-selected') {
       const selectedColumns = tableEvent.meta.selection;
@@ -72,9 +82,7 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
         return setDataType(firstSelectedColumn.dataType as DataTypes);
       }
       setFormatValue(null);
-      const allColumnTypesAreEqual = selectedColumns.every(
-        (column) => column.dataType === firstSelectedColumn.dataType
-      );
+      const allColumnTypesAreEqual = selectedColumnsAreEqual(selectedColumns);
       if (allColumnTypesAreEqual) {
         return setDataType(firstSelectedColumn.dataType as DataTypes);
       }
@@ -128,7 +136,7 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
         </SelectColumnInfo>
       ) : (
         <>
-          <SettingsColumn>
+          <SettingsColumnLeft>
             <TitleWrapper>
               <Headline variant="h4">
                 {t(
@@ -183,17 +191,28 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
                   {selectedDataTypeOption && selectedDataTypeOption.label}
                 </DropableContainer>
                 <Dropdown isOpen={dropdownOpen}>
+                  {!selectedColumnsAreEqual(selectedColumns) && (
+                    <DropdownInfo>
+                      <Title variant="h5">
+                        {t(
+                          'widget_customization_format_value_settings.you_will_map_property'
+                        )}
+                      </Title>
+                    </DropdownInfo>
+                  )}
                   <DropdownListContainer scrollToActive maxHeight={150}>
                     {(activeItemRef) => (
-                      <DropdownList
-                        ref={activeItemRef}
-                        items={DATA_TYPES}
-                        setActiveItem={(item) => dataType === item.value}
-                        onClick={(e, item) => {
-                          setDataType(item.value);
-                          setDropdownOpen(!dropdownOpen);
-                        }}
-                      />
+                      <div>
+                        <DropdownList
+                          ref={activeItemRef}
+                          items={DATA_TYPES}
+                          setActiveItem={(item) => dataType === item.value}
+                          onClick={(e, item) => {
+                            setDataType(item.value);
+                            setDropdownOpen(!dropdownOpen);
+                          }}
+                        />
+                      </div>
                     )}
                   </DropdownListContainer>
                 </Dropdown>
@@ -207,8 +226,8 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
                 'widget_customization_format_value_settings.select_multiple_columns_to_apply_formatting'
               )}
             </BodyText>
-          </SettingsColumn>
-          <SettingsColumn>
+          </SettingsColumnLeft>
+          <SettingsColumnRight>
             <SectionTitle
               title={t(
                 'widget_customization_format_value_settings.values_format'
@@ -254,7 +273,7 @@ const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
                 </BodyText>
               </FormatInfo>
             )}
-          </SettingsColumn>
+          </SettingsColumnRight>
         </>
       )}
     </Container>

@@ -20,7 +20,7 @@ type Props = {
   /** Update formatter event handler */
   onUpdateFormatValue: ({
     formatValue,
-    formatTableSettings,
+    formatTableColumns,
   }: FormatSettings) => void;
   /** Settings disabled for customization */
   formattingDisabled?: string;
@@ -30,7 +30,7 @@ type Props = {
 
 type FormatSettings = {
   formatValue?: string | null;
-  formatTableSettings?: Record<string, any>;
+  formatTableColumns?: Record<string, any>;
 };
 
 const FormatSettings: FC<Props> = ({
@@ -62,7 +62,7 @@ const FormatSettings: FC<Props> = ({
               <FormatTableSettings
                 onUpdateFormatValue={(settings) =>
                   onUpdateFormatValue({
-                    formatTableSettings: {
+                    formatTableColumns: {
                       ...chartSettings.formatTableColumns,
                       ...settings,
                     },

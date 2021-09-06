@@ -11,6 +11,18 @@ import {
 const isEmpty = (arr: any[]) =>
   arr.every((item) => !item || item === DEFAULT_FORMATTER_PATTERN.value);
 
+const applyPrefixAndSuffix = (prefix, suffix) => {
+  let serializedSettings = '';
+  if (prefix && suffix) {
+    serializedSettings = prefix + '${}' + suffix;
+  } else if (prefix) {
+    serializedSettings = prefix + '${}';
+  } else if (suffix) {
+    serializedSettings = '${}' + suffix;
+  }
+  return serializedSettings;
+};
+
 const serializeFormatterSettings = (settings: FormatterSettings) => {
   const { prefix, suffix, variableType } = settings;
 
@@ -49,15 +61,17 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
     }
   } else if (variableType === 'datetime') {
     const { dateFormat, timeFormat } = settings as DateTimeFormatter;
-    if (dateFormat === 'original') {
-      precisionString = '${}';
-    } else {
+    if (dateFormat && dateFormat !== 'original') {
       precisionString = '${' + dateFormat;
       if (timeFormat) precisionString += `; ${timeFormat}`;
       precisionString += '}';
+      serializedSettings = precisionString;
+    } else {
+      serializedSettings = applyPrefixAndSuffix(prefix, suffix);
     }
+  } else if (variableType === 'string') {
+    serializedSettings = applyPrefixAndSuffix(prefix, suffix);
   }
-
   if (precisionString) {
     if (prefix && suffix) {
       serializedSettings = `${prefix}${precisionString}${suffix}`;
@@ -66,8 +80,6 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
     } else if (suffix) {
       serializedSettings = `${precisionString}${suffix}`;
     }
-  } else {
-    serializedSettings = prefix + '${}' + suffix;
   }
 
   return serializedSettings;

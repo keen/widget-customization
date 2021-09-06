@@ -23,8 +23,8 @@ export const DATA_TYPES = [
     label: 'string',
     value: DataTypes.string,
   },
-  {
-    label: 'boolean',
-    value: DataTypes.boolean,
-  },
+  // {
+  //   label: 'boolean',
+  //   value: DataTypes.boolean,
+  // },
 ];

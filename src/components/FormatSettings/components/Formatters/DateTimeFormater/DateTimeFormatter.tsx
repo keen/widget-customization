@@ -66,6 +66,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         dateFormat,
         timeFormat,
       });
+
       if (newFormatValue !== formatValue) {
         onUpdateFormatValue(newFormatValue);
       }
@@ -109,7 +110,12 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   return (
     <div>
       <PrefixAndSuffix
-        onChange={(values) => setState({ ...state, ...values })}
+        onChange={(values) =>
+          setState({
+            ...state,
+            ...values,
+          })
+        }
         prefix={state.prefix}
         suffix={state.suffix}
       />

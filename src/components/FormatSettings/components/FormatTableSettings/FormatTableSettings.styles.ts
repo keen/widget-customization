@@ -2,17 +2,28 @@ import styled, { css } from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
 import { colors } from '@keen.io/colors';
 
-export const Container = styled.div`
-  display: flex;
-`;
-
-export const SettingsColumn = styled.div`
+const mixin = css`
   max-width: 500px;
-  padding-right: 72px;
   flex: 1;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  min-height: 320px;
+`;
+
+export const SettingsColumnLeft = styled.div`
+  ${mixin};
+  padding-right: 72px;
+`;
+
+export const SettingsColumnRight = styled.div`
+  ${mixin};
+  border-left: 1px solid ${colors.gray[300]};
+  padding-left: 20px;
 `;
 
 export const InputWrapper = styled.div`
@@ -68,4 +79,9 @@ export const TitleActions = styled.div`
   button {
     margin-left: 10px;
   }
+`;
+
+export const DropdownInfo = styled.div`
+  padding: 10px 13px;
+  background: ${colors.gray[100]};
 `;

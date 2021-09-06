@@ -24,11 +24,11 @@ export const DATE_FORMATS = [
 export const TIME_FORMATS = [
   {
     label: '12-hour clock',
-    value: 'HH:mm',
+    value: 'hh:mm',
   },
   {
     label: '24-hour clock',
-    value: 'hh:mm',
+    value: 'HH:mm',
   },
   {
     label: "Don't show time",

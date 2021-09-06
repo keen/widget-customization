@@ -24,21 +24,22 @@ const StringFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   useEffect(() => {
     if (formatValue) {
-      const settings = createFormatterSettings(formatValue);
+      const settings = createFormatterSettings(formatValue, 'string');
       setState(settings);
     }
   }, []);
 
   useEffect(() => {
-    const settings = createFormatterSettings(formatValue);
+    const settings = createFormatterSettings(formatValue, 'string');
     setState((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 
-  const { prefix, suffix } = state;
+  const { prefix, suffix, variableType } = state;
 
   useDebounce(
     () => {
       const newFormatValue = serializeFormatterSettings({
+        variableType,
         prefix,
         suffix,
       });
