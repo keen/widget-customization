@@ -9,10 +9,12 @@ import { AppContext } from '../../contexts';
 import SettingsContainer from '../SettingsContainer';
 
 import { FormatNumericSettings, FormatTableSettings } from './components';
+import { ChartCustomizationSettings } from '../../types';
 
 type Props = {
   /** Widget type */
   widgetType: PickerWidgets;
+  chartSettings: ChartCustomizationSettings;
   /** Value formatter pattern */
   formatValue: string | null;
   /** Update formatter event handler */
@@ -33,17 +35,15 @@ type FormatSettings = {
 
 const FormatSettings: FC<Props> = ({
   widgetType,
-  formatValue,
+  chartSettings,
   onUpdateFormatValue,
   formattingDisabled,
   formattingNotAvailable,
 }) => {
   const { modalContainer } = useContext(AppContext);
 
-  // komponent powinien ogarniać jaki to jest typ i zwracać odpowiednie formatValues albo formatTableColumns
-
   return (
-    <div>
+    <>
       {formattingNotAvailable ? (
         <BodyText variant="body1">{formattingNotAvailable}</BodyText>
       ) : (
@@ -60,14 +60,18 @@ const FormatSettings: FC<Props> = ({
           <SettingsContainer isDisabled={!!formattingDisabled}>
             {widgetType === 'table' ? (
               <FormatTableSettings
-                formatValue={formatValue}
                 onUpdateFormatValue={(settings) =>
-                  onUpdateFormatValue({ formatTableSettings: settings })
+                  onUpdateFormatValue({
+                    formatTableSettings: {
+                      ...chartSettings.formatTableColumns,
+                      ...settings,
+                    },
+                  })
                 }
               />
             ) : (
               <FormatNumericSettings
-                formatValue={formatValue}
+                formatValue={chartSettings.formatValue}
                 onUpdateFormatValue={(settings) =>
                   onUpdateFormatValue({ formatValue: settings })
                 }
@@ -76,7 +80,7 @@ const FormatSettings: FC<Props> = ({
           </SettingsContainer>
         </MousePositionedTooltip>
       )}
-    </div>
+    </>
   );
 };
 

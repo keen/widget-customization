@@ -58,18 +58,6 @@ const createFormatterSettings = (
     }
   }
 
-  console.log('A', {
-    variableType,
-    prefix,
-    suffix,
-    precision,
-    operation,
-    value,
-    separator,
-    dateFormat,
-    timeFormat,
-  });
-
   return {
     variableType,
     prefix,

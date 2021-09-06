@@ -8,11 +8,11 @@ import {
 } from '@testing-library/react';
 
 import NumericFormatter from './NumericFormatter';
-
-import { createFormatterSettings } from '../../../../utils';
-import { BASIC_FORMATTER_PATTERN } from '../../../../constants';
+import { createFormatterSettings } from '../../../../../utils';
+import { BASIC_FORMATTER_PATTERN } from '../../../../../constants';
 
 import { OPERATIONS_OPTIONS } from './constants';
+import { NumericFormatter as NumericFormatterType } from '../../../../../types';
 
 const render = (overProps: any = {}) => {
   const props = {
@@ -55,7 +55,7 @@ test('renders options from formatter', () => {
   const formatter = `prefix\$\{number; 0.0; ${OPERATIONS_OPTIONS[1].value}; 10\}suffix`;
   const { prefix, suffix, precision, value } = createFormatterSettings(
     formatter
-  );
+  ) as NumericFormatterType;
   const {
     wrapper: { getByText, getByTestId },
   } = render({ formatValue: formatter });

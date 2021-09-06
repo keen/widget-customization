@@ -17,9 +17,15 @@ export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
     `};
 `;
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ isDisabled? }>`
   max-width: 310px;
   width: 100%;
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `};
 `;
 
 export const ControlContainer = styled.div`

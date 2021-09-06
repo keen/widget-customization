@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SectionTitle from '../../../SectionTitle';
-
-import NumericFormatter from '../NumericFormatter';
+import { NumericFormatter } from '../Formatters';
 
 type Props = {
   /** Value formatter pattern */

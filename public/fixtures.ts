@@ -17,6 +17,9 @@ export const lineChart = {
 export const barChart = {
   chartSettings: {
     formatValue: '${number; 0,0}',
+    formatTableSettings: {
+      name: 'asd${number; 0,0.0}asd',
+    },
   },
   widgetSettings: {
     card: {

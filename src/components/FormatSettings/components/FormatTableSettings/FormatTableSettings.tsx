@@ -1,7 +1,9 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { transparentize } from 'polished';
+import { useTranslation } from 'react-i18next';
 
 import {
+  Button,
   DropableContainer,
   Dropdown,
   DropdownList,
@@ -9,7 +11,7 @@ import {
   Input,
   Label,
 } from '@keen.io/ui-core';
-import { BodyText } from '@keen.io/typography';
+import { BodyText, Headline } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
 import { ChartEvents, TableEvents } from '@keen.io/charts';
 import { extractFormatterType } from '@keen.io/charts-utils';
@@ -17,21 +19,24 @@ import { extractFormatterType } from '@keen.io/charts-utils';
 import SectionTitle from '../../../SectionTitle';
 import { AppContext } from '../../../../contexts';
 
-import { PrefixAndSuffix } from '../index';
-import NumericFormatter from '../NumericFormatter';
-import { DateTimeFormatter } from '../DateTimeFormater';
-
 import {
   InputWrapper,
   SettingsColumn,
   Container,
   ControlContainer,
+  SelectColumnInfo,
+  FormatInfo,
+  TitleWrapper,
+  TitleActions,
 } from './FormatTableSettings.styles';
 import { DATA_TYPES, DataTypes } from './constants';
+import {
+  DateTimeFormatter,
+  NumericFormatter,
+  StringFormatter,
+} from '../Formatters';
 
 type Props = {
-  /** Value formatter pattern */
-  formatValue: string | null;
   /** Update formatter event handler */
   onUpdateFormatValue: (formatValue: Record<string, any>) => void;
   /** Settings disabled for customization */
@@ -40,46 +45,49 @@ type Props = {
   formattingNotAvailable?: string;
 };
 
-const FormatTableSettings: FC<Props> = ({
-  formatValue,
-  onUpdateFormatValue,
-}) => {
+const FormatTableSettings: FC<Props> = ({ onUpdateFormatValue }) => {
   const chartEventsRef = useRef<ChartEvents<TableEvents>>();
-
-  const [format, setFormat] = useState({
-    prefix: 'test',
-    suffix: 'test2',
-  });
+  const { t } = useTranslation();
 
   const { pubSub } = useContext(AppContext);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dataType, setDataType] = useState<DataTypes | null>(null);
+  const [dataType, setDataType] = useState(null);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [formatValue, setFormatValue] = useState(null);
 
   const onChartEvent = (tableEvent) => {
-    // useEffect
     if (tableEvent.eventName === '@table/columns-selected') {
       const selectedColumns = tableEvent.meta.selection;
       setSelectedColumns(selectedColumns);
       if (selectedColumns.length === 0) return setDataType(null);
+      const [firstSelectedColumn] = selectedColumns;
       if (selectedColumns.length === 1) {
-        // todo destructirization of first ele
-        if (selectedColumns[0].formatter) {
+        setFormatValue(firstSelectedColumn.formatter);
+        if (firstSelectedColumn.formatter) {
           return setDataType(
-            extractFormatterType(selectedColumns[0].formatter) as DataTypes
+            extractFormatterType(firstSelectedColumn.formatter) as DataTypes
           );
         }
-        return setDataType(selectedColumns[0].dataType as DataTypes);
+        return setDataType(firstSelectedColumn.dataType as DataTypes);
       }
+      setFormatValue(null);
       const allColumnTypesAreEqual = selectedColumns.every(
-        (column) => column.dataType === selectedColumns[0].dataType
+        (column) => column.dataType === firstSelectedColumn.dataType
       );
       if (allColumnTypesAreEqual) {
-        return setDataType(selectedColumns[0].dataType as DataTypes);
+        return setDataType(firstSelectedColumn.dataType as DataTypes);
       }
       setDataType(DataTypes.notDefined);
     }
+    if (tableEvent.eventName === '@table/deselect-columns') {
+      setSelectedColumns([]);
+      setDataType(null);
+    }
+  };
+
+  const deselectColumns = () => {
+    chartEventsRef.current.publish({ eventName: '@table/deselect-columns' });
   };
 
   useEffect(() => {
@@ -88,7 +96,7 @@ const FormatTableSettings: FC<Props> = ({
       onChartEvent
     );
     return () => {
-      chartEventsRef.current.publish({ eventName: '@table/deselect-columns' });
+      deselectColumns();
       chartEventsUnsubscribe();
     };
   }, []);
@@ -101,17 +109,56 @@ const FormatTableSettings: FC<Props> = ({
     onUpdateFormatValue(formatters);
   };
 
+  const selectedDataTypeOption = DATA_TYPES.find(
+    (type) => type.value === dataType
+  );
+
   return (
     <Container>
       {!dataType ? (
-        'Select column'
+        <SelectColumnInfo>
+          <BodyText
+            variant="body1"
+            color={transparentize(0.3, colors.black[100])}
+          >
+            {t(
+              'widget_customization_format_value_settings.click_on_columns_to_select_data'
+            )}
+          </BodyText>
+        </SelectColumnInfo>
       ) : (
         <>
           <SettingsColumn>
-            <SectionTitle title="Column name & Data Type" />
+            <TitleWrapper>
+              <Headline variant="h4">
+                {t(
+                  'widget_customization_format_value_settings.column_name_and_data_type'
+                )}
+              </Headline>
+              <TitleActions>
+                <BodyText
+                  variant="body2"
+                  color={transparentize(0.3, colors.black[100])}
+                >
+                  ({t('widget_customization_format_value_settings.selected')}:{' '}
+                  {selectedColumns.length})
+                </BodyText>
+                <Button
+                  size="small"
+                  style="outline"
+                  variant="secondary"
+                  onClick={deselectColumns}
+                >
+                  {t('widget_customization_format_value_settings.deselect_all')}
+                </Button>
+              </TitleActions>
+            </TitleWrapper>
             <ControlContainer>
-              <Label variant="secondary">Column Name</Label>
+              <Label variant="secondary">
+                {t('widget_customization_format_value_settings.column_name')}
+              </Label>
               <InputWrapper>
+                {/*todo*/}
                 <Input
                   defaultValue={'Column name'}
                   placeholder={'Column name'}
@@ -121,17 +168,19 @@ const FormatTableSettings: FC<Props> = ({
               </InputWrapper>
             </ControlContainer>
             <ControlContainer>
-              <Label variant="secondary">Data type</Label>
+              <Label variant="secondary">
+                {t('widget_customization_format_value_settings.data_type')}
+              </Label>
               <InputWrapper>
                 <DropableContainer
                   variant="secondary"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   isActive={dropdownOpen}
-                  value={dataType || 'Select'}
+                  value={dataType}
                   dropIndicator
                   onDefocus={() => setDropdownOpen(false)}
                 >
-                  {dataType || 'Select'}
+                  {selectedDataTypeOption && selectedDataTypeOption.label}
                 </DropableContainer>
                 <Dropdown isOpen={dropdownOpen}>
                   <DropdownListContainer scrollToActive maxHeight={150}>
@@ -154,17 +203,21 @@ const FormatTableSettings: FC<Props> = ({
               variant="body2"
               color={transparentize(0.5, colors.black[100])}
             >
-              Select multiple columns with the same data type to apply the same
-              formatting.
+              {t(
+                'widget_customization_format_value_settings.select_multiple_columns_to_apply_formatting'
+              )}
             </BodyText>
           </SettingsColumn>
           <SettingsColumn>
-            <SectionTitle title="Values format" />
+            <SectionTitle
+              title={t(
+                'widget_customization_format_value_settings.values_format'
+              )}
+            />
             {dataType === DataTypes.string && (
-              <PrefixAndSuffix
-                onChange={({ prefix, suffix }) => setFormat({ prefix, suffix })}
-                prefix={format.prefix}
-                suffix={format.suffix}
+              <StringFormatter
+                formatValue={formatValue}
+                onUpdateFormatValue={onUpdateFormat}
               />
             )}
             {dataType === DataTypes.number && (
@@ -179,7 +232,28 @@ const FormatTableSettings: FC<Props> = ({
                 onUpdateFormatValue={onUpdateFormat}
               />
             )}
-            {dataType === DataTypes.boolean && <p>Boolean not supported</p>}
+            {dataType === DataTypes.boolean && (
+              <FormatInfo>
+                <BodyText variant="body2" color={colors.blue[500]}>
+                  {t(
+                    'widget_customization_format_value_settings.boolean_not_supported'
+                  )}
+                </BodyText>
+              </FormatInfo>
+            )}
+            {dataType === DataTypes.notDefined && (
+              <FormatInfo>
+                <BodyText variant="body2" color={colors.blue[500]}>
+                  {t(
+                    'widget_customization_format_value_settings.selected_columns_use_different_data_type'
+                  )}
+                  <br />
+                  {t(
+                    'widget_customization_format_value_settings.specify_data_type_to_apply_proper_formatting'
+                  )}
+                </BodyText>
+              </FormatInfo>
+            )}
           </SettingsColumn>
         </>
       )}

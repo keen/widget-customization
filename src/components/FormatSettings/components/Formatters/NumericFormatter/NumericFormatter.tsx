@@ -24,18 +24,18 @@ import {
   LabelText,
 } from './NumericFormatter.styles';
 
-import { DEFAULT_FORMATTER_PATTERN } from '../../../../constants';
+import { DEFAULT_FORMATTER_PATTERN } from '../../../../../constants';
+import { createFormatterSettings } from '../../../../../utils';
+import { serializeFormatterSettings } from '../../../../../serializers';
+import { FormatterSettings, NumericFormatter } from '../../../../../types';
+
+import { PrefixAndSuffix } from '../components';
 
 import {
   PATTERNS_OPTIONS as patterns,
   OPERATIONS_OPTIONS as operationsOptions,
   FULL_NUMBER_PATTERN,
 } from './constants';
-import { createFormatterSettings } from '../../../../utils';
-import { serializeFormatterSettings } from '../../../../serializers';
-
-import { FormatterSettings } from '../../../../types';
-import { PrefixAndSuffix } from '../index';
 
 type Props = {
   /** Value formatter pattern */
@@ -57,7 +57,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
 
   const [dropdown, setDropdown] = useState<'precision' | 'operation'>();
-  const [state, setState] = useState<FormatterSettings>(initialState);
+  const [state, setState] = useState<NumericFormatter>(initialState);
 
   useEffect(() => {
     if (formatValue) {
@@ -70,7 +70,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     const { separator, ...settings } = createFormatterSettings(
       formatValue,
       'number'
-    );
+    ) as NumericFormatter;
     setState((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 

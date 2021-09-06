@@ -126,11 +126,11 @@ const App: FC<Props> = ({
         <Section>
           <FormatSettings
             widgetType={widgetType}
+            chartSettings={chart}
             formattingDisabled={formatValues?.isDisabled}
             formattingNotAvailable={formatValues?.isNotAvailable}
             formatValue={formatValue}
             onUpdateFormatValue={(formatSettings) => {
-              console.log('fir', formatSettings);
               onUpdateChartSettings({
                 ...chart,
                 ...formatSettings,

@@ -50,16 +50,33 @@ export type WidgetTransform<S> = {
   serializeOut: (settings: ChartCustomizationSettings) => Partial<S>;
 };
 
-export type FormatterSettings = {
-  variableType?: string | 'datetime' | 'number'; // todo
+export type NumericFormatter = {
+  variableType?: string | 'datetime' | 'number';
   prefix?: string;
   suffix?: string;
   precision?: string;
   operation?: 'add' | 'subtract' | 'multiply' | 'divide';
   value?: string;
   separator?: boolean;
+};
+
+export type DateTimeFormatter = {
+  variableType?: string | 'datetime' | 'number';
+  prefix?: string;
+  suffix?: string;
   dateFormat?: string;
   timeFormat?: string;
 };
+
+export type StringFormatter = {
+  variableType?: string | 'datetime' | 'number';
+  prefix?: string;
+  suffix?: string;
+};
+
+export type FormatterSettings =
+  | NumericFormatter
+  | DateTimeFormatter
+  | StringFormatter;
 
 export type CircularChartValueMode = 'percentage' | 'numeric';

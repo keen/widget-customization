@@ -1,35 +1,20 @@
-import { FormatterSettings } from '../types';
+import {
+  DateTimeFormatter,
+  FormatterSettings,
+  NumericFormatter,
+} from '../types';
 import {
   DEFAULT_FORMATTER_PATTERN,
   BASIC_FORMATTER_PATTERN,
 } from '../constants';
 
-const isEmpty = (arr: string[]) =>
+const isEmpty = (arr: any[]) =>
   arr.every((item) => !item || item === DEFAULT_FORMATTER_PATTERN.value);
 
 const serializeFormatterSettings = (settings: FormatterSettings) => {
-  const {
-    prefix,
-    suffix,
-    precision,
-    operation,
-    value,
-    separator,
-    dateFormat,
-    timeFormat,
-    variableType,
-  } = settings;
+  const { prefix, suffix, variableType } = settings;
 
-  const shouldFormatSettings = !isEmpty([
-    variableType,
-    prefix,
-    suffix,
-    precision,
-    operation,
-    value,
-    dateFormat,
-    timeFormat,
-  ]);
+  const shouldFormatSettings = !isEmpty(Object.values(settings));
 
   if (!shouldFormatSettings) return null;
 
@@ -37,6 +22,12 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
   let precisionString = '';
 
   if (variableType === 'number') {
+    const {
+      precision,
+      operation,
+      value,
+      separator,
+    } = settings as NumericFormatter;
     if (precision && precision !== DEFAULT_FORMATTER_PATTERN.value) {
       precisionString = `\$\{number; ${
         separator ? `0,${precision}` : precision
@@ -57,6 +48,7 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
       precisionString = BASIC_FORMATTER_PATTERN;
     }
   } else if (variableType === 'datetime') {
+    const { dateFormat, timeFormat } = settings as DateTimeFormatter;
     if (dateFormat === 'original') {
       precisionString = '${}';
     } else {
@@ -74,8 +66,10 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
     } else if (suffix) {
       serializedSettings = `${precisionString}${suffix}`;
     }
+  } else {
+    serializedSettings = prefix + '${}' + suffix;
   }
-  console.log('serializedSettings', serializedSettings);
+
   return serializedSettings;
 };
 

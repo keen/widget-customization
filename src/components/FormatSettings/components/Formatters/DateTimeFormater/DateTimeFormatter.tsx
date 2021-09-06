@@ -1,22 +1,26 @@
 import React, { FC, useEffect, useState } from 'react';
-import { PrefixAndSuffix } from '../index';
 import { BodyText } from '@keen.io/typography';
-import {
-  InputWrapper,
-  Row,
-  ControlContainer,
-} from './DateTimeFormatter.styles';
+import { useDebounce } from 'react-use';
+import { useTranslation } from 'react-i18next';
 import {
   DropableContainer,
   Dropdown,
   DropdownList,
   DropdownListContainer,
 } from '@keen.io/ui-core';
+
+import { DateTimeFormatter, FormatterSettings } from '../../../../../types';
+import { createFormatterSettings } from '../../../../../utils';
+import { serializeFormatterSettings } from '../../../../../serializers';
+
+import { PrefixAndSuffix } from '../components';
+
+import {
+  InputWrapper,
+  Row,
+  ControlContainer,
+} from './DateTimeFormatter.styles';
 import { DATE_FORMATS, TIME_FORMATS } from './constants';
-import { FormatterSettings } from '../../../../types';
-import { createFormatterSettings } from '../../../../utils';
-import { useDebounce } from 'react-use';
-import { serializeFormatterSettings } from '../../../../serializers';
 
 type Props = {
   /** Value formatter pattern */
@@ -33,10 +37,11 @@ const initialState: FormatterSettings = {
 };
 
 const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
+  const { t } = useTranslation();
+
   const [dateDropdownOpen, setDateDropdownOpen] = useState(false);
   const [timeDropdownOpen, setTimeDropdownOpen] = useState(false);
-
-  const [state, setState] = useState<FormatterSettings>(initialState);
+  const [state, setState] = useState<DateTimeFormatter>(initialState);
 
   useEffect(() => {
     if (formatValue) {
@@ -73,16 +78,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     DATE_FORMATS.find((format) => format.value === state.dateFormat) ||
     DATE_FORMATS[0];
   const selectedTimeFormat =
-    TIME_FORMATS.find((format) => format.value === state.timeFormat) ||
-    TIME_FORMATS[0];
-
-  const onDateFormatChange = (format) => {
-    setState({
-      ...state,
-      dateFormat: format.value,
-    });
-    setDateDropdownOpen(!dateDropdownOpen);
-  };
+    TIME_FORMATS.find((format) => format.value === state.timeFormat) || null;
 
   const onTimeFormatChange = (format) => {
     setState({
@@ -90,6 +86,24 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
       timeFormat: format.value,
     });
     setTimeDropdownOpen(!timeDropdownOpen);
+  };
+
+  const onDateFormatChange = (format) => {
+    let timeFormat = state.timeFormat;
+    setDateDropdownOpen(!dateDropdownOpen);
+
+    if (format.value !== 'original') {
+      setTimeDropdownOpen(true);
+      timeFormat = timeFormat || TIME_FORMATS[0].value;
+    } else {
+      timeFormat = null;
+    }
+
+    setState({
+      ...state,
+      timeFormat,
+      dateFormat: format.value,
+    });
   };
 
   return (
@@ -101,7 +115,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
       />
       <Row>
         <BodyText variant="body2" fontWeight="bold">
-          Date format
+          {t('widget_customization_format_value_settings.date_format')}
         </BodyText>
         <ControlContainer>
           <InputWrapper>
@@ -111,7 +125,6 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               isActive={dateDropdownOpen}
               value={selectedDateFormat.label}
               dropIndicator
-              placeholder={'Select'}
               onDefocus={() => setDateDropdownOpen(false)}
             >
               {selectedDateFormat.label}
@@ -131,17 +144,22 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               </DropdownListContainer>
             </Dropdown>
           </InputWrapper>
-          <InputWrapper>
+          <InputWrapper isDisabled={selectedDateFormat.value === 'original'}>
             <DropableContainer
               variant="secondary"
               onClick={() => setTimeDropdownOpen(!timeDropdownOpen)}
               isActive={timeDropdownOpen}
-              value={selectedTimeFormat.label}
-              placeholder={'Select'}
+              value={
+                selectedTimeFormat
+                  ? selectedTimeFormat.label
+                  : t('widget_customization_format_value_settings.time_format')
+              }
               dropIndicator
               onDefocus={() => setTimeDropdownOpen(false)}
             >
-              {selectedTimeFormat.label}
+              {selectedTimeFormat
+                ? selectedTimeFormat.label
+                : t('widget_customization_format_value_settings.time_format')}
             </DropableContainer>
             <Dropdown isOpen={timeDropdownOpen}>
               <DropdownListContainer scrollToActive maxHeight={150}>
@@ -150,6 +168,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                     ref={activeItemRef}
                     items={TIME_FORMATS}
                     setActiveItem={(item) =>
+                      selectedTimeFormat &&
                       selectedTimeFormat.value === item.value
                     }
                     onClick={(e, format) => onTimeFormatChange(format)}
