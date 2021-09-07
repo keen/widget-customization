@@ -1,5 +1,10 @@
 import React from 'react';
-import { act, waitFor, render as rtlRender } from '@testing-library/react';
+import {
+  act,
+  waitFor,
+  fireEvent,
+  render as rtlRender,
+} from '@testing-library/react';
 import { ChartEvents, TableEvents, ColumnSelection } from '@keen.io/charts';
 import { PubSub } from '@keen.io/pubsub';
 
@@ -30,6 +35,80 @@ const render = (overProps: any = {}) => {
     chartEvents,
   };
 };
+
+test('renders notification about selecting column', async () => {
+  const {
+    wrapper: { getByText },
+  } = render();
+
+  expect(
+    getByText(
+      'widget_customization_format_value_settings.click_on_columns_to_select_data'
+    )
+  ).toBeInTheDocument();
+});
+
+test('allows user to specify column format', async () => {
+  const {
+    chartEvents,
+    props: { onUpdateFormatValue },
+    wrapper: { getByTestId },
+  } = render();
+  const columnsSelection: ColumnSelection[] = [
+    { name: '@column/01', dataType: 'string', formatter: null },
+  ];
+
+  act(() => {
+    chartEvents.publish({
+      eventName: '@table/columns-selected',
+      meta: { selection: columnsSelection },
+    });
+  });
+
+  await waitFor(() => getByTestId('input-prefix'));
+
+  const prefixInput = getByTestId('input-prefix');
+
+  act(() => {
+    fireEvent.change(prefixInput, { target: { value: '@prefix' } });
+  });
+
+  await waitFor(() => {
+    expect(onUpdateFormatValue).toBeCalledWith({
+      '@column/01': '@prefix${string}',
+    });
+  });
+});
+
+test('allows user to rename column', async () => {
+  const {
+    chartEvents,
+    props: { onUpdateColumnName },
+    wrapper: { getByTestId },
+  } = render();
+  const columnsSelection: ColumnSelection[] = [
+    { name: '@column/01', dataType: 'string', formatter: null },
+  ];
+
+  act(() => {
+    chartEvents.publish({
+      eventName: '@table/columns-selected',
+      meta: { selection: columnsSelection },
+    });
+  });
+
+  await waitFor(() => getByTestId('column-name-input'));
+
+  const columnNameInput = getByTestId('column-name-input');
+
+  act(() => {
+    fireEvent.change(columnNameInput, { target: { value: '@column/rename' } });
+  });
+
+  await waitFor(() => {
+    expect(onUpdateColumnName).toBeCalledWith('@column/01', '@column/rename');
+  });
+});
 
 test('renders notification about inconsistent columns types', async () => {
   const {

@@ -175,6 +175,7 @@ const FormatTableSettings: FC<Props> = ({
               </Label>
               <InputWrapper>
                 <Input
+                  data-testid="column-name-input"
                   variant="solid"
                   value={
                     selectedColumns.length > 1
