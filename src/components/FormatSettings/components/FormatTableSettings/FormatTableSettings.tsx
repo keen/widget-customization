@@ -48,11 +48,13 @@ type Props = {
   formattingDisabled?: string;
   /** Settings are not available */
   formattingNotAvailable?: string;
+  columnsNamesMapping: Record<string, string>;
 };
 
 const FormatTableSettings: FC<Props> = ({
   onUpdateFormatValue,
   onUpdateColumnName,
+  columnsNamesMapping,
 }) => {
   const chartEventsRef = useRef<ChartEvents<TableEvents>>();
   const { t } = useTranslation();
@@ -174,7 +176,9 @@ const FormatTableSettings: FC<Props> = ({
                 <Input
                   variant="solid"
                   value={
-                    selectedColumns.length > 1 ? '' : selectedColumns[0].name
+                    selectedColumns.length > 1
+                      ? ''
+                      : columnsNamesMapping[selectedColumns[0].name]
                   }
                   onChange={(e) =>
                     onUpdateColumnName({

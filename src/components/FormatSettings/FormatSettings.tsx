@@ -62,14 +62,14 @@ const FormatSettings: FC<Props> = ({
           <SettingsContainer isDisabled={!!formattingDisabled}>
             {widgetType === 'table' ? (
               <FormatTableSettings
+                columnsNamesMapping={chartSettings.columnsNamesMapping}
                 onUpdateColumnName={(columnMap) => {
-                  const columnNamesMap = {
+                  onUpdateColumnNamesMapping({
                     columnsNamesMapping: {
                       ...chartSettings.columnsNamesMapping,
                       ...columnMap,
                     },
-                  };
-                  onUpdateColumnNamesMapping(columnNamesMap);
+                  });
                 }}
                 onUpdateFormatValue={(settings) =>
                   onUpdateFormatValue({

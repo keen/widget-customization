@@ -20,6 +20,9 @@ export const barChart = {
     formatTableColumns: {
       name: 'asd${number; 0,0.0}asd',
     },
+    columnsNamesMapping: {
+      author: 'Book author',
+    },
   },
   widgetSettings: {
     card: {
