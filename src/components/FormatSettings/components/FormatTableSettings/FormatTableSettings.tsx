@@ -48,6 +48,7 @@ type Props = {
   formattingDisabled?: string;
   /** Settings are not available */
   formattingNotAvailable?: string;
+  /** Columns rename settings */
   columnsNamesMapping: Record<string, string>;
 };
 
@@ -275,7 +276,7 @@ const FormatTableSettings: FC<Props> = ({
               </FormatInfo>
             )}
             {dataType === DataTypes.notDefined && (
-              <FormatInfo>
+              <FormatInfo data-testid="columns-format-notification">
                 <BodyText variant="body2" color={colors.blue[500]}>
                   {t(
                     'widget_customization_format_value_settings.selected_columns_use_different_data_type'
