@@ -44,6 +44,30 @@ const FormatSettings: FC<Props> = ({
 }) => {
   const { modalContainer } = useContext(AppContext);
 
+  const onColumnFormatUpdate = (settings) => {
+    const tableColumnsFormats = {
+      ...chartSettings.formatTableColumns,
+      ...settings,
+    };
+    Object.keys(tableColumnsFormats).forEach((key) => {
+      if (tableColumnsFormats[key] === '') delete tableColumnsFormats[key];
+    });
+    onUpdateFormatValue({
+      formatTableColumns: tableColumnsFormats,
+    });
+  };
+
+  const onColumnNameUpdate = (name, newName) => {
+    const columnsMap = {
+      ...chartSettings.columnsNamesMapping,
+    };
+    if (newName === '') delete columnsMap[name];
+    else columnsMap[name] = newName;
+    onUpdateColumnNamesMapping({
+      columnsNamesMapping: columnsMap,
+    });
+  };
+
   return (
     <>
       {formattingNotAvailable ? (
@@ -63,24 +87,8 @@ const FormatSettings: FC<Props> = ({
             {widgetType === 'table' ? (
               <FormatTableSettings
                 columnsNamesMapping={chartSettings.columnsNamesMapping}
-                onUpdateColumnName={(name, newName) => {
-                  const columnsMap = {
-                    ...chartSettings.columnsNamesMapping,
-                  };
-                  if (newName === '') delete columnsMap[name];
-                  else columnsMap[name] = newName;
-                  onUpdateColumnNamesMapping({
-                    columnsNamesMapping: columnsMap,
-                  });
-                }}
-                onUpdateFormatValue={(settings) =>
-                  onUpdateFormatValue({
-                    formatTableColumns: {
-                      ...chartSettings.formatTableColumns,
-                      ...settings,
-                    },
-                  })
-                }
+                onUpdateColumnName={onColumnNameUpdate}
+                onUpdateFormatValue={onColumnFormatUpdate}
               />
             ) : (
               <FormatNumericSettings
