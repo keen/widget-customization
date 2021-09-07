@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/keen/query-creator/compare/v0.0.21...v0.0.22) (2021-07-21)
+
+
+### Features
+
+* 🎸 legend settings component ([c9f754d](https://github.com/keen/query-creator/commit/c9f754d801abb365f5d752859d331e49d9473929))
+* 🎸 legend settings component ([80dfbbf](https://github.com/keen/query-creator/commit/80dfbbfc0b05d2f9af1050374b57796af40123d2))
+* 🎸 line chart settings ([6ff46bd](https://github.com/keen/query-creator/commit/6ff46bd5f58eafc303316b7b30167e9ef25c6cd6))
+* 🎸 line settings ([56925c9](https://github.com/keen/query-creator/commit/56925c98f02d20366b566d5e30321b05614b8dba))
+
+
+### Bug Fixes
+
+* 🐛 Horizontal and Vertical grid - serialize order fix ([3f19876](https://github.com/keen/query-creator/commit/3f198767aae7af7422bedd0582562839fa6f7212))
+
 ### [0.0.21](https://github.com/keen/query-creator/compare/v0.0.20...v0.0.21) (2021-07-20)
 
 
