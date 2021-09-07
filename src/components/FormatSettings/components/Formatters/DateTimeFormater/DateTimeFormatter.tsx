@@ -124,7 +124,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
           {t('widget_customization_format_value_settings.date_format')}
         </BodyText>
         <ControlContainer>
-          <InputWrapper>
+          <InputWrapper data-testid="date-select">
             <DropableContainer
               variant="secondary"
               onClick={() => setDateDropdownOpen(!dateDropdownOpen)}
@@ -150,7 +150,10 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               </DropdownListContainer>
             </Dropdown>
           </InputWrapper>
-          <InputWrapper isDisabled={selectedDateFormat.value === 'original'}>
+          <InputWrapper
+            isDisabled={selectedDateFormat.value === 'original'}
+            data-testid="time-select"
+          >
             <DropableContainer
               variant="secondary"
               onClick={() => setTimeDropdownOpen(!timeDropdownOpen)}
