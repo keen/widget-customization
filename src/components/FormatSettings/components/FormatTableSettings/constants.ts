@@ -8,10 +8,6 @@ export enum DataTypes {
 
 export const DATA_TYPES = [
   {
-    label: 'Select',
-    value: DataTypes.notDefined,
-  },
-  {
     label: 'datetime',
     value: DataTypes.dateTime,
   },

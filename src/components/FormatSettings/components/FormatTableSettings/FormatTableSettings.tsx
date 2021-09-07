@@ -43,7 +43,7 @@ type Props = {
   /** Update formatter event handler */
   onUpdateFormatValue: (formatValue: Record<string, any>) => void;
   /** Update column name */
-  onUpdateColumnName: (column: Record<string, any>) => void;
+  onUpdateColumnName: (name: string, newName: string) => void;
   /** Settings disabled for customization */
   formattingDisabled?: string;
   /** Settings are not available */
@@ -181,9 +181,7 @@ const FormatTableSettings: FC<Props> = ({
                       : columnsNamesMapping[selectedColumns[0].name]
                   }
                   onChange={(e) =>
-                    onUpdateColumnName({
-                      [selectedColumns[0].name]: e.target.value,
-                    })
+                    onUpdateColumnName(selectedColumns[0].name, e.target.value)
                   }
                 />
               </InputWrapper>
@@ -197,7 +195,10 @@ const FormatTableSettings: FC<Props> = ({
                   variant="secondary"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   isActive={dropdownOpen}
-                  value={dataType}
+                  placeholder={t(
+                    'widget_customization_format_value_settings.select_data_type'
+                  )}
+                  value={selectedDataTypeOption && selectedDataTypeOption.value}
                   dropIndicator
                   onDefocus={() => setDropdownOpen(false)}
                 >

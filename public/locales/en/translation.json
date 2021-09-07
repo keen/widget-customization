@@ -93,7 +93,8 @@
     "selected": "Selected",
     "time_format": "Time Format",
     "date_format": "Date Format",
-    "you_will_map_property": "You will map property to the different type. Some values may not be interpreted."
+    "you_will_map_property": "You will map property to the different type. Some values may not be interpreted.",
+    "select_data_type": "Select data type"
   },
   "widget_customization_section": {
     "clear_button": "Clear"

@@ -61,14 +61,13 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
     }
   } else if (variableType === 'datetime') {
     const { dateFormat, timeFormat } = settings as DateTimeFormatter;
+    precisionString = '${datetime';
     if (dateFormat && dateFormat !== 'original') {
-      precisionString = '${' + dateFormat;
+      precisionString += ';' + dateFormat;
       if (timeFormat) precisionString += `; ${timeFormat}`;
-      precisionString += '}';
-      serializedSettings = precisionString;
-    } else {
-      serializedSettings = applyPrefixAndSuffix(prefix, suffix);
     }
+    precisionString += '}';
+    serializedSettings = precisionString;
   } else if (variableType === 'string') {
     serializedSettings = applyPrefixAndSuffix(prefix, suffix);
   }

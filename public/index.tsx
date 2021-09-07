@@ -47,6 +47,9 @@ const App = () => {
         },
       },
       settings: {
+        formatValue: {
+          author: 'EEE${datetime;YYYY-MM-DD;hidden}',
+        },
         margins: { top: 30, left: 45, right: 30, bottom: 60 },
       },
     });
