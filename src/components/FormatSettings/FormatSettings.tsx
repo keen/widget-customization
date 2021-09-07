@@ -44,7 +44,7 @@ const FormatSettings: FC<Props> = ({
 }) => {
   const { modalContainer } = useContext(AppContext);
 
-  const onColumnFormatUpdate = (settings) => {
+  const onColumnFormatUpdate = (settings: Record<string, any>) => {
     const tableColumnsFormats = {
       ...chartSettings.formatTableColumns,
       ...settings,
@@ -57,7 +57,7 @@ const FormatSettings: FC<Props> = ({
     });
   };
 
-  const onColumnNameUpdate = (name, newName) => {
+  const onColumnNameUpdate = (name: string, newName: string) => {
     const columnsMap = {
       ...chartSettings.columnsNamesMapping,
     };
