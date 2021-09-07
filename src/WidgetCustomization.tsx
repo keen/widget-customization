@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
-import { PubSub } from '@keen.io/Pubsub';
+import { PubSub } from '@keen.io/pubsub';
 
 import App from './components/App';
 import { AppContext } from './contexts';
