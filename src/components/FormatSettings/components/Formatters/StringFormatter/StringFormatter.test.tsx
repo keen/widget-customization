@@ -38,7 +38,7 @@ afterAll(() => {
   jest.useRealTimers();
 });
 
-test('serializes "srting" formatter pattern as component values', () => {
+test('serializes "string" formatter pattern as component values', () => {
   const formatter = `@prefix\${string}@suffix`;
 
   const { prefix, suffix } = createFormatterSettings(
