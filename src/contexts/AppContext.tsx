@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { PubSub } from '@keen.io/Pubsub';
+import { PubSub } from '@keen.io/pubsub';
 
 const AppContext = createContext<{
   modalContainer?: string;
