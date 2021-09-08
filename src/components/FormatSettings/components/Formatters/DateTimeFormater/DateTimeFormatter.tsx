@@ -43,6 +43,15 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const [timeDropdownOpen, setTimeDropdownOpen] = useState(false);
   const [state, setState] = useState<DateTimeFormatter>(initialState);
 
+  const TranslatedDateFormats = DATE_FORMATS.map(({ label, value }) => ({
+    label: t(label),
+    value,
+  }));
+  const TranslatedTimeFormats = TIME_FORMATS.map(({ label, value }) => ({
+    label: t(label),
+    value,
+  }));
+
   useEffect(() => {
     if (formatValue) {
       const settings = createFormatterSettings(formatValue, 'datetime');
@@ -76,10 +85,11 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   );
 
   const selectedDateFormat =
-    DATE_FORMATS.find((format) => format.value === state.dateFormat) ||
-    DATE_FORMATS[0];
+    TranslatedDateFormats.find((format) => format.value === state.dateFormat) ||
+    TranslatedDateFormats[0];
   const selectedTimeFormat =
-    TIME_FORMATS.find((format) => format.value === state.timeFormat) || null;
+    TranslatedTimeFormats.find((format) => format.value === state.timeFormat) ||
+    null;
 
   const onTimeFormatChange = (format) => {
     setState({
@@ -95,7 +105,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
     if (format.value !== 'original') {
       setTimeDropdownOpen(true);
-      timeFormat = timeFormat || TIME_FORMATS[0].value;
+      timeFormat = timeFormat || TranslatedTimeFormats[0].value;
     } else {
       timeFormat = null;
     }
@@ -140,7 +150,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                 {(activeItemRef) => (
                   <DropdownList
                     ref={activeItemRef}
-                    items={DATE_FORMATS}
+                    items={TranslatedDateFormats}
                     setActiveItem={(item) =>
                       selectedDateFormat.value === item.value
                     }
@@ -175,7 +185,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                 {(activeItemRef) => (
                   <DropdownList
                     ref={activeItemRef}
-                    items={TIME_FORMATS}
+                    items={TranslatedTimeFormats}
                     setActiveItem={(item) =>
                       selectedTimeFormat &&
                       selectedTimeFormat.value === item.value

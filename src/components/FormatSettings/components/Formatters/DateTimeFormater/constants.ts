@@ -1,37 +1,37 @@
 export const DATE_FORMATS = [
   {
-    label: 'Original format',
+    label: 'widget_customization_date_formats.original',
     value: 'original',
   },
   {
-    label: 'YYYY-MM-DD',
+    label: 'widget_customization_date_formats.YYYY-MM-DD',
     value: 'YYYY-MM-DD',
   },
   {
-    label: 'DD-MM-YYYY',
+    label: 'widget_customization_date_formats.DD-MM-YYYY',
     value: 'DD-MM-YYYY',
   },
   {
-    label: 'MM-DD-YYYY',
+    label: 'widget_customization_date_formats.MM-DD-YYYY',
     value: 'MM-DD-YYYY',
   },
   {
-    label: "Don't show date",
+    label: 'widget_customization_date_formats.hidden',
     value: 'hidden',
   },
 ];
 
 export const TIME_FORMATS = [
   {
-    label: '12-hour clock',
+    label: 'widget_customization_time_formats.hh:mm',
     value: 'hh:mm',
   },
   {
-    label: '24-hour clock',
+    label: 'widget_customization_time_formats.HH:mm',
     value: 'HH:mm',
   },
   {
-    label: "Don't show time",
+    label: 'widget_customization_time_formats.hidden',
     value: 'hidden',
   },
 ];

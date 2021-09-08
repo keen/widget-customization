@@ -66,7 +66,7 @@
     "saved_query_name_tooltip": "Click to use as Chart Title"
   },
   "widget_customization_format_value_settings": {
-    "section_title": "Values Format",
+    "section_title": "Value Format",
     "section_description": "(See in metric chart or series details popup, axis that presents values)",
     "prefix": "Prefix",
     "suffix": "Suffix",
@@ -77,7 +77,6 @@
     "select_pattern_placeholder": "Select pattern",
     "select_operations_placeholder": "Select",
     "original_data": "Original data",
-    "full_number": "(Full number)",
     "separator": "Separate groups of thousands with a comma \" , \"",
     "select_precision_first": "Select the precision first",
     "click_on_columns_to_select_data": "Click on the columns to format the data.",
@@ -95,6 +94,23 @@
     "date_format": "Date Format",
     "you_will_map_property": "You will map property to the different type. Some values may not be interpreted.",
     "select_data_type": "Select data type"
+  },
+  "widget_customization_data_types": {
+    "datetime": "datetime",
+    "number": "number",
+    "string": "string"
+  },
+  "widget_customization_date_formats": {
+    "original": "Original format",
+    "YYYY-MM-DD": "YYYY-MM-DD",
+    "DD-MM-YYYY": "DD-MM-YYYY",
+    "MM-DD-YYYY": "MM-DD-YYYY",
+    "hidden":  "Don't show date"
+  },
+  "widget_customization_time_formats": {
+    "hh:mm": "12-hour clock",
+    "HH:mm": "24-hour clock",
+    "hidden": "Don't show time"
   },
   "widget_customization_section": {
     "clear_button": "Clear"

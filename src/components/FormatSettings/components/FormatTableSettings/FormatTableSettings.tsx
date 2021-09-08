@@ -67,6 +67,11 @@ const FormatTableSettings: FC<Props> = ({
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [formatValue, setFormatValue] = useState(null);
 
+  const TranslatedDataTypes = DATA_TYPES.map(({ label, value }) => ({
+    label: t(label),
+    value,
+  }));
+
   const selectedColumnsAreEqual = (selectedColumns) => {
     const [firstSelectedColumn] = selectedColumns;
     return selectedColumns.every(
@@ -125,7 +130,7 @@ const FormatTableSettings: FC<Props> = ({
     onUpdateFormatValue(formatters);
   };
 
-  const selectedDataTypeOption = DATA_TYPES.find(
+  const selectedDataTypeOption = TranslatedDataTypes.find(
     (type) => type.value === dataType
   );
 
@@ -221,7 +226,7 @@ const FormatTableSettings: FC<Props> = ({
                       <div>
                         <DropdownList
                           ref={activeItemRef}
-                          items={DATA_TYPES}
+                          items={TranslatedDataTypes}
                           setActiveItem={(item) => dataType === item.value}
                           onClick={(e, item) => {
                             setDataType(item.value);

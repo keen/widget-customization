@@ -25,3 +25,24 @@ export const DEFAULT_FORMATTER_PATTERN = {
 };
 
 export const BASIC_FORMATTER_PATTERN = '${number}';
+
+export enum MENU_ITEMS_ENUM {
+  TITLES = 'titles',
+  FORMATTING = 'formatting',
+  CHART_ELEMENTS = 'chart_elements',
+}
+
+export const MENU_ITEMS = [
+  {
+    id: MENU_ITEMS_ENUM.TITLES,
+    label: 'widget_customization_sections.titles',
+  },
+  {
+    id: MENU_ITEMS_ENUM.FORMATTING,
+    label: 'widget_customization_sections.formatting',
+  },
+  {
+    id: MENU_ITEMS_ENUM.CHART_ELEMENTS,
+    label: 'widget_customization_sections.components',
+  },
+];

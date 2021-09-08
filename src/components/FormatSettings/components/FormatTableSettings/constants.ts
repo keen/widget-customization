@@ -8,19 +8,15 @@ export enum DataTypes {
 
 export const DATA_TYPES = [
   {
-    label: 'datetime',
+    label: 'widget_customization_data_types.datetime',
     value: DataTypes.dateTime,
   },
   {
-    label: 'number',
+    label: 'widget_customization_data_types.number',
     value: DataTypes.number,
   },
   {
-    label: 'string',
+    label: 'widget_customization_data_types.string',
     value: DataTypes.string,
   },
-  // {
-  //   label: 'boolean',
-  //   value: DataTypes.boolean,
-  // },
 ];

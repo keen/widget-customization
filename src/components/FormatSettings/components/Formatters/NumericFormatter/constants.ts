@@ -12,5 +12,3 @@ export const OPERATIONS_OPTIONS = OPERATIONS.map((operation) => ({
   label: operation.replace(/^\w/, (c: string) => c.toUpperCase()),
   value: operation,
 }));
-
-export const FULL_NUMBER_PATTERN = '0';

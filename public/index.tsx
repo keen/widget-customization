@@ -66,6 +66,7 @@ const App = () => {
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}
         onUpdateChartSettings={(settings) => setChartSettings(settings)}
+        onMenuItemChange={(currentMenuItemId) => console.log(currentMenuItemId)}
         modalContainer="#modal-root"
         savedQueryName="Last purchases"
         customizationSections={{

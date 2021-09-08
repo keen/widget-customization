@@ -19,6 +19,8 @@ import {
   WidgetCustomizationSettings,
   SectionsConfiguration,
 } from '../../types';
+import { MENU_ITEMS } from '../../constants';
+
 import ComponentSettings from '../ComponentSettings/ComponentSettings';
 import FormatSettings from '../FormatSettings/FormatSettings';
 
@@ -37,6 +39,8 @@ type Props = {
   savedQueryName?: string;
   /** Widget type */
   widgetType?: PickerWidgets;
+  /** Callback which will be called on menu section change */
+  onMenuItemChange?: (menuItemId: string) => void;
 };
 
 const App: FC<Props> = ({
@@ -47,6 +51,7 @@ const App: FC<Props> = ({
   onUpdateChartSettings,
   onUpdateWidgetSettings,
   customizationSections,
+  onMenuItemChange,
 }) => {
   const { t } = useTranslation();
 
@@ -58,30 +63,23 @@ const App: FC<Props> = ({
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
-
   const [activeMenuItemId, setActiveMenuItemId] = useState('titles');
+  const TranslatedMenuItems = MENU_ITEMS.map(({ id, label }) => ({
+    id,
+    label: t(label),
+  }));
 
-  const MENU_ITEMS = [
-    {
-      id: 'titles',
-      label: t('widget_customization_sections.titles'),
-    },
-    {
-      id: 'formatting',
-      label: t('widget_customization_sections.formatting'),
-    },
-    {
-      id: 'chartElements',
-      label: t('widget_customization_sections.components'),
-    },
-  ];
+  const onMenuChange = (itemId) => {
+    setActiveMenuItemId(itemId);
+    onMenuItemChange(itemId);
+  };
 
   return (
     <Layout>
       <SideMenuWrapper>
         <SideMenu
-          menuItems={MENU_ITEMS}
-          onChange={(itemId) => setActiveMenuItemId(itemId)}
+          menuItems={TranslatedMenuItems}
+          onChange={onMenuChange}
           activeItemId={activeMenuItemId}
         />
       </SideMenuWrapper>
