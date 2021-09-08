@@ -2,10 +2,7 @@ import { PickerWidgets } from '@keen.io/widget-picker';
 
 export const HEADING_DISABLED_WIDGETS: PickerWidgets[] = ['json'];
 
-export const FORMAT_VALUES_DISABLED_WIDGETS: PickerWidgets[] = [
-  'table',
-  'json',
-];
+export const FORMAT_VALUES_DISABLED_WIDGETS: PickerWidgets[] = ['json'];
 
 export const SUPPORTED_FORMATTER_PATTERNS = [
   '0',
