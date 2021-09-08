@@ -41,6 +41,10 @@ test('applies date formatters to selects', async () => {
   const inputSuffix = getByTestId('input-suffix').getAttribute('value');
   expect(inputPrefix).toEqual(prefix);
   expect(inputSuffix).toEqual(suffix);
-  expect(getByText('YYYY-MM-DD')).toBeInTheDocument();
-  expect(getByText('24-hour clock')).toBeInTheDocument();
+  expect(
+    getByText('widget_customization_date_formats.YYYY-MM-DD')
+  ).toBeInTheDocument();
+  expect(
+    getByText('widget_customization_time_formats.HH:mm')
+  ).toBeInTheDocument();
 });
