@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.32](https://github.com/keen/query-creator/compare/v0.0.31...v0.0.32) (2021-08-12)
+
+
+### Bug Fixes
+
+* 🐛 Pie format value fix ([b36da75](https://github.com/keen/query-creator/commit/b36da75bb354416b76f7e10eb928266b315625ad))
+
+### [0.0.31](https://github.com/keen/query-creator/compare/v0.0.30...v0.0.31) (2021-08-10)
+
+
+### Features
+
+* 🎸 Circular chart changes ([1fe9961](https://github.com/keen/query-creator/commit/1fe99619fa42dd17608fe7fbe1de0f2ffae463d4))
+
+
+### Bug Fixes
+
+* 🐛 Changes ([4cb86e0](https://github.com/keen/query-creator/commit/4cb86e0d5c59540d56856f73de3f5b79c379cfc1))
+* 🐛 Tests fix ([b8d17b1](https://github.com/keen/query-creator/commit/b8d17b1d9132cf3ce30cd9e300ee6ca5e3a12e1e))
+
+### [0.0.30](https://github.com/keen/query-creator/compare/v0.0.29...v0.0.30) (2021-08-09)
+
+
+### Features
+
+* 🎸 Circular chart value mode ([a2483b5](https://github.com/keen/query-creator/commit/a2483b5ea60f6c10f050d5c76385f68d6f5b09b1))
+
+### [0.0.29](https://github.com/keen/query-creator/compare/v0.0.28...v0.0.29) (2021-08-09)
+
+
+### Bug Fixes
+
+* 🐛 Thousands separator behavior changed ([66a5525](https://github.com/keen/query-creator/commit/66a55250608bf53a3466aa499280490c79824826))
+
+### [0.0.28](https://github.com/keen/query-creator/compare/v0.0.27...v0.0.28) (2021-08-03)
+
+
+### Features
+
+* 🎸 axes titles ([54a84a0](https://github.com/keen/query-creator/commit/54a84a0c1c494111f1ecf6c54c9e252102c2ea6c))
+
+### [0.0.27](https://github.com/keen/query-creator/compare/v0.0.26...v0.0.27) (2021-07-30)
+
+
+### Bug Fixes
+
+* 🐛 update translation ([b92fd7b](https://github.com/keen/query-creator/commit/b92fd7b1635c528d432c8a13ef0671241538c19b))
+
+### [0.0.26](https://github.com/keen/query-creator/compare/v0.0.25...v0.0.26) (2021-07-29)
+
+### [0.0.25](https://github.com/keen/query-creator/compare/v0.0.24...v0.0.25) (2021-07-29)
+
+### [0.0.24](https://github.com/keen/query-creator/compare/v0.0.23...v0.0.24) (2021-07-27)
+
+
+### Bug Fixes
+
+* 🐛 card interface changed ([088a43f](https://github.com/keen/query-creator/commit/088a43fffc3e92f1363a0ae269c479acba25cfaf))
+
+### [0.0.23](https://github.com/keen/query-creator/compare/v0.0.22...v0.0.23) (2021-07-27)
+
+
+### Features
+
+* 🎸 choropleth settings ([82e6b50](https://github.com/keen/query-creator/commit/82e6b509652b093cef359aa78d39bebb59646ee5))
+* 🎸 funnel percentages ([bc5ea78](https://github.com/keen/query-creator/commit/bc5ea78bf996c8c36f4d81c9b9409dcdddee4ebe))
+* 🎸 heatmap chart settings ([27f06d6](https://github.com/keen/query-creator/commit/27f06d61e088501e472498fbd145e8dafcbf6c75))
+* 🎸 metric and table settings ([9bbed69](https://github.com/keen/query-creator/commit/9bbed695e6cdfcc070dacaa2db2784cef060f4be))
+* 🎸 Pie/Donut chart settigns ([d5517e4](https://github.com/keen/query-creator/commit/d5517e4ad4ee75661533b0384388d00c696e86b9))
+
 ### [0.0.22](https://github.com/keen/query-creator/compare/v0.0.21...v0.0.22) (2021-07-21)
 
 
