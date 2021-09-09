@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.33](https://github.com/keen/query-creator/compare/v0.0.32...v0.0.33) (2021-09-09)
+
+
+### Features
+
+* 🎸 Column name ([b31369d](https://github.com/keen/query-creator/commit/b31369d2af444dee8c724eea578a4239da6c49c6))
+* 🎸 Component changes, missing logic added ([546d45c](https://github.com/keen/query-creator/commit/546d45c27ddfd25f3cb912dc1594161d2460d290))
+* 🎸 WIP - Table chart column formatters ([ca65904](https://github.com/keen/query-creator/commit/ca65904524b9ce488c4ece46ff70ac3fe34eb052))
+
+
+### Bug Fixes
+
+* 🐛 Bug fixes ([85a0bb9](https://github.com/keen/query-creator/commit/85a0bb910b0a1e9cdd9fa27c5db107d67d5dce0d))
+* 🐛 Column names mapping fix ([15ca13e](https://github.com/keen/query-creator/commit/15ca13e697a9e6049e019053f3e26dedf3e43904))
+* 🐛 CR fixes, on menu item change callback prop added ([145e77f](https://github.com/keen/query-creator/commit/145e77fdb28b587011ff28848b7381e1655223b4))
+* 🐛 Formatter and column rename fixes ([e5b84ea](https://github.com/keen/query-creator/commit/e5b84ea76f4ef3a5400f43a3a812575657091f71))
+* 🐛 removed table from disabled widgets ([34c05eb](https://github.com/keen/query-creator/commit/34c05eb2269880cb913f39415df8ad8e382f7e9e))
+* 🐛 String formatter, removing empty values ([d7618ec](https://github.com/keen/query-creator/commit/d7618ec1fcfc1487d1257f061794f770d0f4fdd0))
+* 🐛 Table formatting fixes, tooltip added ([c225172](https://github.com/keen/query-creator/commit/c2251723f196cf4f34c885d644ac9c55bdf43759))
+
 ### [0.0.32](https://github.com/keen/query-creator/compare/v0.0.31...v0.0.32) (2021-08-12)
 
 
