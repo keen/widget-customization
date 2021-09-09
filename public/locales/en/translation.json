@@ -94,7 +94,8 @@
     "date_format": "Date Format",
     "you_will_map_property": "You will map property to the different type. Some values may not be interpreted.",
     "select_data_type": "Select data type",
-    "select_the_single_column_to_change_the_name": "Select the single column to change the name"
+    "select_the_single_column_to_change_the_name": "Select the single column to change the name",
+    "select_the_date_format_first": "Select the Date format first"
   },
   "widget_customization_data_types": {
     "datetime": "datetime",
@@ -119,7 +120,6 @@
   "widget_customization": {
     "settings_disabled": "Run your query first",
     "settings_disabled_for_widget": "Settings do not affect {{widget}} visualization",
-    "format_values_not_avaialble": "No formatting options for {{analysis}} analysis",
     "chart_settings_not_available": "Run query and select the visualization type to see chart settings.",
     "chart_settings_not_available_for_widget": "There are no chart settings for the {{widget}} chart."
   }
