@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.34](https://github.com/keen/query-creator/compare/v0.0.33...v0.0.34) (2021-09-09)
+
+
+### Features
+
+* 🎸 Disabled analysis removed ([19a8ecc](https://github.com/keen/query-creator/commit/19a8ecc8302ef66897b30c9972addd91861c1252))
+* 🎸 Missing tooltip added ([3523582](https://github.com/keen/query-creator/commit/352358291746c015adb1e03444f87bd8338262ab))
+
+
+### Bug Fixes
+
+* 🐛 Empty name field when two columns selected ([b3c904e](https://github.com/keen/query-creator/commit/b3c904e716b63dbe4625ebfdb24d53f448ca5a16))
+
 ### [0.0.33](https://github.com/keen/query-creator/compare/v0.0.32...v0.0.33) (2021-09-09)
 
 
