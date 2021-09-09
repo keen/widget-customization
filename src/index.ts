@@ -2,6 +2,7 @@ import WidgetCustomization from './WidgetCustomization';
 import { serializeInputSettings, serializeOutputSettings } from './serializers';
 import { useCustomizationSections } from './hooks';
 import { createWidgetSettings } from './utils';
+import { MENU_ITEMS_ENUM } from './constants';
 
 import {
   SerializedSettings,
@@ -21,4 +22,5 @@ export {
   SectionsConfiguration,
   ChartCustomizationSettings,
   WidgetCustomizationSettings,
+  MENU_ITEMS_ENUM,
 };

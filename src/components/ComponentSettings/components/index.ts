@@ -7,6 +7,8 @@ import ChoroplethSettings from './Choropleth';
 import MetricSettings from './Metric';
 import TableSettings from './Table';
 import ComponentSettingsNotAvailable from './ComponentSettingsNotAvailable';
+import GridSettings from './GridSettings';
+import LegendSettings from './LegendSettings';
 
 export {
   BarSettings,
@@ -18,4 +20,6 @@ export {
   HeatmapSettings,
   CircularSettings,
   ComponentSettingsNotAvailable,
+  GridSettings,
+  LegendSettings,
 };

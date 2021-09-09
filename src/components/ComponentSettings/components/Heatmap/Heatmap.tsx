@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import LegendSettings from '../../../LegendSettings';
 import SectionTitle from '../../../SectionTitle';
 import SettingsItem from '../../../SettingsItem';
 import { SettingsModifier } from '../types';
+import LegendSettings from '../LegendSettings';
 
 const HeatmapSettings: FC<SettingsModifier> = ({
   chartSettings,

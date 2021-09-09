@@ -5,6 +5,7 @@ import funnelTransformation from './funnel';
 import circularTransformation from './circular';
 import choroplethTransformation from './choropleth';
 import heatmapTransformation from './heatmap';
+import tableTransformation from './table';
 
 const chartTransformations = {
   bar: barTransformation,
@@ -14,6 +15,7 @@ const chartTransformations = {
   circular: circularTransformation,
   choropleth: choroplethTransformation,
   heatmap: heatmapTransformation,
+  table: tableTransformation,
 };
 
 export default chartTransformations;

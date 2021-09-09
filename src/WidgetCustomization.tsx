@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { PickerWidgets } from '@keen.io/widget-picker';
+import { PubSub } from '@keen.io/pubsub';
 
 import App from './components/App';
 import { AppContext } from './contexts';
@@ -27,6 +28,10 @@ type Props = {
   customizationSections?: SectionsConfiguration;
   /** Widget type */
   widgetType?: PickerWidgets;
+  /** PubSub used to communicate with chart */
+  pubSub?: PubSub;
+  /** Callback which will be called on menu section change */
+  onMenuItemChange?: (menuItemId: string) => void;
 };
 
 const WidgetCustomization: FC<Props> = ({
@@ -38,15 +43,18 @@ const WidgetCustomization: FC<Props> = ({
   savedQueryName,
   widgetType,
   customizationSections = {},
+  pubSub,
+  onMenuItemChange,
 }) => {
   return (
-    <AppContext.Provider value={{ modalContainer }}>
+    <AppContext.Provider value={{ modalContainer, pubSub }}>
       <App
         chart={chartSettings}
         widget={widgetSettings}
         widgetType={widgetType}
         savedQueryName={savedQueryName}
         customizationSections={customizationSections}
+        onMenuItemChange={onMenuItemChange}
         onUpdateChartSettings={(settings) => {
           onUpdateChartSettings(settings);
         }}

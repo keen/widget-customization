@@ -1,5 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { PickerWidgets } from '@keen.io/widget-picker';
+import { SideMenu } from '@keen.io/ui-core';
 
 import {
   Layout,
@@ -9,7 +12,6 @@ import {
 } from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
-import FormatSettings from '../FormatSettings';
 import AxesTitles, { AXES_TITLES_WIDGETS } from '../AxesTitles';
 
 import {
@@ -17,9 +19,10 @@ import {
   WidgetCustomizationSettings,
   SectionsConfiguration,
 } from '../../types';
-import { SideMenu } from '@keen.io/ui-core';
+import { MENU_ITEMS } from '../../constants';
+
 import ComponentSettings from '../ComponentSettings/ComponentSettings';
-import { useTranslation } from 'react-i18next';
+import FormatSettings from '../FormatSettings/FormatSettings';
 
 type Props = {
   /** Chart customization settings */
@@ -36,6 +39,8 @@ type Props = {
   savedQueryName?: string;
   /** Widget type */
   widgetType?: PickerWidgets;
+  /** Callback which will be called on menu section change */
+  onMenuItemChange?: (menuItemId: string) => void;
 };
 
 const App: FC<Props> = ({
@@ -46,6 +51,7 @@ const App: FC<Props> = ({
   onUpdateChartSettings,
   onUpdateWidgetSettings,
   customizationSections,
+  onMenuItemChange,
 }) => {
   const { t } = useTranslation();
 
@@ -57,30 +63,23 @@ const App: FC<Props> = ({
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
-
   const [activeMenuItemId, setActiveMenuItemId] = useState('titles');
+  const TranslatedMenuItems = MENU_ITEMS.map(({ id, label }) => ({
+    id,
+    label: t(label),
+  }));
 
-  const MENU_ITEMS = [
-    {
-      id: 'titles',
-      label: t('widget_customization_sections.titles'),
-    },
-    {
-      id: 'formatting',
-      label: t('widget_customization_sections.formatting'),
-    },
-    {
-      id: 'chartElements',
-      label: t('widget_customization_sections.components'),
-    },
-  ];
+  const onMenuChange = (itemId) => {
+    setActiveMenuItemId(itemId);
+    onMenuItemChange(itemId);
+  };
 
   return (
     <Layout>
       <SideMenuWrapper>
         <SideMenu
-          menuItems={MENU_ITEMS}
-          onChange={(itemId) => setActiveMenuItemId(itemId)}
+          menuItems={TranslatedMenuItems}
+          onChange={onMenuChange}
           activeItemId={activeMenuItemId}
         />
       </SideMenuWrapper>
@@ -124,15 +123,23 @@ const App: FC<Props> = ({
       {activeMenuItemId === 'formatting' && (
         <Section>
           <FormatSettings
+            widgetType={widgetType}
+            chartSettings={chart}
             formattingDisabled={formatValues?.isDisabled}
             formattingNotAvailable={formatValues?.isNotAvailable}
             formatValue={formatValue}
-            onUpdateFormatValue={(settings) =>
+            onUpdateColumnNamesMapping={(columns) => {
               onUpdateChartSettings({
                 ...chart,
-                formatValue: settings,
-              })
-            }
+                ...columns,
+              });
+            }}
+            onUpdateFormatValue={(formatSettings) => {
+              onUpdateChartSettings({
+                ...chart,
+                ...formatSettings,
+              });
+            }}
           />
         </Section>
       )}

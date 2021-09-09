@@ -2,10 +2,7 @@ import { PickerWidgets } from '@keen.io/widget-picker';
 
 export const HEADING_DISABLED_WIDGETS: PickerWidgets[] = ['json'];
 
-export const FORMAT_VALUES_DISABLED_WIDGETS: PickerWidgets[] = [
-  'table',
-  'json',
-];
+export const FORMAT_VALUES_DISABLED_WIDGETS: PickerWidgets[] = ['json'];
 
 export const SUPPORTED_FORMATTER_PATTERNS = [
   '0',
@@ -25,3 +22,24 @@ export const DEFAULT_FORMATTER_PATTERN = {
 };
 
 export const BASIC_FORMATTER_PATTERN = '${number}';
+
+export enum MENU_ITEMS_ENUM {
+  TITLES = 'titles',
+  FORMATTING = 'formatting',
+  CHART_ELEMENTS = 'chart_elements',
+}
+
+export const MENU_ITEMS = [
+  {
+    id: MENU_ITEMS_ENUM.TITLES,
+    label: 'widget_customization_sections.titles',
+  },
+  {
+    id: MENU_ITEMS_ENUM.FORMATTING,
+    label: 'widget_customization_sections.formatting',
+  },
+  {
+    id: MENU_ITEMS_ENUM.CHART_ELEMENTS,
+    label: 'widget_customization_sections.components',
+  },
+];

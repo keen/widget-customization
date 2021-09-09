@@ -1,45 +1,78 @@
-import { FormatterSettings } from '../types';
+import {
+  DateTimeFormatter,
+  FormatterSettings,
+  NumericFormatter,
+} from '../types';
 import {
   DEFAULT_FORMATTER_PATTERN,
   BASIC_FORMATTER_PATTERN,
 } from '../constants';
 
-const isEmpty = (arr: string[]) =>
+const isEmpty = (arr: any[]) =>
   arr.every((item) => !item || item === DEFAULT_FORMATTER_PATTERN.value);
 
-const serializeFormatterSettings = (settings: FormatterSettings) => {
-  const { prefix, suffix, precision, operation, value, separator } = settings;
+const applyStringFormatter = (prefix, suffix) => {
+  let serializedSettings = '';
+  if (prefix && suffix) {
+    serializedSettings = prefix + '${string}' + suffix;
+  } else if (prefix) {
+    serializedSettings = prefix + '${string}';
+  } else if (suffix) {
+    serializedSettings = '${string}' + suffix;
+  }
+  return serializedSettings;
+};
 
-  const shouldFormatSettings = !isEmpty([
-    prefix,
-    suffix,
-    precision,
-    operation,
-    value,
-  ]);
+const serializeFormatterSettings = (settings: FormatterSettings) => {
+  const { prefix, suffix, variableType } = settings;
+
+  const shouldFormatSettings = !isEmpty(Object.values(settings));
+
   if (!shouldFormatSettings) return null;
 
   let serializedSettings = '';
   let precisionString = '';
 
-  if (precision && precision !== DEFAULT_FORMATTER_PATTERN.value) {
-    precisionString = `\$\{number; ${separator ? `0,${precision}` : precision}`;
+  if (variableType === 'number') {
+    const {
+      precision,
+      operation,
+      value,
+      separator,
+    } = settings as NumericFormatter;
+    if (precision && precision !== DEFAULT_FORMATTER_PATTERN.value) {
+      precisionString = `\$\{number; ${
+        separator ? `0,${precision}` : precision
+      }`;
 
-    if (operation && value) {
-      precisionString += `; ${operation}; ${value}`;
+      if (operation && value) {
+        precisionString += `; ${operation}; ${value}`;
+      }
+
+      precisionString += '}';
+      serializedSettings = precisionString;
     }
 
-    precisionString += '}';
-    serializedSettings = precisionString;
+    if (
+      (!precision || precision === DEFAULT_FORMATTER_PATTERN.value) &&
+      (prefix || suffix)
+    ) {
+      precisionString = BASIC_FORMATTER_PATTERN;
+    }
+  } else if (variableType === 'datetime') {
+    const { dateFormat, timeFormat } = settings as DateTimeFormatter;
+    if (dateFormat || timeFormat || prefix || suffix) {
+      precisionString = '${datetime';
+      if (dateFormat && dateFormat !== 'original') {
+        precisionString += ';' + dateFormat;
+        if (timeFormat) precisionString += `; ${timeFormat}`;
+      }
+      precisionString += '}';
+      serializedSettings = precisionString;
+    }
+  } else if (variableType === 'string') {
+    serializedSettings = applyStringFormatter(prefix, suffix);
   }
-
-  if (
-    (!precision || precision === DEFAULT_FORMATTER_PATTERN.value) &&
-    (prefix || suffix)
-  ) {
-    precisionString = BASIC_FORMATTER_PATTERN;
-  }
-
   if (precisionString) {
     if (prefix && suffix) {
       serializedSettings = `${prefix}${precisionString}${suffix}`;
