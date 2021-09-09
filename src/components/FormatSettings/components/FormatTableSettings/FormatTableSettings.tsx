@@ -195,7 +195,9 @@ const FormatTableSettings: FC<Props> = ({
                   <Input
                     data-testid="column-name-input"
                     variant="solid"
-                    placeholder={selectedColumns[0].name}
+                    placeholder={
+                      selectedColumns.length > 1 ? '' : selectedColumns[0].name
+                    }
                     value={
                       selectedColumns.length > 1
                         ? ''
