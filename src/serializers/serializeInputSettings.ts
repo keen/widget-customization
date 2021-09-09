@@ -1,5 +1,9 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
-import { MetricChartSettings, PieChartSettings } from '@keen.io/charts';
+import {
+  MetricChartSettings,
+  PieChartSettings,
+  TableChartSettings,
+} from '@keen.io/charts';
 
 import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
@@ -25,60 +29,77 @@ const serializeInputSettings = (
   chartSettings: Record<string, any>,
   widgetSettings: Record<string, any>
 ): SerializedSettings => {
+  let settings = null;
+
   switch (widgetType) {
     case 'heatmap':
-      return {
+      settings = {
         chart: chartTransformations.heatmap.serializeIn(
           chartSettings as PartialHeatmapChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'choropleth':
-      return {
+      settings = {
         chart: chartTransformations.choropleth.serializeIn(
           chartSettings as PartialChoroplethChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'donut':
     case 'pie':
-      return {
+      settings = {
         chart: chartTransformations.circular.serializeIn(
           chartSettings as PieChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'funnel':
-      return {
+      settings = {
         chart: chartTransformations.funnel.serializeIn(
           chartSettings as PartialFunnelChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'metric':
-      return {
+      settings = {
         chart: chartTransformations.metric.serializeIn(
           chartSettings as MetricChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'line':
     case 'area':
-      return {
+      settings = {
         chart: chartTransformations.line.serializeIn(
           chartSettings as PartialLineChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
     case 'bar':
-      return {
+      settings = {
         chart: chartTransformations.bar.serializeIn(
           chartSettings as PartialBarChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
+      break;
+    case 'table':
+      settings = {
+        chart: chartTransformations.table.serializeIn(
+          chartSettings as TableChartSettings
+        ),
+        widget: createWidgetSettings(widgetSettings),
+      };
+      break;
     default:
-      return {
+      settings = {
         chart: {
           formatValue: null,
           funnelPercentages: chartSettings.theme.funnel.header.badge.enabled,
@@ -89,6 +110,14 @@ const serializeInputSettings = (
         widget: createWidgetSettings(widgetSettings),
       };
   }
+  return {
+    chart: {
+      formatTableColumns: {},
+      columnsNamesMapping: {},
+      ...settings.chart,
+    },
+    widget: settings.widget,
+  };
 };
 
 export default serializeInputSettings;

@@ -33,6 +33,8 @@ const serializeOutputSettings = (
       return chartTransformations.line.serializeOut(chartSettings);
     case 'bar':
       return chartTransformations.bar.serializeOut(chartSettings);
+    case 'table':
+      return chartTransformations.table.serializeOut(chartSettings);
     default:
       return {};
   }

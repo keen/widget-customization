@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import LegendSettings from '../../../LegendSettings';
 import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
-import ValueMode from '../../../ValueMode';
 
 import { SettingsModifier } from '../types';
+import { ValueMode } from './components';
+import LegendSettings from '../LegendSettings';
 
 const CircularSettings: FC<SettingsModifier> = ({
   widgetSettings,

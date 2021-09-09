@@ -1,18 +1,6 @@
 import styled, { css } from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  max-width: 320px;
-`;
-
-const mixin = css`
-  width: 100%;
-  max-width: 240px;
-`;
-
 export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
   display: flex;
   align-items: center;
@@ -29,10 +17,9 @@ export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
     `};
 `;
 
-export const MultiControl = styled.div<{ isDisabled: boolean }>`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  ${mixin};
+export const InputWrapper = styled.div<{ isDisabled? }>`
+  max-width: 310px;
+  width: 100%;
   ${({ isDisabled }) =>
     isDisabled &&
     css`
@@ -42,17 +29,9 @@ export const MultiControl = styled.div<{ isDisabled: boolean }>`
 `;
 
 export const ControlContainer = styled.div`
-  ${mixin};
-`;
-
-export const StyledLabel = styled.label`
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-`;
-
-export const LabelText = styled.span`
-  margin-left: 5px;
-  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+  max-width: 310px;
+  display: flex;
+  column-gap: 10px;
 `;

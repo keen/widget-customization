@@ -22,18 +22,19 @@ import {
   ControlContainer,
   StyledLabel,
   LabelText,
-} from './FormatValues.styles';
+} from './NumericFormatter.styles';
 
-import { DEFAULT_FORMATTER_PATTERN } from '../../constants';
+import { DEFAULT_FORMATTER_PATTERN } from '../../../../../constants';
+import { createFormatterSettings } from '../../../../../utils';
+import { serializeFormatterSettings } from '../../../../../serializers';
+import { FormatterSettings, NumericFormatter } from '../../../../../types';
+
+import { PrefixAndSuffix } from '../components';
+
 import {
   PATTERNS_OPTIONS as patterns,
   OPERATIONS_OPTIONS as operationsOptions,
-  FULL_NUMBER_PATTERN,
 } from './constants';
-import { createFormatterSettings } from '../../utils';
-import { serializeFormatterSettings } from '../../serializers';
-
-import { FormatterSettings } from '../../types';
 
 type Props = {
   /** Value formatter pattern */
@@ -51,29 +52,41 @@ const initialState: FormatterSettings = {
   separator: false,
 };
 
-const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
+const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
 
   const [dropdown, setDropdown] = useState<'precision' | 'operation'>();
-  const [state, setState] = useState<FormatterSettings>(initialState);
+  const [state, setState] = useState<NumericFormatter>(initialState);
 
   useEffect(() => {
     if (formatValue) {
-      const settings = createFormatterSettings(formatValue);
+      const settings = createFormatterSettings(formatValue, 'number');
       setState(settings);
     }
   }, []);
 
   useEffect(() => {
-    const { separator, ...settings } = createFormatterSettings(formatValue);
+    const { separator, ...settings } = createFormatterSettings(
+      formatValue,
+      'number'
+    ) as NumericFormatter;
     setState((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 
-  const { prefix, suffix, precision, operation, value, separator } = state;
+  const {
+    prefix,
+    suffix,
+    precision,
+    operation,
+    value,
+    separator,
+    variableType,
+  } = state;
 
   useDebounce(
     () => {
       const newFormatValue = serializeFormatterSettings({
+        variableType,
         prefix,
         suffix,
         precision,
@@ -95,17 +108,7 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         label: t(DEFAULT_FORMATTER_PATTERN.label),
         value: DEFAULT_FORMATTER_PATTERN.value,
       },
-      ...patterns.map((pattern) => {
-        if (pattern.value === FULL_NUMBER_PATTERN) {
-          return {
-            ...pattern,
-            label: `${pattern.label} ${t(
-              'widget_customization_format_value_settings.full_number'
-            )}`,
-          };
-        }
-        return pattern;
-      }),
+      ...patterns,
     ],
     [patterns]
   );
@@ -132,50 +135,11 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   return (
     <Container>
-      <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_format_value_settings.prefix')}
-        </BodyText>
-        <ControlContainer>
-          <Input
-            data-testid="input-prefix"
-            value={prefix || ''}
-            variant="solid"
-            placeholder={t(
-              'widget_customization_format_value_settings.text_placeholder'
-            )}
-            onChange={(e) => {
-              const inputValue = e.currentTarget.value;
-              setState((state) => ({
-                ...state,
-                prefix: inputValue,
-              }));
-            }}
-          />
-        </ControlContainer>
-      </Row>
-      <Row>
-        <BodyText variant="body2" fontWeight="bold">
-          {t('widget_customization_format_value_settings.suffix')}
-        </BodyText>
-        <ControlContainer>
-          <Input
-            data-testid="input-suffix"
-            value={suffix || ''}
-            variant="solid"
-            placeholder={t(
-              'widget_customization_format_value_settings.text_placeholder'
-            )}
-            onChange={(e) => {
-              const inputValue = e.currentTarget.value;
-              setState((state) => ({
-                ...state,
-                suffix: inputValue,
-              }));
-            }}
-          />
-        </ControlContainer>
-      </Row>
+      <PrefixAndSuffix
+        onChange={(values) => setState({ ...state, ...values })}
+        prefix={state.prefix}
+        suffix={state.suffix}
+      />
       <Row>
         <BodyText variant="body2" fontWeight="bold">
           {t('widget_customization_format_value_settings.precision')}
@@ -317,4 +281,4 @@ const FormatValues: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   );
 };
 
-export default FormatValues;
+export default NumericFormatter;

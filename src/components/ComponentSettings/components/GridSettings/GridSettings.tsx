@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Toggle } from '@keen.io/ui-core';
 
-import Label from '../Label';
-import Row from '../Row';
+import Label from '../../../Label';
+import Row from '../../../Row';
 
-import { ChartCustomizationSettings } from '../../types';
+import { ChartCustomizationSettings } from '../../../../types';
 
 type Props = {
   /* Vertical grid */

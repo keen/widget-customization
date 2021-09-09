@@ -1,48 +1,75 @@
 import React, { FC, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { MousePositionedTooltip } from '@keen.io/ui-core';
+import { PickerWidgets } from '@keen.io/widget-picker';
 import { BodyText } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
-
-import { Container } from './FormatSettings.styles';
-
-import SectionTitle from '../SectionTitle';
-import FormatValues from '../FormatValues';
-import SettingsContainer from '../SettingsContainer';
+import { MousePositionedTooltip } from '@keen.io/ui-core';
 
 import { AppContext } from '../../contexts';
 
+import SettingsContainer from '../SettingsContainer';
+
+import { FormatNumericSettings, FormatTableSettings } from './components';
+import { ChartCustomizationSettings } from '../../types';
+
 type Props = {
+  /** Widget type */
+  widgetType: PickerWidgets;
+  chartSettings: ChartCustomizationSettings;
   /** Value formatter pattern */
   formatValue: string | null;
   /** Update formatter event handler */
-  onUpdateFormatValue: (formatValue: string | null) => void;
+  onUpdateFormatValue: ({
+    formatValue,
+    formatTableColumns,
+  }: FormatSettings) => void;
+  onUpdateColumnNamesMapping: ({ columnsNamesMapping }) => void;
   /** Settings disabled for customization */
   formattingDisabled?: string;
   /** Settings are not available */
   formattingNotAvailable?: string;
 };
 
+type FormatSettings = {
+  formatValue?: string | null;
+  formatTableColumns?: Record<string, any>;
+};
+
 const FormatSettings: FC<Props> = ({
-  formatValue,
+  widgetType,
+  chartSettings,
   onUpdateFormatValue,
   formattingDisabled,
   formattingNotAvailable,
+  onUpdateColumnNamesMapping,
 }) => {
-  const { t } = useTranslation();
   const { modalContainer } = useContext(AppContext);
 
-  const isDisabled = formattingDisabled || formattingNotAvailable;
+  const onColumnFormatUpdate = (settings: Record<string, any>) => {
+    const tableColumnsFormats = {
+      ...chartSettings.formatTableColumns,
+      ...settings,
+    };
+    Object.keys(tableColumnsFormats).forEach((key) => {
+      if (tableColumnsFormats[key] === '') delete tableColumnsFormats[key];
+    });
+    onUpdateFormatValue({
+      formatTableColumns: tableColumnsFormats,
+    });
+  };
+
+  const onColumnNameUpdate = (name: string, newName: string) => {
+    const columnsMap = {
+      ...chartSettings.columnsNamesMapping,
+    };
+    if (newName === '') delete columnsMap[name];
+    else columnsMap[name] = newName;
+    onUpdateColumnNamesMapping({
+      columnsNamesMapping: columnsMap,
+    });
+  };
 
   return (
-    <Container>
-      <SectionTitle
-        title={t('widget_customization_format_value_settings.section_title')}
-        description={t(
-          'widget_customization_format_value_settings.section_description'
-        )}
-        onClear={isDisabled ? null : () => onUpdateFormatValue(null)}
-      />
+    <>
       {formattingNotAvailable ? (
         <BodyText variant="body1">{formattingNotAvailable}</BodyText>
       ) : (
@@ -57,14 +84,25 @@ const FormatSettings: FC<Props> = ({
           )}
         >
           <SettingsContainer isDisabled={!!formattingDisabled}>
-            <FormatValues
-              formatValue={formatValue}
-              onUpdateFormatValue={onUpdateFormatValue}
-            />
+            {widgetType === 'table' ? (
+              <FormatTableSettings
+                columnsNamesMapping={chartSettings.columnsNamesMapping}
+                onUpdateColumnName={onColumnNameUpdate}
+                onUpdateFormatValue={onColumnFormatUpdate}
+              />
+            ) : (
+              <FormatNumericSettings
+                formatValue={chartSettings.formatValue}
+                isDisabled={!!formattingDisabled || !!formattingNotAvailable}
+                onUpdateFormatValue={(settings) =>
+                  onUpdateFormatValue({ formatValue: settings })
+                }
+              />
+            )}
           </SettingsContainer>
         </MousePositionedTooltip>
       )}
-    </Container>
+    </>
   );
 };
 

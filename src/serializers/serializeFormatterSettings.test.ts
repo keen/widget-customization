@@ -21,6 +21,7 @@ test('serialize formatter settings for prefix only', () => {
     prefix: 'prefix',
     suffix: undefined,
     value: null,
+    variableType: 'number',
   };
   const result = serializeFormatterSettings(settings);
 
@@ -34,6 +35,7 @@ test('serialize formatter settings for basic formatting option', () => {
     prefix: '',
     suffix: '',
     value: null,
+    variableType: 'number',
   };
   const result = serializeFormatterSettings(settings);
 
@@ -47,6 +49,7 @@ test('serialize formatter settings for basic formatting option with operation', 
     prefix: '',
     suffix: '',
     value: '100',
+    variableType: 'number',
   };
   const result = serializeFormatterSettings(settings);
 
@@ -60,6 +63,7 @@ test('serialize formatter settings for basic formatting option with operation, p
     prefix: 'prefix',
     suffix: 'suffix',
     value: '100',
+    variableType: 'number',
   };
   const result = serializeFormatterSettings(settings);
 
