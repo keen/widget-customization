@@ -17,15 +17,9 @@ export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
     `};
 `;
 
-export const InputWrapper = styled.div<{ isDisabled? }>`
+export const InputWrapper = styled.div`
   max-width: 310px;
   width: 100%;
-  ${({ isDisabled }) =>
-    isDisabled &&
-    css`
-      opacity: 0.5;
-      pointer-events: none;
-    `};
 `;
 
 export const ControlContainer = styled.div`
@@ -34,4 +28,13 @@ export const ControlContainer = styled.div`
   max-width: 310px;
   display: flex;
   column-gap: 10px;
+`;
+
+export const DropdownWrapper = styled.div<{ isDisabled? }>`
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `};
 `;
