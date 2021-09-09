@@ -45,6 +45,6 @@ test('applies date formatters to selects', async () => {
     getByText('widget_customization_date_formats.YYYY-MM-DD')
   ).toBeInTheDocument();
   expect(
-    getByText('widget_customization_time_formats.HH:mm')
+    getByText('widget_customization_time_formats.24-hour-clock')
   ).toBeInTheDocument();
 });

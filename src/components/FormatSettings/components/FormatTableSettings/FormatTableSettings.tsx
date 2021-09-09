@@ -10,6 +10,7 @@ import {
   DropdownListContainer,
   Input,
   Label,
+  MousePositionedTooltip,
   Title,
 } from '@keen.io/ui-core';
 import { BodyText, Headline } from '@keen.io/typography';
@@ -60,7 +61,7 @@ const FormatTableSettings: FC<Props> = ({
   const chartEventsRef = useRef<ChartEvents<TableEvents>>();
   const { t } = useTranslation();
 
-  const { pubSub } = useContext(AppContext);
+  const { pubSub, modalContainer } = useContext(AppContext);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dataType, setDataType] = useState(null);
@@ -174,25 +175,42 @@ const FormatTableSettings: FC<Props> = ({
                 </Button>
               </TitleActions>
             </TitleWrapper>
-            <ControlContainer isDisabled={selectedColumns.length > 1}>
-              <Label variant="secondary">
-                {t('widget_customization_format_value_settings.column_name')}
-              </Label>
-              <InputWrapper>
-                <Input
-                  data-testid="column-name-input"
-                  variant="solid"
-                  value={
-                    selectedColumns.length > 1
-                      ? ''
-                      : columnsNamesMapping[selectedColumns[0].name]
-                  }
-                  onChange={(e) =>
-                    onUpdateColumnName(selectedColumns[0].name, e.target.value)
-                  }
-                />
-              </InputWrapper>
-            </ControlContainer>
+            <MousePositionedTooltip
+              isActive={selectedColumns.length > 1}
+              tooltipPortal={modalContainer}
+              tooltipTheme="dark"
+              renderContent={() => (
+                <BodyText variant="body2" color={colors.white[500]}>
+                  {t(
+                    'widget_customization_format_value_settings.select_the_single_column_to_change_the_name'
+                  )}
+                </BodyText>
+              )}
+            >
+              <ControlContainer isDisabled={selectedColumns.length > 1}>
+                <Label variant="secondary">
+                  {t('widget_customization_format_value_settings.column_name')}
+                </Label>
+                <InputWrapper>
+                  <Input
+                    data-testid="column-name-input"
+                    variant="solid"
+                    placeholder={selectedColumns[0].name}
+                    value={
+                      selectedColumns.length > 1
+                        ? ''
+                        : columnsNamesMapping[selectedColumns[0].name] || ''
+                    }
+                    onChange={(e) =>
+                      onUpdateColumnName(
+                        selectedColumns[0].name,
+                        e.target.value
+                      )
+                    }
+                  />
+                </InputWrapper>
+              </ControlContainer>
+            </MousePositionedTooltip>
             <ControlContainer>
               <Label variant="secondary">
                 {t('widget_customization_format_value_settings.data_type')}
