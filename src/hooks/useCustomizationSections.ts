@@ -2,8 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Query } from '@keen.io/query';
 import { PickerWidgets } from '@keen.io/widget-picker';
 
-import { formatAnalysis } from '../utils';
-
 import {
   HEADING_DISABLED_WIDGETS,
   FORMAT_VALUES_DISABLED_WIDGETS,
@@ -59,22 +57,6 @@ const useCustomizationSections = (
     };
   }
 
-  const { analysis_type: analysisType } = query;
-  const formatValuesNotAvailable =
-    analysisType === 'extraction' || analysisType === 'select_unique';
-
-  if (formatValuesNotAvailable) {
-    sectionsConfig = {
-      ...sectionsConfig,
-      formatValues: {
-        isDisabled: null,
-        isNotAvailable: t('widget_customization.format_values_not_avaialble', {
-          analysis: formatAnalysis(analysisType),
-        }),
-      },
-    };
-  }
-
   if (HEADING_DISABLED_WIDGETS.includes(widgetType)) {
     sectionsConfig = {
       ...sectionsConfig,
@@ -86,10 +68,7 @@ const useCustomizationSections = (
     };
   }
 
-  if (
-    !formatValuesNotAvailable &&
-    FORMAT_VALUES_DISABLED_WIDGETS.includes(widgetType)
-  ) {
+  if (FORMAT_VALUES_DISABLED_WIDGETS.includes(widgetType)) {
     sectionsConfig = {
       ...sectionsConfig,
       formatValues: {

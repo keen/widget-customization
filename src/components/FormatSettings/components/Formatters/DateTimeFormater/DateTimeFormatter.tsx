@@ -1,17 +1,21 @@
-import React, { FC, useEffect, useState } from 'react';
-import { BodyText } from '@keen.io/typography';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 import { useTranslation } from 'react-i18next';
+
+import { BodyText } from '@keen.io/typography';
 import {
   DropableContainer,
   Dropdown,
   DropdownList,
   DropdownListContainer,
+  MousePositionedTooltip,
 } from '@keen.io/ui-core';
+import { colors } from '@keen.io/colors';
 
 import { DateTimeFormatter, FormatterSettings } from '../../../../../types';
 import { createFormatterSettings } from '../../../../../utils';
 import { serializeFormatterSettings } from '../../../../../serializers';
+import { AppContext } from '../../../../../contexts';
 
 import { PrefixAndSuffix } from '../components';
 
@@ -19,6 +23,7 @@ import {
   InputWrapper,
   Row,
   ControlContainer,
+  DropdownWrapper,
 } from './DateTimeFormatter.styles';
 import { DATE_FORMATS, TIME_FORMATS } from './constants';
 
@@ -38,6 +43,7 @@ const initialState: FormatterSettings = {
 
 const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
+  const { modalContainer } = useContext(AppContext);
 
   const [dateDropdownOpen, setDateDropdownOpen] = useState(false);
   const [timeDropdownOpen, setTimeDropdownOpen] = useState(false);
@@ -160,41 +166,59 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               </DropdownListContainer>
             </Dropdown>
           </InputWrapper>
-          <InputWrapper
-            isDisabled={selectedDateFormat.value === 'original'}
-            data-testid="time-select"
-          >
-            <DropableContainer
-              variant="secondary"
-              onClick={() => setTimeDropdownOpen(!timeDropdownOpen)}
-              isActive={timeDropdownOpen}
-              value={
-                selectedTimeFormat
-                  ? selectedTimeFormat.label
-                  : t('widget_customization_format_value_settings.time_format')
-              }
-              dropIndicator
-              onDefocus={() => setTimeDropdownOpen(false)}
+          <InputWrapper data-testid="time-select">
+            <MousePositionedTooltip
+              isActive={selectedDateFormat.value === 'original'}
+              tooltipPortal={modalContainer}
+              tooltipTheme="dark"
+              renderContent={() => (
+                <BodyText variant="body2" color={colors.white[500]}>
+                  {t(
+                    'widget_customization_format_value_settings.select_the_date_format_first'
+                  )}
+                </BodyText>
+              )}
             >
-              {selectedTimeFormat
-                ? selectedTimeFormat.label
-                : t('widget_customization_format_value_settings.time_format')}
-            </DropableContainer>
-            <Dropdown isOpen={timeDropdownOpen}>
-              <DropdownListContainer scrollToActive maxHeight={150}>
-                {(activeItemRef) => (
-                  <DropdownList
-                    ref={activeItemRef}
-                    items={TranslatedTimeFormats}
-                    setActiveItem={(item) =>
-                      selectedTimeFormat &&
-                      selectedTimeFormat.value === item.value
-                    }
-                    onClick={(e, format) => onTimeFormatChange(format)}
-                  />
-                )}
-              </DropdownListContainer>
-            </Dropdown>
+              <DropdownWrapper
+                isDisabled={selectedDateFormat.value === 'original'}
+              >
+                <DropableContainer
+                  variant="secondary"
+                  onClick={() => setTimeDropdownOpen(!timeDropdownOpen)}
+                  isActive={timeDropdownOpen}
+                  value={
+                    selectedTimeFormat
+                      ? selectedTimeFormat.label
+                      : t(
+                          'widget_customization_format_value_settings.time_format'
+                        )
+                  }
+                  dropIndicator
+                  onDefocus={() => setTimeDropdownOpen(false)}
+                >
+                  {selectedTimeFormat
+                    ? selectedTimeFormat.label
+                    : t(
+                        'widget_customization_format_value_settings.time_format'
+                      )}
+                </DropableContainer>
+                <Dropdown isOpen={timeDropdownOpen}>
+                  <DropdownListContainer scrollToActive maxHeight={150}>
+                    {(activeItemRef) => (
+                      <DropdownList
+                        ref={activeItemRef}
+                        items={TranslatedTimeFormats}
+                        setActiveItem={(item) =>
+                          selectedTimeFormat &&
+                          selectedTimeFormat.value === item.value
+                        }
+                        onClick={(e, format) => onTimeFormatChange(format)}
+                      />
+                    )}
+                  </DropdownListContainer>
+                </Dropdown>
+              </DropdownWrapper>
+            </MousePositionedTooltip>
           </InputWrapper>
         </ControlContainer>
       </Row>

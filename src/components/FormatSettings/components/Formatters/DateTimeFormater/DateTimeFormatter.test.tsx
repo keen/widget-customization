@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender } from '@testing-library/react';
+import { cleanup, render as rtlRender } from '@testing-library/react';
 
 import DateTimeFormatter from './DateTimeFormatter';
 import { AppContext } from '../../../../../contexts';
@@ -24,6 +24,19 @@ const render = (overProps: any = {}) => {
     wrapper,
   };
 };
+
+afterEach(() => {
+  cleanup();
+});
+
+beforeEach(() => {
+  let modalRoot = document.getElementById('modal-root');
+  if (!modalRoot) {
+    modalRoot = document.createElement('div');
+    modalRoot.setAttribute('id', 'modal-root');
+    document.body.appendChild(modalRoot);
+  }
+});
 
 test('applies date formatters to selects', async () => {
   const formatter = 'prefix${datetime;YYYY-MM-DD;HH:mm}suffix';
