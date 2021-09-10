@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.35](https://github.com/keen/query-creator/compare/v0.0.34...v0.0.35) (2021-09-10)
+
+
+### Bug Fixes
+
+* 🐛 Chart elements tab missing fix ([cf70369](https://github.com/keen/query-creator/commit/cf7036951a365f94a252e4e404de0a3d558a3e0f))
+* 🐛 Typing added ([b66c99a](https://github.com/keen/query-creator/commit/b66c99a18c6f9aa7f0a62d4f899e8d012b6ff6fd))
+
 ### [0.0.34](https://github.com/keen/query-creator/compare/v0.0.33...v0.0.34) (2021-09-09)
 
 
