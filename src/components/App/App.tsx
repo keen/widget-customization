@@ -5,10 +5,10 @@ import { PickerWidgets } from '@keen.io/widget-picker';
 import { SideMenu } from '@keen.io/ui-core';
 
 import {
+  HeadingSettingsContainer,
   Layout,
   Section,
   SideMenuWrapper,
-  HeadingSettingsContainer,
 } from './App.styles';
 
 import HeadingSettings from '../HeadingSettings';
@@ -16,10 +16,10 @@ import AxesTitles, { AXES_TITLES_WIDGETS } from '../AxesTitles';
 
 import {
   ChartCustomizationSettings,
-  WidgetCustomizationSettings,
   SectionsConfiguration,
+  WidgetCustomizationSettings,
 } from '../../types';
-import { MENU_ITEMS } from '../../constants';
+import { MENU_ITEMS, MENU_ITEMS_ENUM } from '../../constants';
 
 import ComponentSettings from '../ComponentSettings/ComponentSettings';
 import FormatSettings from '../FormatSettings/FormatSettings';
@@ -63,7 +63,9 @@ const App: FC<Props> = ({
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
-  const [activeMenuItemId, setActiveMenuItemId] = useState('titles');
+  const [activeMenuItemId, setActiveMenuItemId] = useState<MENU_ITEMS_ENUM>(
+    MENU_ITEMS_ENUM.TITLES
+  );
   const TranslatedMenuItems = MENU_ITEMS.map(({ id, label }) => ({
     id,
     label: t(label),
@@ -83,7 +85,7 @@ const App: FC<Props> = ({
           activeItemId={activeMenuItemId}
         />
       </SideMenuWrapper>
-      {activeMenuItemId === 'titles' && (
+      {activeMenuItemId === MENU_ITEMS_ENUM.TITLES && (
         <Section>
           <HeadingSettingsContainer>
             <HeadingSettings
@@ -120,7 +122,7 @@ const App: FC<Props> = ({
           </HeadingSettingsContainer>
         </Section>
       )}
-      {activeMenuItemId === 'formatting' && (
+      {activeMenuItemId === MENU_ITEMS_ENUM.FORMATTING && (
         <Section>
           <FormatSettings
             widgetType={widgetType}
@@ -143,7 +145,7 @@ const App: FC<Props> = ({
           />
         </Section>
       )}
-      {activeMenuItemId === 'chart_elements' && (
+      {activeMenuItemId === MENU_ITEMS_ENUM.CHART_ELEMENTS && (
         <Section>
           <ComponentSettings
             widgetType={widgetType}
