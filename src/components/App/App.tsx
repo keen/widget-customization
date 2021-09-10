@@ -143,7 +143,7 @@ const App: FC<Props> = ({
           />
         </Section>
       )}
-      {activeMenuItemId === 'chartElements' && (
+      {activeMenuItemId === 'chart_elements' && (
         <Section>
           <ComponentSettings
             widgetType={widgetType}
