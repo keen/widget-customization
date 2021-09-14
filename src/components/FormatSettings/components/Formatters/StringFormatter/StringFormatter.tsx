@@ -20,42 +20,29 @@ const initialState: FormatterSettings = {
 };
 
 const StringFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
-  const [state, setState] = useState<FormatterSettings>(initialState);
-
-  useEffect(() => {
-    if (formatValue) {
-      const settings = createFormatterSettings(formatValue, 'string');
-      setState(settings);
-    }
-  }, []);
+  const [formatterElements, setFormatterElements] = useState<FormatterSettings>(
+    initialState
+  );
+  const [format, setFormat] = useState(formatValue);
 
   useEffect(() => {
     const settings = createFormatterSettings(formatValue, 'string');
-    setState((state) => ({ ...state, ...settings }));
+    setFormatterElements((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 
-  const { prefix, suffix, variableType } = state;
+  useDebounce(() => onUpdateFormatValue(format), 300, [format]);
 
-  useDebounce(
-    () => {
-      const newFormatValue = serializeFormatterSettings({
-        variableType,
-        prefix,
-        suffix,
-      });
-      if (newFormatValue !== formatValue) {
-        onUpdateFormatValue(newFormatValue);
-      }
-    },
-    300,
-    [state, formatValue]
-  );
+  const onFormatChange = (newValues) => {
+    const newFormatterElements = { ...formatterElements, ...newValues };
+    setFormatterElements(newFormatterElements);
+    setFormat(serializeFormatterSettings(newFormatterElements));
+  };
 
   return (
     <PrefixAndSuffix
-      onChange={(values) => setState({ ...state, ...values })}
-      prefix={state.prefix}
-      suffix={state.suffix}
+      onChange={onFormatChange}
+      prefix={formatterElements.prefix}
+      suffix={formatterElements.suffix}
     />
   );
 };

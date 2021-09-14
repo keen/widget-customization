@@ -47,8 +47,10 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   const [dateDropdownOpen, setDateDropdownOpen] = useState(false);
   const [timeDropdownOpen, setTimeDropdownOpen] = useState(false);
-  const [state, setState] = useState<DateTimeFormatter>(initialState);
-
+  const [formatterElements, setFormatterElements] = useState<DateTimeFormatter>(
+    initialState
+  );
+  const [format, setFormat] = useState(formatValue);
   const TranslatedDateFormats = DATE_FORMATS.map(({ label, value }) => ({
     label: t(label),
     value,
@@ -59,54 +61,40 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   }));
 
   useEffect(() => {
-    if (formatValue) {
-      const settings = createFormatterSettings(formatValue, 'datetime');
-      setState(settings);
-    }
-  }, []);
-
-  useEffect(() => {
     const settings = createFormatterSettings(formatValue, 'datetime');
-    setState((state) => ({ ...state, ...settings }));
+    setFormatterElements((state) => ({ ...state, ...settings }));
   }, [formatValue]);
 
-  const { prefix, suffix, dateFormat, timeFormat, variableType } = state;
-
-  useDebounce(
-    () => {
-      const newFormatValue = serializeFormatterSettings({
-        variableType,
-        prefix,
-        suffix,
-        dateFormat,
-        timeFormat,
-      });
-
-      if (newFormatValue !== formatValue) {
-        onUpdateFormatValue(newFormatValue);
-      }
-    },
-    300,
-    [state, formatValue]
-  );
+  useDebounce(() => onUpdateFormatValue(format), 300, [format]);
 
   const selectedDateFormat =
-    TranslatedDateFormats.find((format) => format.value === state.dateFormat) ||
-    TranslatedDateFormats[0];
+    TranslatedDateFormats.find(
+      (format) => format.value === formatterElements.dateFormat
+    ) || TranslatedDateFormats[0];
   const selectedTimeFormat =
-    TranslatedTimeFormats.find((format) => format.value === state.timeFormat) ||
-    null;
+    TranslatedTimeFormats.find(
+      (format) => format.value === formatterElements.timeFormat
+    ) || null;
+
+  const updateFormat = (values) => {
+    const newFormatterElements = {
+      ...formatterElements,
+      ...values,
+    };
+    setFormatterElements(newFormatterElements);
+    const newFormatValue = serializeFormatterSettings(newFormatterElements);
+    setFormat(newFormatValue);
+  };
 
   const onTimeFormatChange = (format) => {
-    setState({
-      ...state,
+    updateFormat({
       timeFormat: format.value,
     });
     setTimeDropdownOpen(!timeDropdownOpen);
   };
 
   const onDateFormatChange = (format) => {
-    let timeFormat = state.timeFormat;
+    let timeFormat = formatterElements.timeFormat;
     setDateDropdownOpen(!dateDropdownOpen);
 
     if (format.value !== 'original') {
@@ -116,8 +104,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
       timeFormat = null;
     }
 
-    setState({
-      ...state,
+    updateFormat({
       timeFormat,
       dateFormat: format.value,
     });
@@ -126,14 +113,9 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   return (
     <div>
       <PrefixAndSuffix
-        onChange={(values) =>
-          setState({
-            ...state,
-            ...values,
-          })
-        }
-        prefix={state.prefix}
-        suffix={state.suffix}
+        onChange={(values) => updateFormat({ ...values })}
+        prefix={formatterElements.prefix}
+        suffix={formatterElements.suffix}
       />
       <Row>
         <BodyText variant="body2" fontWeight="bold">
