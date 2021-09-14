@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.36](https://github.com/keen/query-creator/compare/v0.0.35...v0.0.36) (2021-09-14)
+
+
+### Bug Fixes
+
+* 🐛 Formatters calling on change on initial render fix ([31c2912](https://github.com/keen/query-creator/commit/31c29126824bece31283b0e5e0ae3b745494a2b5))
+
 ### [0.0.35](https://github.com/keen/query-creator/compare/v0.0.34...v0.0.35) (2021-09-10)
 
 
