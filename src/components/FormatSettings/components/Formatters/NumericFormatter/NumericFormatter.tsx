@@ -56,51 +56,34 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
 
   const [dropdown, setDropdown] = useState<'precision' | 'operation'>();
-  const [state, setState] = useState<NumericFormatter>(initialState);
-
-  useEffect(() => {
-    if (formatValue) {
-      const settings = createFormatterSettings(formatValue, 'number');
-      setState(settings);
-    }
-  }, []);
+  const [formatterElements, setFormatterElements] = useState<NumericFormatter>(
+    initialState
+  );
+  const [format, setFormat] = useState(formatValue);
 
   useEffect(() => {
     const { separator, ...settings } = createFormatterSettings(
       formatValue,
       'number'
     ) as NumericFormatter;
-    setState((state) => ({ ...state, ...settings }));
+    setFormatterElements((formatterElements) => ({
+      ...formatterElements,
+      ...settings,
+    }));
   }, [formatValue]);
 
-  const {
-    prefix,
-    suffix,
-    precision,
-    operation,
-    value,
-    separator,
-    variableType,
-  } = state;
+  const { precision, operation, value, separator } = formatterElements;
 
-  useDebounce(
-    () => {
-      const newFormatValue = serializeFormatterSettings({
-        variableType,
-        prefix,
-        suffix,
-        precision,
-        operation,
-        value,
-        separator,
-      });
-      if (newFormatValue !== formatValue) {
-        onUpdateFormatValue(newFormatValue);
-      }
-    },
-    300,
-    [state, formatValue]
-  );
+  useDebounce(() => onUpdateFormatValue(format), 300, [format]);
+
+  const updateFormat = (values) => {
+    const updatedState = {
+      ...formatterElements,
+      ...values,
+    };
+    setFormatterElements(updatedState);
+    setFormat(serializeFormatterSettings(updatedState));
+  };
 
   const patternsOptions = useMemo(
     () => [
@@ -122,23 +105,20 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   const onPrecisionChange = (_e, { value: precisionValue }) => {
     if (patternOption.value === DEFAULT_FORMATTER_PATTERN.value) {
-      setState((state) => ({ ...state, separator: true }));
+      updateFormat({ separator: true });
     }
     if (precisionValue === DEFAULT_FORMATTER_PATTERN.value) {
-      setState((state) => ({ ...state, separator: false }));
+      updateFormat({ separator: false });
     }
-    setState((state) => ({
-      ...state,
-      precision: precisionValue,
-    }));
+    updateFormat({ precision: precisionValue });
   };
 
   return (
     <Container>
       <PrefixAndSuffix
-        onChange={(values) => setState({ ...state, ...values })}
-        prefix={state.prefix}
-        suffix={state.suffix}
+        onChange={(values) => updateFormat({ ...values })}
+        prefix={formatterElements.prefix}
+        suffix={formatterElements.suffix}
       />
       <Row>
         <BodyText variant="body2" fontWeight="bold">
@@ -229,10 +209,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                         operationOption?.value === item.value
                       }
                       onClick={(_e, { value: operationValue }) => {
-                        setState((state) => ({
-                          ...state,
-                          operation: operationValue,
-                        }));
+                        updateFormat({ operation: operationValue });
                       }}
                     />
                   )}
@@ -250,11 +227,11 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               type="number"
               onChange={(e) => {
                 const inputValue = e.currentTarget.value;
-                setState((state) => ({
-                  ...state,
-                  operation: inputValue === '' ? null : state.operation,
+                updateFormat({
+                  operation:
+                    inputValue === '' ? null : formatterElements.operation,
                   value: inputValue,
-                }));
+                });
               }}
             />
           </MultiControl>
@@ -264,9 +241,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             <Checkbox
               id="separator"
               disabled={!precision}
-              onChange={() =>
-                setState((state) => ({ ...state, separator: !separator }))
-              }
+              onChange={() => updateFormat({ separator: !separator })}
               checked={!!separator}
             />
             <LabelText>
