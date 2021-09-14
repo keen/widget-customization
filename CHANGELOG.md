@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.37](https://github.com/keen/query-creator/compare/v0.0.36...v0.0.37) (2021-09-14)
+
+
+### Bug Fixes
+
+* 🐛 Not saving fields with null values ([1566e60](https://github.com/keen/query-creator/commit/1566e604b0faf591af06ae485ce1a666ae7d19e5))
+
 ### [0.0.36](https://github.com/keen/query-creator/compare/v0.0.35...v0.0.36) (2021-09-14)
 
 
