@@ -50,7 +50,8 @@ const FormatSettings: FC<Props> = ({
       ...settings,
     };
     Object.keys(tableColumnsFormats).forEach((key) => {
-      if (tableColumnsFormats[key] === '') delete tableColumnsFormats[key];
+      if (['', null].includes(tableColumnsFormats[key]))
+        delete tableColumnsFormats[key];
     });
     onUpdateFormatValue({
       formatTableColumns: tableColumnsFormats,
@@ -61,7 +62,7 @@ const FormatSettings: FC<Props> = ({
     const columnsMap = {
       ...chartSettings.columnsNamesMapping,
     };
-    if (newName === '') delete columnsMap[name];
+    if (['', null].includes(newName)) delete columnsMap[name];
     else columnsMap[name] = newName;
     onUpdateColumnNamesMapping({
       columnsNamesMapping: columnsMap,
