@@ -80,7 +80,7 @@ const ComponentSettings: FC<Props> = ({
   const { hiddenOptions } = componentSettingsConfig;
 
   const settingsComponent = getSettingsComponent(widgetType);
-  const settingsAreAvailable = !hiddenOptions?.card || widgetType === 'table';
+  const settingsAreAvailable = !hiddenOptions?.card || widgetType !== 'table';
 
   return settingsComponent && settingsAreAvailable ? (
     <MousePositionedTooltip
