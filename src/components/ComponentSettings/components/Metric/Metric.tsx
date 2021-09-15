@@ -5,9 +5,14 @@ import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
+import { IconStyle, IconType } from './components';
+import { AnimatePresence, motion } from 'framer-motion';
+import { slideMotion } from './motion';
 
 const MetricSettings: FC<SettingsModifier> = ({
   widgetSettings,
+  chartSettings,
+  onUpdateChartSettings,
   onUpdateWidgetSettings,
   hiddenOptions,
 }) => {
@@ -29,6 +34,46 @@ const MetricSettings: FC<SettingsModifier> = ({
           }}
         />
       )}
+      <SettingsItem
+        id="display-icon"
+        label={t('widget_customization_metric_settings.display_icon')}
+        isEnabled={chartSettings.iconEnabled}
+        onChange={(iconEnabled) => {
+          const newSettings = {
+            ...chartSettings,
+            iconEnabled,
+          };
+          if (!iconEnabled) {
+            delete newSettings['iconStyle'];
+            delete newSettings['iconType'];
+          }
+          onUpdateChartSettings(newSettings);
+        }}
+      />
+      <AnimatePresence initial={false}>
+        {chartSettings.iconEnabled && (
+          <motion.div {...slideMotion} style={{ overflow: 'hidden' }}>
+            <IconStyle
+              iconStyle={chartSettings.iconStyle}
+              onChange={(iconStyle) => {
+                onUpdateChartSettings({
+                  ...chartSettings,
+                  iconStyle,
+                });
+              }}
+            />
+            <IconType
+              iconType={chartSettings.iconType}
+              onChange={(iconType) => {
+                onUpdateChartSettings({
+                  ...chartSettings,
+                  iconType,
+                });
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

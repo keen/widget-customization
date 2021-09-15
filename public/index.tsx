@@ -9,7 +9,7 @@ import {
 } from '../src';
 
 import createI18n from './i18n';
-import { barChart as fixture, tableData } from './fixtures';
+import { metricChart as fixture, tableData } from './fixtures';
 import { KeenDataviz } from '@keen.io/dataviz';
 import { PubSub } from '@keen.io/pubsub';
 
@@ -60,7 +60,7 @@ const App = () => {
     <>
       <div ref={visualizationContainer} />
       <WidgetCustomization
-        widgetType="table"
+        widgetType="metric"
         pubSub={pubSub}
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}

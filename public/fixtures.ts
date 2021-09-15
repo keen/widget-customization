@@ -14,6 +14,23 @@ export const lineChart = {
   },
 };
 
+export const metricChart = {
+  chartSettings: {
+    formatValue: '${number; 0,0}',
+    formatTableColumns: {
+      name: 'asd${number; 0,0.0}asd',
+    },
+    columnsNamesMapping: {
+      author: 'Book author',
+    },
+    iconEnabled: true,
+    iconType: 'click-outside',
+    iconStyle: 'regular',
+  },
+  widgetSettings: {
+    type: 'difference',
+  },
+};
 export const barChart = {
   chartSettings: {
     formatValue: '${number; 0,0}',

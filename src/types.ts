@@ -12,6 +12,9 @@ export type ChartCustomizationSettings = {
   valueMode?: CircularChartValueMode;
   columnsNamesMapping?: Record<string, string>;
   formatTableColumns?: Record<string, any>;
+  iconEnabled?: boolean;
+  iconStyle?: string;
+  iconType?: string;
 };
 
 export type WidgetCustomizationSettings = {
