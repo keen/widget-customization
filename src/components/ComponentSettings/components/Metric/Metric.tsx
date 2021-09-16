@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
 import { IconStyle, IconType } from './components';
-import { AnimatePresence, motion } from 'framer-motion';
 import { slideMotion } from './motion';
 
 const MetricSettings: FC<SettingsModifier> = ({

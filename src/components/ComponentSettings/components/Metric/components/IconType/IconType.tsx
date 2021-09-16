@@ -11,10 +11,10 @@ import {
 import { useDynamicContentPosition } from '@keen.io/react-hooks';
 import { Icons } from '@keen.io/icons';
 
-import { DropdownWrapper, DropableContainerWrapper } from './IconType.styles';
-
 import Label from '../../../../../Label';
 import Row from '../../../../../Row';
+
+import { DropdownWrapper, DropableContainerWrapper } from './IconType.styles';
 
 type Props = {
   /** Value mode */

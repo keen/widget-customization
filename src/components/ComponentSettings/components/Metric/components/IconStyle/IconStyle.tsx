@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { RadioSelect } from '@keen.io/ui-core';
 import { useTranslation } from 'react-i18next';
 
-import { RadioSelectContainer } from './IconStyle.styles';
-
-import { ICON_STYLE_OPTIONS } from './constants';
 import Label from '../../../../../Label';
 import Row from '../../../../../Row';
+
+import { RadioSelectContainer } from './IconStyle.styles';
+import { ICON_STYLE_OPTIONS } from './constants';
 
 type Props = {
   /** Value mode */

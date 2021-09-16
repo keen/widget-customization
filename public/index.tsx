@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { KeenDataviz } from '@keen.io/dataviz';
+import { PubSub } from '@keen.io/pubsub';
+
 import WidgetCustomization from '../src/WidgetCustomization';
 import { createWidgetSettings } from '../src/utils';
 import {
@@ -10,8 +13,6 @@ import {
 
 import createI18n from './i18n';
 import { metricChart as fixture, tableData } from './fixtures';
-import { KeenDataviz } from '@keen.io/dataviz';
-import { PubSub } from '@keen.io/pubsub';
 
 createI18n();
 
