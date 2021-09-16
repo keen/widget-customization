@@ -1,14 +1,16 @@
 import { MetricChartSettings } from '@keen.io/charts';
+import { IconType } from '@keen.io/icons';
 
 import { WidgetTransform } from '../../types';
+import { IconStyles } from '../../constants';
 
 export type PartialMetricChartSettings = Omit<MetricChartSettings, 'theme'> & {
   theme: {
     metric: {
       icon: {
         enabled: boolean;
-        style: string;
-        type: string;
+        style: IconStyles;
+        type: IconType;
       };
     };
   };
@@ -25,7 +27,17 @@ const transform: WidgetTransform<PartialMetricChartSettings> = {
       iconType: icon?.type,
     };
   },
-  serializeOut: ({ formatValue, iconEnabled, iconStyle, iconType }) => {
+  serializeOut: ({
+    formatValue,
+    iconEnabled,
+    iconStyle,
+    iconType,
+  }: {
+    formatValue: string;
+    iconType: IconType;
+    iconEnabled: boolean;
+    iconStyle: IconStyles;
+  }) => {
     return {
       formatValue,
       theme: {

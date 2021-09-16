@@ -1,5 +1,8 @@
 import { LegendSettings, TextSettings } from '@keen.io/widgets';
 import { CardSettings, Layout } from '@keen.io/ui-core';
+import { IconType } from '@keen.io/icons';
+
+import { IconStyles } from './constants';
 
 export type ChartCustomizationSettings = {
   formatValue?: string | null;
@@ -13,8 +16,8 @@ export type ChartCustomizationSettings = {
   columnsNamesMapping?: Record<string, string>;
   formatTableColumns?: Record<string, any>;
   iconEnabled?: boolean;
-  iconStyle?: string;
-  iconType?: string;
+  iconStyle?: IconStyles;
+  iconType?: IconType;
 };
 
 export type WidgetCustomizationSettings = {

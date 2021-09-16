@@ -39,15 +39,10 @@ const MetricSettings: FC<SettingsModifier> = ({
         label={t('widget_customization_metric_settings.display_icon')}
         isEnabled={chartSettings.iconEnabled}
         onChange={(iconEnabled) => {
-          const newSettings = {
+          onUpdateChartSettings({
             ...chartSettings,
             iconEnabled,
-          };
-          if (!iconEnabled) {
-            delete newSettings['iconStyle'];
-            delete newSettings['iconType'];
-          }
-          onUpdateChartSettings(newSettings);
+          });
         }}
       />
       <AnimatePresence initial={false}>

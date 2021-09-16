@@ -9,8 +9,8 @@ import {
   DynamicPortal,
 } from '@keen.io/ui-core';
 import { useDynamicContentPosition } from '@keen.io/react-hooks';
+import { Icons } from '@keen.io/icons';
 
-import { IconOptions } from './constants';
 import { DropdownWrapper, DropableContainerWrapper } from './IconType.styles';
 
 import Label from '../../../../../Label';
@@ -26,14 +26,14 @@ type Props = {
 const IconType: FC<Props> = ({ onChange, iconType }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const iconTypeOptions = Object.keys(IconOptions).map((icon) => ({
+  const IconTypeOptions = Icons.map((icon) => ({
     label: icon,
     value: icon,
   }));
 
-  const selectedIcon = iconType
-    ? iconTypeOptions.find((icon) => icon.value === iconType)
-    : iconTypeOptions[0];
+  const selectedIcon = Icons.includes(iconType as any)
+    ? IconTypeOptions.find((icon) => icon.value === iconType)
+    : IconTypeOptions[0];
 
   const containerRef = useRef(null);
   const { t } = useTranslation();
@@ -68,7 +68,7 @@ const IconType: FC<Props> = ({ onChange, iconType }) => {
                 {(activeItemRef) => (
                   <DropdownList
                     ref={activeItemRef}
-                    items={iconTypeOptions}
+                    items={IconTypeOptions}
                     setActiveItem={(item) =>
                       selectedIcon && selectedIcon.value === item.value
                     }

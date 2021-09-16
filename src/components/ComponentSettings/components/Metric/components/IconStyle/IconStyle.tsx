@@ -20,7 +20,7 @@ const IconStyle: FC<Props> = ({ onChange, iconStyle }) => {
 
   return (
     <div>
-      <Row>
+      <Row data-testid="icon-style">
         <Label>{t('widget_customization_metric_settings.icon_style')}</Label>
         <RadioSelectContainer>
           <RadioSelect

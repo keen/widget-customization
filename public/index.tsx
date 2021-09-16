@@ -19,7 +19,9 @@ const App = () => {
   const [
     chartSettings,
     setChartSettings,
-  ] = useState<ChartCustomizationSettings>(fixture.chartSettings);
+  ] = useState<ChartCustomizationSettings>(
+    fixture.chartSettings as ChartCustomizationSettings
+  );
   const [
     widgetSettings,
     setWidgetSettings,
