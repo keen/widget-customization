@@ -20,7 +20,7 @@
   "widget_customization_metric_settings": {
     "title": "Metric Chart Settings",
     "display_icon": "Display Icon",
-    "icon_style": "Icon Style",
+    "icon_style": "Icon background",
     "icon": "Icon"
   },
   "widget_customization_grid_settings": {

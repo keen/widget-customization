@@ -9,12 +9,12 @@ import {
   DynamicPortal,
 } from '@keen.io/ui-core';
 import { useDynamicContentPosition } from '@keen.io/react-hooks';
-import { Icons } from '@keen.io/icons';
 
 import Label from '../../../../../Label';
 import Row from '../../../../../Row';
 
 import { DropdownWrapper, DropableContainerWrapper } from './IconType.styles';
+import { AvailableIcons } from './constants';
 
 type Props = {
   /** Value mode */
@@ -26,12 +26,12 @@ type Props = {
 const IconType: FC<Props> = ({ onChange, iconType }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const IconTypeOptions = Icons.map((icon) => ({
-    label: icon,
+  const IconTypeOptions = AvailableIcons.map((icon) => ({
+    label: icon.charAt(0).toUpperCase() + icon.slice(1),
     value: icon,
   }));
 
-  const selectedIcon = Icons.includes(iconType as any)
+  const selectedIcon = AvailableIcons.includes(iconType as any)
     ? IconTypeOptions.find((icon) => icon.value === iconType)
     : IconTypeOptions[0];
 
