@@ -12,6 +12,7 @@ import { PartialHeatmapChartSettings } from '../charts/heatmap/transform';
 import { PartialFunnelChartSettings } from '../charts/funnel/transform';
 import { PartialChoroplethChartSettings } from '../charts/choropleth/transform';
 import { PartialMetricChartSettings } from '../charts/metric/transform';
+import { AvailableIcons } from '../constants';
 
 /**
  * Translate chart settings interface to widget customization settings
@@ -111,6 +112,9 @@ const serializeInputSettings = (
     chart: {
       formatTableColumns: {},
       columnsNamesMapping: {},
+      iconEnabled: false,
+      iconStyle: 'solid',
+      iconType: AvailableIcons[0],
       ...settings.chart,
     },
     widget: settings.widget,
