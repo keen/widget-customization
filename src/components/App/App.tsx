@@ -73,7 +73,7 @@ const App: FC<Props> = ({
 
   const onMenuChange = (itemId) => {
     setActiveMenuItemId(itemId);
-    onMenuItemChange(itemId);
+    onMenuItemChange && onMenuItemChange(itemId);
   };
 
   return (

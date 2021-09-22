@@ -10,11 +10,11 @@ import {
 } from '@keen.io/ui-core';
 import { useDynamicContentPosition } from '@keen.io/react-hooks';
 
+import { AvailableIcons } from '../../../../../../constants';
 import Label from '../../../../../Label';
 import Row from '../../../../../Row';
 
 import { DropdownWrapper, DropableContainerWrapper } from './IconType.styles';
-import { AvailableIcons } from './constants';
 
 type Props = {
   /** Value mode */
