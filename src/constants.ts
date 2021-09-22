@@ -43,3 +43,8 @@ export const MENU_ITEMS = [
     label: 'widget_customization_sections.components',
   },
 ];
+
+export enum IconStyles {
+  regular = 'regular',
+  solid = 'solid',
+}

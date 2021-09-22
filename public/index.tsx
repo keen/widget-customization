@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { KeenDataviz } from '@keen.io/dataviz';
+import { PubSub } from '@keen.io/pubsub';
+
 import WidgetCustomization from '../src/WidgetCustomization';
 import { createWidgetSettings } from '../src/utils';
 import {
@@ -9,9 +12,7 @@ import {
 } from '../src';
 
 import createI18n from './i18n';
-import { barChart as fixture, tableData } from './fixtures';
-import { KeenDataviz } from '@keen.io/dataviz';
-import { PubSub } from '@keen.io/pubsub';
+import { metricChart as fixture, tableData } from './fixtures';
 
 createI18n();
 
@@ -19,7 +20,9 @@ const App = () => {
   const [
     chartSettings,
     setChartSettings,
-  ] = useState<ChartCustomizationSettings>(fixture.chartSettings);
+  ] = useState<ChartCustomizationSettings>(
+    fixture.chartSettings as ChartCustomizationSettings
+  );
   const [
     widgetSettings,
     setWidgetSettings,
@@ -60,7 +63,7 @@ const App = () => {
     <>
       <div ref={visualizationContainer} />
       <WidgetCustomization
-        widgetType="table"
+        widgetType="metric"
         pubSub={pubSub}
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}
