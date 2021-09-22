@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.38](https://github.com/keen/query-creator/compare/v0.0.37...v0.0.38) (2021-09-22)
+
+
+### Features
+
+* 🎸 Icon types added ([f50aab4](https://github.com/keen/query-creator/commit/f50aab46d43fc659cc31c874e48f5eeb5733429c))
+* 🎸 Metric icons ([fcfe3ca](https://github.com/keen/query-creator/commit/fcfe3ca199e1597aaf6269fbadd2a3a17fac392b))
+
+
+### Bug Fixes
+
+* 🐛 Fix ([f23c94b](https://github.com/keen/query-creator/commit/f23c94bbe8bc6e056a78312ada64f4e35fd41da2))
+
 ### [0.0.37](https://github.com/keen/query-creator/compare/v0.0.36...v0.0.37) (2021-09-14)
 
 
