@@ -4,7 +4,6 @@ import {
   fireEvent,
   act,
   waitFor,
-  within,
 } from '@testing-library/react';
 
 import NumericFormatter from './NumericFormatter';
@@ -102,7 +101,9 @@ test('thousands separator is disabled when precision is not set', () => {
   } = render({ formatValue: formatter });
 
   const separatorContainer = getByTestId('separator');
-  const separatorCheckbox = within(separatorContainer).getByRole('checkbox');
+  const separatorCheckbox = separatorContainer.querySelector(
+    'input[type="checkbox"]'
+  );
   expect(separatorCheckbox).toBeDisabled();
 });
 
@@ -113,6 +114,8 @@ test('thousands separator is enabled when precision is set', () => {
   } = render({ formatValue: formatter });
 
   const separatorContainer = getByTestId('separator');
-  const separatorCheckbox = within(separatorContainer).getByRole('checkbox');
+  const separatorCheckbox = separatorContainer.querySelector(
+    'input[type="checkbox"]'
+  );
   expect(separatorCheckbox).not.toBeDisabled();
 });

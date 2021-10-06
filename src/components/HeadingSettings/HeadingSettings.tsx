@@ -1,7 +1,12 @@
 import React, { FC, useContext, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { transparentize } from 'polished';
-import { Input, Label, MousePositionedTooltip } from '@keen.io/ui-core';
+import {
+  Input,
+  KEYBOARD_KEYS,
+  Label,
+  MousePositionedTooltip,
+} from '@keen.io/ui-core';
 import { BodyText, FontWeight } from '@keen.io/typography';
 import { TextSettings } from '@keen.io/widgets';
 import { Icon } from '@keen.io/icons';
@@ -47,6 +52,17 @@ const HeadingSettings: FC<Props> = ({
 
   const titleInput = useRef(null);
 
+  const handleQueryNameClick = () => {
+    onUpdateTitleSettings({
+      ...title,
+      content: savedQueryName,
+    });
+
+    if (titleInput.current) {
+      titleInput.current.value = savedQueryName;
+    }
+  };
+
   return (
     <>
       <SectionTitle
@@ -81,16 +97,12 @@ const HeadingSettings: FC<Props> = ({
             >
               <UseQueryName
                 data-testid="inherit-query-name"
-                onClick={() => {
-                  onUpdateTitleSettings({
-                    ...title,
-                    content: savedQueryName,
-                  });
-
-                  if (titleInput.current) {
-                    titleInput.current.value = savedQueryName;
-                  }
+                onClick={handleQueryNameClick}
+                onKeyDown={(e) => {
+                  if (e.keyCode === KEYBOARD_KEYS.ENTER) handleQueryNameClick();
                 }}
+                role="button"
+                tabIndex={0}
               >
                 <BodyText variant="body3" fontWeight={400}>
                   <FontWeight fontWeight={700}>
