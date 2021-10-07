@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react';
 import { ChartEvents, TableEvents, ColumnSelection } from '@keen.io/charts';
 import { PubSub } from '@keen.io/pubsub';
+import { KEYBOARD_KEYS } from '@keen.io/ui-core';
 
 import { AppContext } from '../../../../contexts';
 
@@ -154,5 +155,43 @@ test('renders notification about not supported "boolean" type', async () => {
         'widget_customization_format_value_settings.boolean_not_supported'
       )
     ).toBeInTheDocument();
+  });
+});
+
+test('allows user to set data type by using keyboard', async () => {
+  const {
+    chartEvents,
+    wrapper: { getByTestId, getByText },
+  } = render();
+  const columnsSelection: ColumnSelection[] = [
+    { name: '@column/01', dataType: 'number', formatter: null },
+  ];
+
+  act(() => {
+    chartEvents.publish({
+      eventName: '@table/columns-selected',
+      meta: { selection: columnsSelection },
+    });
+  });
+
+  await waitFor(() => getByTestId('column-name-input'));
+
+  const element = getByText('widget_customization_data_types.number');
+  fireEvent.keyDown(element, {
+    key: 'Enter',
+    keyCode: KEYBOARD_KEYS.ENTER,
+  });
+  fireEvent.keyDown(element, {
+    key: 'ArrowDown',
+    keyCode: KEYBOARD_KEYS.DOWN,
+  });
+  fireEvent.keyDown(element, {
+    key: 'Enter',
+    keyCode: KEYBOARD_KEYS.ENTER,
+  });
+
+  await waitFor(() => {
+    const element = getByText('widget_customization_data_types.string');
+    expect(element).toBeInTheDocument();
   });
 });

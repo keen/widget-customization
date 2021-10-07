@@ -5,6 +5,7 @@ import {
   fireEvent,
   cleanup,
 } from '@testing-library/react';
+import { KEYBOARD_KEYS } from '@keen.io/ui-core';
 
 import HeadingSettings from './HeadingSettings';
 import { AppContext } from '../../contexts';
@@ -111,6 +112,28 @@ test('allows user to use saved query name as widget title', () => {
 
   const element = getByTestId('inherit-query-name');
   fireEvent.click(element);
+
+  expect(props.onUpdateTitleSettings).toHaveBeenCalledWith({
+    ...title,
+    content: savedQueryName,
+  });
+});
+
+test('allows user to use saved query name as widget title with enter key', () => {
+  const savedQueryName = '@savedQueryName';
+  const {
+    wrapper: { getByTestId },
+    props,
+    title,
+  } = render({
+    savedQueryName,
+  });
+
+  const element = getByTestId('inherit-query-name');
+  fireEvent.keyDown(element, {
+    key: 'Enter',
+    keyCode: KEYBOARD_KEYS.ENTER,
+  });
 
   expect(props.onUpdateTitleSettings).toHaveBeenCalledWith({
     ...title,

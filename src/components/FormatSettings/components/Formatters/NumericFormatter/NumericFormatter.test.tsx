@@ -5,6 +5,7 @@ import {
   act,
   waitFor,
 } from '@testing-library/react';
+import { KEYBOARD_KEYS } from '@keen.io/ui-core';
 
 import NumericFormatter from './NumericFormatter';
 import { createFormatterSettings } from '../../../../../utils';
@@ -91,6 +92,37 @@ test('calls onUpdateFormatValue on value change', async () => {
     expect(props.onUpdateFormatValue).toHaveBeenCalledWith(
       `${inputValue}${BASIC_FORMATTER_PATTERN}`
     );
+  });
+});
+
+test('supports keyboard navigation on precision dropdown', async () => {
+  const {
+    wrapper: { getByText },
+    props,
+  } = render();
+
+  const element = getByText(
+    'widget_customization_format_value_settings.original_data'
+  );
+  fireEvent.keyDown(element, {
+    key: 'Enter',
+    keyCode: KEYBOARD_KEYS.ENTER,
+  });
+  fireEvent.keyDown(element, {
+    key: 'ArrowDown',
+    keyCode: KEYBOARD_KEYS.DOWN,
+  });
+  fireEvent.keyDown(element, {
+    key: 'ArrowDown',
+    keyCode: KEYBOARD_KEYS.DOWN,
+  });
+  fireEvent.keyDown(element, {
+    key: 'Enter',
+    keyCode: KEYBOARD_KEYS.ENTER,
+  });
+
+  await waitFor(() => {
+    expect(props.onUpdateFormatValue).toHaveBeenCalledWith('${number; 0.0}');
   });
 });
 
