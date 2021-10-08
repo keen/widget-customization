@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -7,8 +7,9 @@ import {
   DropdownList,
   DropdownListContainer,
   DynamicPortal,
+  KEYBOARD_KEYS,
 } from '@keen.io/ui-core';
-import { useDynamicContentPosition } from '@keen.io/react-hooks';
+import { useDynamicContentPosition, useKeypress } from '@keen.io/react-hooks';
 
 import { AvailableIcons } from '../../../../../../constants';
 import Label from '../../../../../Label';
@@ -25,13 +26,14 @@ type Props = {
 
 const IconType: FC<Props> = ({ onChange, iconType }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectionIndex, setIndex] = useState<number>(null);
 
   const IconTypeOptions = AvailableIcons.map((icon) => ({
     label: icon.charAt(0).toUpperCase() + icon.slice(1),
     value: icon,
   }));
 
-  const selectedIcon = AvailableIcons.includes(iconType as any)
+  const selectedIcon = AvailableIcons.includes(iconType)
     ? IconTypeOptions.find((icon) => icon.value === iconType)
     : IconTypeOptions[0];
 
@@ -41,6 +43,60 @@ const IconType: FC<Props> = ({ onChange, iconType }) => {
   const { setPosition, contentPosition } = useDynamicContentPosition(
     containerRef
   );
+
+  useEffect(() => {
+    if (dropdownOpen) {
+      const iconIndex = IconTypeOptions.findIndex(
+        ({ value }) => value === iconType
+      );
+      const index = iconIndex > 0 ? iconIndex : 0;
+
+      setIndex(index);
+    }
+    return () => {
+      setIndex(null);
+    };
+  }, [dropdownOpen]);
+
+  const keyboardHandler = useCallback(
+    (_e: KeyboardEvent, keyCode: number) => {
+      switch (keyCode) {
+        case KEYBOARD_KEYS.ENTER:
+          const { value } = IconTypeOptions[selectionIndex];
+          onChange(value);
+          setDropdownOpen(false);
+          break;
+        case KEYBOARD_KEYS.UP:
+          if (selectionIndex > 0) {
+            setIndex(selectionIndex - 1);
+          }
+          break;
+        case KEYBOARD_KEYS.DOWN:
+          if (selectionIndex === null) {
+            setIndex(0);
+          } else if (selectionIndex < IconTypeOptions.length - 1) {
+            setIndex(selectionIndex + 1);
+          }
+          break;
+        case KEYBOARD_KEYS.ESCAPE:
+          setDropdownOpen(false);
+          break;
+      }
+    },
+    [selectionIndex, IconTypeOptions]
+  );
+
+  useKeypress({
+    keyboardAction: keyboardHandler,
+    handledKeys: [
+      KEYBOARD_KEYS.ENTER,
+      KEYBOARD_KEYS.ESCAPE,
+      KEYBOARD_KEYS.UP,
+      KEYBOARD_KEYS.DOWN,
+    ],
+    addEventListenerCondition: dropdownOpen,
+    eventListenerDependencies: [dropdownOpen, selectionIndex, IconTypeOptions],
+  });
 
   return (
     <div>
@@ -69,10 +125,11 @@ const IconType: FC<Props> = ({ onChange, iconType }) => {
                   <DropdownList
                     ref={activeItemRef}
                     items={IconTypeOptions}
-                    setActiveItem={(item) =>
-                      selectedIcon && selectedIcon.value === item.value
+                    setActiveItem={({ value }) =>
+                      IconTypeOptions[selectionIndex] &&
+                      value === IconTypeOptions[selectionIndex].value
                     }
-                    onClick={(e, icon) => onChange(icon.value)}
+                    onClick={(_e, icon) => onChange(icon.value)}
                   />
                 )}
               </DropdownListContainer>

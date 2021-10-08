@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { FC, useState, useEffect, useMemo } from 'react';
+import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'react-use';
 import { transparentize } from 'polished';
@@ -12,8 +12,10 @@ import {
   DropdownList,
   Checkbox,
   MousePositionedTooltip,
+  KEYBOARD_KEYS,
 } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
+import { useKeypress } from '@keen.io/react-hooks';
 
 import {
   Container,
@@ -56,6 +58,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { t } = useTranslation();
 
   const [dropdown, setDropdown] = useState<'precision' | 'operation'>();
+  const [selectionIndex, setIndex] = useState<number>(null);
   const [formatterElements, setFormatterElements] = useState<NumericFormatter>(
     initialState
   );
@@ -113,6 +116,86 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     updateFormat({ precision: precisionValue });
   };
 
+  useEffect(() => {
+    const { precision, operation } = formatterElements;
+    let index = 0;
+
+    if (isPrecisionOpen) {
+      const precisionIndex = patternsOptions.findIndex(
+        ({ value }) => value === precision
+      );
+      if (precisionIndex > 0) index = precisionIndex;
+    }
+
+    if (isOperationOpen) {
+      const operationIndex = operationsOptions.findIndex(
+        ({ value }) => value === operation
+      );
+      if (operationIndex > 0) index = operationIndex;
+    }
+
+    setIndex(index);
+
+    return () => {
+      setIndex(null);
+    };
+  }, [isPrecisionOpen, isOperationOpen]);
+
+  const keyboardHandler = useCallback(
+    (_e: KeyboardEvent, keyCode: number) => {
+      switch (keyCode) {
+        case KEYBOARD_KEYS.ENTER:
+          if (isPrecisionOpen) {
+            const { value } = patternsOptions[selectionIndex];
+            onPrecisionChange(_e, { value });
+          }
+
+          if (isOperationOpen) {
+            const { value } = operationsOptions[selectionIndex];
+            updateFormat({ operation: value });
+          }
+          setDropdown(null);
+          break;
+        case KEYBOARD_KEYS.UP:
+          if (selectionIndex > 0) {
+            setIndex(selectionIndex - 1);
+          }
+          break;
+        case KEYBOARD_KEYS.DOWN:
+          if (selectionIndex === null) {
+            setIndex(0);
+          } else if (
+            (isPrecisionOpen && selectionIndex < patternsOptions.length - 1) ||
+            (isOperationOpen && selectionIndex < operationsOptions.length - 1)
+          ) {
+            setIndex(selectionIndex + 1);
+          }
+          break;
+        case KEYBOARD_KEYS.ESCAPE:
+          setDropdown(null);
+          break;
+      }
+    },
+    [selectionIndex, isPrecisionOpen, isOperationOpen]
+  );
+
+  useKeypress({
+    keyboardAction: keyboardHandler,
+    handledKeys: [
+      KEYBOARD_KEYS.ENTER,
+      KEYBOARD_KEYS.ESCAPE,
+      KEYBOARD_KEYS.UP,
+      KEYBOARD_KEYS.DOWN,
+    ],
+    addEventListenerCondition: isOperationOpen || isPrecisionOpen,
+    eventListenerDependencies: [
+      dropdown,
+      selectionIndex,
+      patternsOptions,
+      operationsOptions,
+    ],
+  });
+
   return (
     <Container>
       <PrefixAndSuffix
@@ -157,7 +240,10 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                 <DropdownList
                   ref={activeItemRef}
                   items={patternsOptions}
-                  setActiveItem={(item) => patternOption.value === item.value}
+                  setActiveItem={({ value }) =>
+                    patternsOptions[selectionIndex] &&
+                    patternsOptions[selectionIndex].value === value
+                  }
                   onClick={onPrecisionChange}
                 />
               )}
@@ -205,8 +291,9 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                     <DropdownList
                       ref={activeItemRef}
                       items={operationsOptions}
-                      setActiveItem={(item) =>
-                        operationOption?.value === item.value
+                      setActiveItem={({ value }) =>
+                        operationsOptions[selectionIndex] &&
+                        operationsOptions[selectionIndex].value === value
                       }
                       onClick={(_e, { value: operationValue }) => {
                         updateFormat({ operation: operationValue });

@@ -1,4 +1,11 @@
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 
@@ -12,11 +19,13 @@ import {
   Label,
   MousePositionedTooltip,
   Title,
+  KEYBOARD_KEYS,
 } from '@keen.io/ui-core';
 import { BodyText, Headline } from '@keen.io/typography';
 import { colors } from '@keen.io/colors';
 import { ChartEvents, TableEvents } from '@keen.io/charts';
 import { extractFormatterType } from '@keen.io/charts-utils';
+import { useKeypress } from '@keen.io/react-hooks';
 
 import SectionTitle from '../../../SectionTitle';
 import { AppContext } from '../../../../contexts';
@@ -67,6 +76,7 @@ const FormatTableSettings: FC<Props> = ({
   const [dataType, setDataType] = useState(null);
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [formatValue, setFormatValue] = useState(null);
+  const [selectionIndex, setIndex] = useState<number>(null);
 
   const TranslatedDataTypes = DATA_TYPES.map(({ label, value }) => ({
     label: t(label),
@@ -122,6 +132,64 @@ const FormatTableSettings: FC<Props> = ({
       chartEventsUnsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (dropdownOpen) {
+      const iconIndex = TranslatedDataTypes.findIndex(
+        ({ value }) => value === dataType
+      );
+      const index = iconIndex > 0 ? iconIndex : 0;
+
+      setIndex(index);
+    }
+    return () => {
+      setIndex(null);
+    };
+  }, [dropdownOpen]);
+
+  const keyboardHandler = useCallback(
+    (_e: KeyboardEvent, keyCode: number) => {
+      switch (keyCode) {
+        case KEYBOARD_KEYS.ENTER:
+          const { value } = TranslatedDataTypes[selectionIndex];
+          setDataType(value);
+          setDropdownOpen(false);
+          break;
+        case KEYBOARD_KEYS.UP:
+          if (selectionIndex > 0) {
+            setIndex(selectionIndex - 1);
+          }
+          break;
+        case KEYBOARD_KEYS.DOWN:
+          if (selectionIndex === null) {
+            setIndex(0);
+          } else if (selectionIndex < TranslatedDataTypes.length - 1) {
+            setIndex(selectionIndex + 1);
+          }
+          break;
+        case KEYBOARD_KEYS.ESCAPE:
+          setDropdownOpen(false);
+          break;
+      }
+    },
+    [selectionIndex, TranslatedDataTypes]
+  );
+
+  useKeypress({
+    keyboardAction: keyboardHandler,
+    handledKeys: [
+      KEYBOARD_KEYS.ENTER,
+      KEYBOARD_KEYS.ESCAPE,
+      KEYBOARD_KEYS.UP,
+      KEYBOARD_KEYS.DOWN,
+    ],
+    addEventListenerCondition: dropdownOpen,
+    eventListenerDependencies: [
+      dropdownOpen,
+      selectionIndex,
+      TranslatedDataTypes,
+    ],
+  });
 
   const onUpdateFormat = (value) => {
     const formatters = {};
@@ -247,7 +315,10 @@ const FormatTableSettings: FC<Props> = ({
                         <DropdownList
                           ref={activeItemRef}
                           items={TranslatedDataTypes}
-                          setActiveItem={(item) => dataType === item.value}
+                          setActiveItem={({ value }) =>
+                            TranslatedDataTypes[selectionIndex] &&
+                            TranslatedDataTypes[selectionIndex].value === value
+                          }
                           onClick={(e, item) => {
                             setDataType(item.value);
                             setDropdownOpen(!dropdownOpen);

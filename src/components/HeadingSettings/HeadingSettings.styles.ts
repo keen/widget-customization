@@ -22,6 +22,10 @@ export const UseQueryName = styled.div`
   &:hover {
     background: ${colors.gray[300]};
   }
+
+  &:focus-visible {
+    outline: 1px solid ${colors.lightBlue[500]};
+  }
 `;
 
 export const QueryIcon = styled.span`
