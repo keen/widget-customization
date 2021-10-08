@@ -63,7 +63,7 @@ const App = () => {
     <>
       <div ref={visualizationContainer} />
       <WidgetCustomization
-        widgetType="metric"
+        widgetType="table"
         pubSub={pubSub}
         chartSettings={chartSettings}
         widgetSettings={widgetSettings}

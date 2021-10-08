@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
@@ -9,8 +9,10 @@ import {
   DropdownList,
   DropdownListContainer,
   MousePositionedTooltip,
+  KEYBOARD_KEYS,
 } from '@keen.io/ui-core';
 import { colors } from '@keen.io/colors';
+import { useKeypress } from '@keen.io/react-hooks';
 
 import { DateTimeFormatter, FormatterSettings } from '../../../../../types';
 import { createFormatterSettings } from '../../../../../utils';
@@ -51,6 +53,7 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     initialState
   );
   const [format, setFormat] = useState(formatValue);
+  const [selectionIndex, setIndex] = useState<number>(null);
   const TranslatedDateFormats = DATE_FORMATS.map(({ label, value }) => ({
     label: t(label),
     value,
@@ -64,6 +67,31 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     const settings = createFormatterSettings(formatValue, 'datetime');
     setFormatterElements((state) => ({ ...state, ...settings }));
   }, [formatValue]);
+
+  useEffect(() => {
+    const { dateFormat, timeFormat } = formatterElements;
+    let index = 0;
+
+    if (dateDropdownOpen) {
+      const precisionIndex = TranslatedDateFormats.findIndex(
+        ({ value }) => value === dateFormat
+      );
+      if (precisionIndex > 0) index = precisionIndex;
+    }
+
+    if (timeDropdownOpen) {
+      const operationIndex = TranslatedTimeFormats.findIndex(
+        ({ value }) => value === timeFormat
+      );
+      if (operationIndex > 0) index = operationIndex;
+    }
+
+    setIndex(index);
+
+    return () => {
+      setIndex(null);
+    };
+  }, [dateDropdownOpen, timeDropdownOpen]);
 
   useDebounce(() => onUpdateFormatValue(format), 300, [format]);
 
@@ -93,12 +121,12 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     setTimeDropdownOpen(!timeDropdownOpen);
   };
 
-  const onDateFormatChange = (format) => {
+  const onDateFormatChange = (format, enableAdditionalAction = true) => {
     let timeFormat = formatterElements.timeFormat;
     setDateDropdownOpen(!dateDropdownOpen);
 
     if (format.value !== 'original') {
-      setTimeDropdownOpen(true);
+      if (enableAdditionalAction) setTimeDropdownOpen(true);
       timeFormat = timeFormat || TranslatedTimeFormats[0].value;
     } else {
       timeFormat = null;
@@ -109,6 +137,64 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
       dateFormat: format.value,
     });
   };
+
+  const keyboardHandler = useCallback(
+    (_e: KeyboardEvent, keyCode: number) => {
+      switch (keyCode) {
+        case KEYBOARD_KEYS.ENTER:
+          if (dateDropdownOpen) {
+            const format = TranslatedDateFormats[selectionIndex];
+            onDateFormatChange(format, false);
+          }
+
+          if (timeDropdownOpen) {
+            const format = TranslatedTimeFormats[selectionIndex];
+            onTimeFormatChange(format);
+          }
+          break;
+        case KEYBOARD_KEYS.UP:
+          if (selectionIndex > 0) {
+            setIndex(selectionIndex - 1);
+          }
+          break;
+        case KEYBOARD_KEYS.DOWN:
+          if (selectionIndex === null) {
+            setIndex(0);
+          } else if (
+            (dateDropdownOpen &&
+              selectionIndex < TranslatedDateFormats.length - 1) ||
+            (timeDropdownOpen &&
+              selectionIndex < TranslatedTimeFormats.length - 1)
+          ) {
+            setIndex(selectionIndex + 1);
+          }
+          break;
+        case KEYBOARD_KEYS.ESCAPE:
+          if (dateDropdownOpen) setDateDropdownOpen(false);
+          if (timeDropdownOpen) setTimeDropdownOpen(false);
+          break;
+      }
+    },
+    [selectionIndex, dateDropdownOpen, timeDropdownOpen]
+  );
+
+  useKeypress({
+    keyboardAction: keyboardHandler,
+    handledKeys: [
+      KEYBOARD_KEYS.ENTER,
+      KEYBOARD_KEYS.ESCAPE,
+      KEYBOARD_KEYS.UP,
+      KEYBOARD_KEYS.DOWN,
+    ],
+    addEventListenerCondition: dateDropdownOpen || timeDropdownOpen,
+    eventListenerDependencies: [
+      dateDropdownOpen,
+      timeDropdownOpen,
+      selectionIndex,
+      TranslatedDateFormats,
+      TranslatedTimeFormats,
+    ],
+  });
 
   return (
     <div>
@@ -139,8 +225,9 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                   <DropdownList
                     ref={activeItemRef}
                     items={TranslatedDateFormats}
-                    setActiveItem={(item) =>
-                      selectedDateFormat.value === item.value
+                    setActiveItem={({ value }) =>
+                      TranslatedDateFormats[selectionIndex] &&
+                      TranslatedDateFormats[selectionIndex].value === value
                     }
                     onClick={(e, format) => onDateFormatChange(format)}
                   />
@@ -190,9 +277,9 @@ const DateTimeFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                       <DropdownList
                         ref={activeItemRef}
                         items={TranslatedTimeFormats}
-                        setActiveItem={(item) =>
-                          selectedTimeFormat &&
-                          selectedTimeFormat.value === item.value
+                        setActiveItem={({ value }) =>
+                          TranslatedTimeFormats[selectionIndex] &&
+                          TranslatedTimeFormats[selectionIndex].value === value
                         }
                         onClick={(e, format) => onTimeFormatChange(format)}
                       />
