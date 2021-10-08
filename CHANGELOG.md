@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.40](https://github.com/keen/query-creator/compare/v0.0.39...v0.0.40) (2021-10-08)
+
+
+### Features
+
+* 🎸 add keyboard navigation ([112404f](https://github.com/keen/query-creator/commit/112404ffc28007b1c761fe94e181c4560c8e62ba))
+
 ### [0.0.39](https://github.com/keen/query-creator/compare/v0.0.38...v0.0.39) (2021-09-22)
 
 ### [0.0.38](https://github.com/keen/query-creator/compare/v0.0.37...v0.0.38) (2021-09-22)
