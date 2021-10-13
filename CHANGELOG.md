@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.41](https://github.com/keen/query-creator/compare/v0.0.40...v0.0.41) (2021-10-13)
+
+
+### Features
+
+* 🎸 Decimal values handling in formatter ([f42191c](https://github.com/keen/query-creator/commit/f42191c98ede45120312188a3db512755ee1803f))
+
 ### [0.0.40](https://github.com/keen/query-creator/compare/v0.0.39...v0.0.40) (2021-10-08)
 
 
