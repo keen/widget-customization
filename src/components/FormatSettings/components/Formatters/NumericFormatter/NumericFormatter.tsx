@@ -311,14 +311,16 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                 'widget_customization_format_value_settings.value_placeholder'
               )}
               borderRadius="0 4px 4px 0"
-              type="number"
+              type="text"
               onChange={(e) => {
                 const inputValue = e.currentTarget.value;
-                updateFormat({
-                  operation:
-                    inputValue === '' ? null : formatterElements.operation,
-                  value: inputValue,
-                });
+                if (!isNaN(inputValue as any)) {
+                  updateFormat({
+                    operation:
+                      inputValue === '' ? null : formatterElements.operation,
+                    value: inputValue,
+                  });
+                }
               }}
             />
           </MultiControl>
