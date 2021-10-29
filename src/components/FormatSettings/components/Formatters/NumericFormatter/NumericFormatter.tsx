@@ -3,6 +3,8 @@ import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'react-use';
 import { transparentize } from 'polished';
+import { AnimatePresence } from 'framer-motion';
+
 import { colors } from '@keen.io/colors';
 import {
   Input,
@@ -13,6 +15,7 @@ import {
   Checkbox,
   MousePositionedTooltip,
   KEYBOARD_KEYS,
+  Tooltip,
 } from '@keen.io/ui-core';
 import { BodyText } from '@keen.io/typography';
 import { useKeypress } from '@keen.io/react-hooks';
@@ -24,6 +27,7 @@ import {
   ControlContainer,
   StyledLabel,
   LabelText,
+  TooltipWrapper,
 } from './NumericFormatter.styles';
 
 import { DEFAULT_FORMATTER_PATTERN } from '../../../../../constants';
@@ -36,6 +40,7 @@ import { PrefixAndSuffix } from '../components';
 import {
   PATTERNS_OPTIONS as patterns,
   OPERATIONS_OPTIONS as operationsOptions,
+  TOAST_MOTION as toastMotion,
 } from './constants';
 
 type Props = {
@@ -63,6 +68,10 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
     initialState
   );
   const [format, setFormat] = useState(formatValue);
+  const [
+    numericValidationTooltipVisible,
+    setNumericValidationTooltipVisible,
+  ] = useState(false);
 
   useEffect(() => {
     const { separator, ...settings } = createFormatterSettings(
@@ -78,6 +87,9 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { precision, operation, value, separator } = formatterElements;
 
   useDebounce(() => onUpdateFormatValue(format), 300, [format]);
+  useDebounce(() => setNumericValidationTooltipVisible(false), 3000, [
+    numericValidationTooltipVisible,
+  ]);
 
   const updateFormat = (values) => {
     const updatedState = {
@@ -314,6 +326,9 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
               type="text"
               onChange={(e) => {
                 const inputValue = e.currentTarget.value;
+                if (inputValue.includes(',')) {
+                  setNumericValidationTooltipVisible(true);
+                }
                 if (!isNaN(inputValue as any)) {
                   updateFormat({
                     operation:
@@ -323,6 +338,25 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
                 }
               }}
             />
+            <AnimatePresence>
+              <TooltipWrapper
+                animate={
+                  numericValidationTooltipVisible
+                    ? toastMotion['entering']
+                    : toastMotion['exiting']
+                }
+                transition={{ duration: 0.2 }}
+                data-testid="validation-tooltip"
+              >
+                <Tooltip hasArrow={true} arrowDirection="top">
+                  <BodyText variant="body2" color={colors.black[100]}>
+                    {t(
+                      'widget_customization_format_value_settings.use_dot_instead_of_comma'
+                    )}
+                  </BodyText>
+                </Tooltip>
+              </TooltipWrapper>
+            </AnimatePresence>
           </MultiControl>
         </Row>
         <Row marginTop="20px" marginBottom="5px" isDisabled={!precision}>
