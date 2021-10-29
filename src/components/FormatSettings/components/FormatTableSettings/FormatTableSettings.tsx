@@ -300,15 +300,13 @@ const FormatTableSettings: FC<Props> = ({
                   {selectedDataTypeOption && selectedDataTypeOption.label}
                 </DropableContainer>
                 <Dropdown isOpen={dropdownOpen}>
-                  {!selectedColumnsAreEqual(selectedColumns) && (
-                    <DropdownInfo>
-                      <Title variant="h5">
-                        {t(
-                          'widget_customization_format_value_settings.you_will_map_property'
-                        )}
-                      </Title>
-                    </DropdownInfo>
-                  )}
+                  <DropdownInfo>
+                    <Title variant="h5">
+                      {t(
+                        'widget_customization_format_value_settings.you_will_map_property'
+                      )}
+                    </Title>
+                  </DropdownInfo>
                   <DropdownListContainer scrollToActive maxHeight={150}>
                     {(activeItemRef) => (
                       <div>
