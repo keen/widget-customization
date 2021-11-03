@@ -12,3 +12,10 @@ export const OPERATIONS_OPTIONS = OPERATIONS.map((operation) => ({
   label: operation.replace(/^\w/, (c: string) => c.toUpperCase()),
   value: operation,
 }));
+
+export const TOAST_MOTION = {
+  entering: { opacity: 1 },
+  entered: {},
+  exiting: { opacity: 0 },
+  exited: {},
+};

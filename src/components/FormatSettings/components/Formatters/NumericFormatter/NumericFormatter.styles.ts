@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
+import { motion } from 'framer-motion';
 
 export const Container = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ export const Row = styled.div<SpaceProps & { isDisabled?: boolean }>`
 `;
 
 export const MultiControl = styled.div<{ isDisabled: boolean }>`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
@@ -52,4 +54,10 @@ export const StyledLabel = styled.label`
 export const LabelText = styled.span`
   margin-left: 5px;
   display: inline-block;
+`;
+
+export const TooltipWrapper = styled(motion.div)`
+  width: 100%;
+  position: absolute;
+  top: 45px;
 `;
