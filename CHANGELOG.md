@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.42](https://github.com/keen/query-creator/compare/v0.0.41...v0.0.42) (2021-11-03)
+
+
+### Features
+
+* 🎸 Validation for numeric formatter ([a07f43a](https://github.com/keen/query-creator/commit/a07f43a7c1529fbc7b9914e0b173915da2a4f605))
+
+
+### Bug Fixes
+
+* 🐛 type inference message ([13a0a04](https://github.com/keen/query-creator/commit/13a0a04f0e41eb3915ab8dfc8bb0ca5889124946))
+
 ### [0.0.41](https://github.com/keen/query-creator/compare/v0.0.40...v0.0.41) (2021-10-13)
 
 
