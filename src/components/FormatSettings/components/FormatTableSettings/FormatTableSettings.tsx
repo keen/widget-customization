@@ -18,7 +18,6 @@ import {
   Input,
   Label,
   MousePositionedTooltip,
-  Title,
   KEYBOARD_KEYS,
 } from '@keen.io/ui-core';
 import { BodyText, Headline } from '@keen.io/typography';
@@ -300,15 +299,13 @@ const FormatTableSettings: FC<Props> = ({
                   {selectedDataTypeOption && selectedDataTypeOption.label}
                 </DropableContainer>
                 <Dropdown isOpen={dropdownOpen}>
-                  {!selectedColumnsAreEqual(selectedColumns) && (
-                    <DropdownInfo>
-                      <Title variant="h5">
-                        {t(
-                          'widget_customization_format_value_settings.you_will_map_property'
-                        )}
-                      </Title>
-                    </DropdownInfo>
-                  )}
+                  <DropdownInfo>
+                    <BodyText variant="body3" fontWeight={400}>
+                      {t(
+                        'widget_customization_format_value_settings.you_will_map_property'
+                      )}
+                    </BodyText>
+                  </DropdownInfo>
                   <DropdownListContainer scrollToActive maxHeight={150}>
                     {(activeItemRef) => (
                       <div>
