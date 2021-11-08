@@ -8,7 +8,9 @@ import { SettingsModifier } from '../types';
 
 const MetricSettings: FC<SettingsModifier> = ({
   widgetSettings,
+  chartSettings,
   onUpdateWidgetSettings,
+  onUpdateChartSettings,
   hiddenOptions,
 }) => {
   const { t } = useTranslation();
@@ -29,6 +31,17 @@ const MetricSettings: FC<SettingsModifier> = ({
           }}
         />
       )}
+      <SettingsItem
+        id="table-selectable-rows"
+        isEnabled={chartSettings.rowsSelection}
+        label={t('widget_customization_table_settings.copy_multiple_rows')}
+        onChange={(rowsSelection) => {
+          onUpdateChartSettings({
+            ...chartSettings,
+            rowsSelection,
+          });
+        }}
+      />
     </div>
   );
 };

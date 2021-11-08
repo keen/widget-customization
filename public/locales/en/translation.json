@@ -52,7 +52,8 @@
     "title": "Heatmap Chart Components"
   },
   "widget_customization_table_settings": {
-    "title": "Table Chart Components"
+    "title": "Table Chart Components",
+    "copy_multiple_rows": "Copy multiple rows"
   },
   "widget_customization_circular_settings": {
     "title": "Donut & Pie Chart Components",
