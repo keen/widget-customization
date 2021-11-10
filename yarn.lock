@@ -1514,16 +1514,16 @@
     d3-time "^2.0.0"
     d3-time-format "^2.2.3"
 
-"@keen.io/charts@^2.35.0":
-  version "2.35.0"
-  resolved "https://registry.yarnpkg.com/@keen.io/charts/-/charts-2.35.0.tgz#6dcd535f68acab7dd98b34d2567b6440649cd342"
-  integrity sha512-sD+YeYIs9ai8Wp6dOQJkmkHE/cYC79/EWje65HP+Zrw6vk2tmOy21/BW8mT/3hMqIN4Uo/kpM2I3mjQtvDP+4w==
+"@keen.io/charts@^2.35.3":
+  version "2.35.3"
+  resolved "https://registry.yarnpkg.com/@keen.io/charts/-/charts-2.35.3.tgz#1c734858f7d42e8b87d8f5d7f7c1216460c5c534"
+  integrity sha512-m9F4RTSHmNqPgucJlyCjv4XWNZ0Y/rOAT6bVCJaJLWvpDdU/O1vTIdrS38jPMqDWqDiXifvlviom7K3dAHdMIg==
   dependencies:
     "@keen.io/charts-utils" "^1.15.0"
     "@keen.io/colors" "^1.1.0"
     "@keen.io/pubsub" "^1.2.0"
     "@keen.io/react-hooks" "^1.4.3"
-    "@keen.io/ui-core" "^2.44.0"
+    "@keen.io/ui-core" "^2.44.2"
     d3-array "^2.4.0"
     d3-axis "^1.0.12"
     d3-drag "^1.2.5"
@@ -1551,17 +1551,17 @@
   resolved "https://registry.yarnpkg.com/@keen.io/colors/-/colors-1.1.0.tgz#feda3fc31056cd67c9d36abfce30470b95ef6879"
   integrity sha512-ATUL4zpj6NNHZChCVfI3ellRIzfJMsYzSCqnkcd7AqZseSGVLe6A8yK0yqlzzYVtz3yunX9nDN1AMpJH2dFIfA==
 
-"@keen.io/dataviz@^2.16.22":
-  version "2.16.22"
-  resolved "https://registry.yarnpkg.com/@keen.io/dataviz/-/dataviz-2.16.22.tgz#d6443a2c2dc4d1f30f854b97ffdf336b129708b3"
-  integrity sha512-8I3zKGUlU1LB6VSJlmJx9cLHlVblw0w200lzPlkAVXTPlL5hxUW/B2W05PvUBBtc8CZrh3ptIsjEa9+1vU+MGg==
+"@keen.io/dataviz@^2.16.25":
+  version "2.16.25"
+  resolved "https://registry.yarnpkg.com/@keen.io/dataviz/-/dataviz-2.16.25.tgz#ccdf21a491e14b6de342ec88ddfd91620c81627c"
+  integrity sha512-F8Dd7fZKA6cSBKSMrsZzd9HIyfqrzMcu4kY7wDy/R+j1EmhYWSfhgDVxSzBbAH32F5YxuFRMhN5FqdxQwGHiBQ==
   dependencies:
-    "@keen.io/charts" "^2.35.0"
+    "@keen.io/charts" "^2.35.3"
     "@keen.io/colors" "^1.1.0"
-    "@keen.io/parser" "^2.8.111"
+    "@keen.io/parser" "^2.8.114"
     "@keen.io/pubsub" "^1.2.0"
     "@keen.io/query" "^1.2.0"
-    "@keen.io/widgets" "^2.16.22"
+    "@keen.io/widgets" "^2.16.25"
     deepmerge "4.2.2"
     react "^16.12.0"
     react-dom "^16.12.0"
@@ -1573,10 +1573,10 @@
   dependencies:
     "@keen.io/colors" "^1.1.0"
 
-"@keen.io/parser@^2.8.111":
-  version "2.8.111"
-  resolved "https://registry.yarnpkg.com/@keen.io/parser/-/parser-2.8.111.tgz#9d9f8d2a653a265d5a89a220b5c14b3964fd16e5"
-  integrity sha512-Il1Zhd+M0vpozY/WkfEGpHmTQetyvhfK2tVxw4ZWAt+Cwcyq0bCNQTmTHmJSacm4rPrqJuMooPkafPgFo5WKNg==
+"@keen.io/parser@^2.8.114":
+  version "2.8.114"
+  resolved "https://registry.yarnpkg.com/@keen.io/parser/-/parser-2.8.114.tgz#073aec7100d40b53b871cea2902c0139821e6ba4"
+  integrity sha512-qDgBzIPx1Jxe4CyJwEoN8OuS5Q5GW5ZVGY+WxTvUrQa7A8qldulKW8+1TMet0m0RFkYrW9EZj+v1VnA32rpICA==
   dependencies:
     "@keen.io/time-utils" "^1.2.5"
     d3-time-format "^2.2.3"
@@ -1607,25 +1607,25 @@
   dependencies:
     dayjs "^1.10.4"
 
-"@keen.io/typography@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@keen.io/typography/-/typography-1.3.1.tgz#b2df23ee21870ba322ed48f9d96938f0450e2563"
-  integrity sha512-TWTmSoZexeW0Vbcr8+g++C4BOSA/FRrksDsQso2366NyQvr7k2nqhzgIuuWurZFJW1FlRatVkmRp2/u2Bx07jQ==
+"@keen.io/typography@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@keen.io/typography/-/typography-1.3.3.tgz#407d099f514ba0b2dcf505b1c1c9fd467c03298b"
+  integrity sha512-QKlhCyLJW5QENB+M+LFskeyrzHQsCkOP7pNHdv3+i54HIe7X5QKMasCWR8yqe9jC91Dwgb0/gVr8AyBs/tyJgg==
   dependencies:
     "@keen.io/colors" "^1.0.0"
     styled-system "^5.1.5"
 
-"@keen.io/ui-core@^2.44.0":
-  version "2.44.0"
-  resolved "https://registry.yarnpkg.com/@keen.io/ui-core/-/ui-core-2.44.0.tgz#7a41687bf7ccf83bb977b54a89f725753255787d"
-  integrity sha512-h5EIzK8+dWUEtSUpckCszysyV+LvY1OCIbRw40yqSMj2G0L95HlZg/+VKnnmz8DuGcMzJCgpjoon2hBCsKsU0w==
+"@keen.io/ui-core@^2.44.2":
+  version "2.44.2"
+  resolved "https://registry.yarnpkg.com/@keen.io/ui-core/-/ui-core-2.44.2.tgz#e87cc304018679acbca8ceaee7d828ec33588612"
+  integrity sha512-nwrAH6xdG1GqtRb3MPgB3v8DopTYZIzdOzp2AcFXL1uT5CphuXB9fvC7prnQ9qNjp04F5fLktPX++ODb7LXWOA==
   dependencies:
     "@keen.io/charts-utils" "^1.15.0"
     "@keen.io/colors" "^1.1.0"
     "@keen.io/icons" "^1.5.1"
     "@keen.io/query" "^1.2.0"
     "@keen.io/react-hooks" "^1.4.3"
-    "@keen.io/typography" "^1.3.1"
+    "@keen.io/typography" "^1.3.3"
     color "^3.1.2"
     csstype "^3.0.9"
     framer-motion "^1.11.1"
@@ -1643,25 +1643,25 @@
     styled-system "^5.1.5"
     webfontloader "^1.6.28"
 
-"@keen.io/widget-picker@^1.4.18":
-  version "1.4.18"
-  resolved "https://registry.yarnpkg.com/@keen.io/widget-picker/-/widget-picker-1.4.18.tgz#be020543d71c06ce4d87223bcea3ae04e0a34410"
-  integrity sha512-M5wEYQGR9shsDpwMHTWL9S2r9OoknrHedxHfdPBC6M2/o6zWCPhhrF8eKNFhy0rETLJxij2sH2uucqtUrganKw==
+"@keen.io/widget-picker@^1.4.21":
+  version "1.4.21"
+  resolved "https://registry.yarnpkg.com/@keen.io/widget-picker/-/widget-picker-1.4.21.tgz#321f31fe6a4e5c074c81d7bf12896dcfb5556501"
+  integrity sha512-fPMetyr/K5GV7Vh2JRYGwsSLlrepBwK7cu9Gj/vfioySQXUbBa4jcyfJLTPWEBH8DI4T4WRSyyOxOOlThEIJCQ==
   dependencies:
     "@keen.io/colors" "^1.0.0"
     "@keen.io/icons" "^1.5.1"
     framer-motion "^1.11.1"
 
-"@keen.io/widgets@^2.16.22":
-  version "2.16.22"
-  resolved "https://registry.yarnpkg.com/@keen.io/widgets/-/widgets-2.16.22.tgz#c863c7bc19ce3738d341d2fde7863bf689e902e1"
-  integrity sha512-KnNaT6VP/89+VY6j52W11cHeprqdPfUVKi01JqBZok9AJDWa1lEFqhZz6rZpdEBSDtb5euG0mytOarQOusH8Sg==
+"@keen.io/widgets@^2.16.25":
+  version "2.16.25"
+  resolved "https://registry.yarnpkg.com/@keen.io/widgets/-/widgets-2.16.25.tgz#7efc99eab22992224c24c22a1ced8d14a4c2b88b"
+  integrity sha512-GGMzO4KmrLGdi5fAlF94LMlsmBYVt8irorBvrHQaKzDUiFBOzowZjEgSQCbenljp0V4RJRerwW/TBCW9X8CznA==
   dependencies:
-    "@keen.io/charts" "^2.35.0"
+    "@keen.io/charts" "^2.35.3"
     "@keen.io/charts-utils" "^1.15.0"
     "@keen.io/colors" "^1.1.0"
     "@keen.io/react-hooks" "^1.4.3"
-    "@keen.io/ui-core" "^2.44.0"
+    "@keen.io/ui-core" "^2.44.2"
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents":
   version "2.1.8-no-fsevents"

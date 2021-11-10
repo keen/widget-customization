@@ -34,7 +34,7 @@ const MetricSettings: FC<SettingsModifier> = ({
       <SettingsItem
         id="table-selectable-rows"
         isEnabled={chartSettings.rowsSelection}
-        label={t('widget_customization_table_settings.copy_multiple_rows')}
+        label={t('widget_customization_table_settings.multiple_rows_selection')}
         onChange={(rowsSelection) => {
           onUpdateChartSettings({
             ...chartSettings,
