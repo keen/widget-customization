@@ -37,12 +37,7 @@ test('displays info message when no available settings for widget', () => {
   const {
     wrapper: { getByText },
   } = render({
-    widgetType: 'table',
-    componentSettingsConfig: {
-      hiddenOptions: {
-        card: true,
-      },
-    },
+    widgetType: 'json',
   });
 
   const noSettingsMessage = getByText(

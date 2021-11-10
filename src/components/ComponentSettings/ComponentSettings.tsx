@@ -80,7 +80,8 @@ const ComponentSettings: FC<Props> = ({
   const { hiddenOptions } = componentSettingsConfig;
 
   const settingsComponent = getSettingsComponent(widgetType);
-  const settingsAreAvailable = !hiddenOptions?.card || widgetType !== 'table';
+
+  const settingsAreAvailable = widgetType !== 'json';
 
   return settingsComponent && settingsAreAvailable ? (
     <MousePositionedTooltip
@@ -94,15 +95,13 @@ const ComponentSettings: FC<Props> = ({
       )}
     >
       <SettingsContainer isDisabled={!!isDisabled}>
-        {settingsComponent
-          ? React.createElement(getSettingsComponent(widgetType), {
-              chartSettings,
-              widgetSettings,
-              onUpdateWidgetSettings,
-              onUpdateChartSettings,
-              hiddenOptions,
-            })
-          : null}
+        {React.createElement(settingsComponent, {
+          chartSettings,
+          widgetSettings,
+          onUpdateWidgetSettings,
+          onUpdateChartSettings,
+          hiddenOptions,
+        })}
       </SettingsContainer>
     </MousePositionedTooltip>
   ) : (
