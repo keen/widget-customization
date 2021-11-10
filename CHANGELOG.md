@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.43](https://github.com/keen/query-creator/compare/v0.0.42...v0.0.43) (2021-11-10)
+
+
+### Features
+
+* 🎸 Table selectable columns ([ea45144](https://github.com/keen/query-creator/commit/ea45144109641be809d528056eb8d38ab90e13bd))
+
 ### [0.0.42](https://github.com/keen/query-creator/compare/v0.0.41...v0.0.42) (2021-11-03)
 
 
