@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-width: 140px;
+  min-width: 145px;
 `;
