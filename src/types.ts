@@ -18,6 +18,7 @@ export type ChartCustomizationSettings = {
   iconEnabled?: boolean;
   iconStyle?: IconStyles;
   iconType?: IconType;
+  rowsSelection?: boolean;
 };
 
 export type WidgetCustomizationSettings = {
