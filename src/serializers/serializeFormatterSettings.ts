@@ -65,7 +65,7 @@ const serializeFormatterSettings = (settings: FormatterSettings) => {
       precisionString = '${datetime';
       if (dateFormat && dateFormat !== 'original') {
         precisionString += ';' + dateFormat;
-        if (timeFormat) precisionString += `; ${timeFormat}`;
+        if (timeFormat) precisionString += `;  ${timeFormat}`;
       }
       precisionString += '}';
       serializedSettings = precisionString;

@@ -24,7 +24,7 @@ export const DATE_FORMATS = [
 export const TIME_FORMATS = [
   {
     label: 'widget_customization_time_formats.12-hour-clock',
-    value: 'hh:mm',
+    value: 'hh:mmA',
   },
   {
     label: 'widget_customization_time_formats.24-hour-clock',
