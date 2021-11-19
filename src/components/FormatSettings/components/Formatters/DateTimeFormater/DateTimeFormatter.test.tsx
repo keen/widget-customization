@@ -94,7 +94,7 @@ test('supports keyboard navigation on date dropdown', async () => {
 
   await waitFor(() => {
     expect(props.onUpdateFormatValue).toHaveBeenCalledWith(
-      'prefix${datetime;MM-DD-YYYY; HH:mm}suffix'
+      'prefix${datetime;MM-DD-YYYY;  HH:mm}suffix'
     );
   });
 });
