@@ -15,4 +15,6 @@ export type SettingsModifier = {
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Component settings configuration */
   hiddenOptions: HiddenOptions;
+  /** Chart result */
+  result?: unknown;
 };
