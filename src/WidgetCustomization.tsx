@@ -32,8 +32,8 @@ type Props = {
   pubSub?: PubSub;
   /** Callback which will be called on menu section change */
   onMenuItemChange?: (menuItemId: string) => void;
-  /** Result of query */
-  result?: unknown;
+  /** Analysis result */
+  analysisResult?: unknown;
 };
 
 const WidgetCustomization: FC<Props> = ({
@@ -47,7 +47,7 @@ const WidgetCustomization: FC<Props> = ({
   customizationSections = {},
   pubSub,
   onMenuItemChange,
-  result,
+  analysisResult,
 }) => {
   return (
     <AppContext.Provider value={{ modalContainer, pubSub }}>
@@ -57,7 +57,7 @@ const WidgetCustomization: FC<Props> = ({
         widgetType={widgetType}
         savedQueryName={savedQueryName}
         customizationSections={customizationSections}
-        result={result}
+        analysisResult={analysisResult}
         onMenuItemChange={onMenuItemChange}
         onUpdateChartSettings={(settings) => {
           onUpdateChartSettings(settings);

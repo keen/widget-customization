@@ -10,10 +10,10 @@ import { CurrentValue, InputContainer, FieldsWrapper } from './Gauge.styles';
 
 import { SettingsModifier } from '../types';
 
-const GaugeSettings: FC<SettingsModifier & { result: unknown }> = ({
+const GaugeSettings: FC<SettingsModifier> = ({
   chartSettings,
   onUpdateChartSettings,
-  result,
+  analysisResult,
 }) => {
   const { t } = useTranslation();
   const { minValue = 0, maxValue } = chartSettings;
@@ -28,13 +28,13 @@ const GaugeSettings: FC<SettingsModifier & { result: unknown }> = ({
 
   const validateFields = useCallback(
     (minimalValue: string, targetValue?: string) => {
-      if (targetValue === '')
+      if (targetValue === '' || targetValue === 'auto')
         return setError({
           hasError: true,
           message:
             'widget_customization_gauge_settings.validation_target_value',
         });
-      if (minimalValue === '')
+      if (minimalValue === '' || targetValue === 'auto')
         return setError({
           hasError: true,
           message:
@@ -59,7 +59,7 @@ const GaugeSettings: FC<SettingsModifier & { result: unknown }> = ({
   return (
     <div>
       <SectionTitle title={t('widget_customization_gauge_settings.title')} />
-      {typeof result === 'number' && (
+      {typeof analysisResult === 'number' && (
         <CurrentValue>
           <BodyText
             variant="body3"
@@ -67,7 +67,7 @@ const GaugeSettings: FC<SettingsModifier & { result: unknown }> = ({
             fontWeight="normal"
           >
             {`${t('widget_customization_gauge_settings.current_value')}: `}
-            <FontWeight fontWeight="bold">{result}</FontWeight>
+            <FontWeight fontWeight="bold">{analysisResult}</FontWeight>
           </BodyText>
         </CurrentValue>
       )}

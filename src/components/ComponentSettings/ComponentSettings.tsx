@@ -40,8 +40,8 @@ type Props = {
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Component settings configuration */
   componentSettingsConfig: ComponentSettings;
-  /** Chart result */
-  result?: unknown;
+  /** Analysis result */
+  analysisResult?: unknown;
 };
 
 const getSettingsComponent = (widgetType: PickerWidgets | 'gauge') => {
@@ -78,7 +78,7 @@ const ComponentSettings: FC<Props> = ({
   onUpdateWidgetSettings,
   onUpdateChartSettings,
   componentSettingsConfig,
-  result,
+  analysisResult,
 }) => {
   const { modalContainer } = useContext(AppContext);
   const { isDisabled } = componentSettingsConfig;
@@ -107,7 +107,7 @@ const ComponentSettings: FC<Props> = ({
           onUpdateWidgetSettings,
           onUpdateChartSettings,
           hiddenOptions,
-          result,
+          analysisResult,
         })}
       </SettingsContainer>
     </MousePositionedTooltip>

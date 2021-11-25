@@ -23,7 +23,7 @@ export const InputContainer = styled.div`
 `;
 
 export const FieldsWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
   max-width: 250px;
   width: 100%;
 `;

@@ -9,7 +9,7 @@ const render = (overProps: any = {}) => {
       minValue: 10,
       maxValue: 200,
     },
-    result: 100,
+    analysisResult: 100,
     onUpdateChartSettings: jest.fn(),
     ...overProps,
   };
@@ -25,13 +25,13 @@ const render = (overProps: any = {}) => {
 test('should render result if provided', () => {
   const {
     wrapper: { getByText },
-    props: { result },
+    props: { analysisResult },
   } = render();
 
   const element = getByText(
     'widget_customization_gauge_settings.current_value:'
   );
-  const value = getByText(result);
+  const value = getByText(analysisResult);
   expect(element).toBeInTheDocument();
   expect(value).toBeInTheDocument();
 });

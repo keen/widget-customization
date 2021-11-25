@@ -19,8 +19,8 @@ export type ChartCustomizationSettings = {
   iconStyle?: IconStyles;
   iconType?: IconType;
   rowsSelection?: boolean;
-  maxValue?: number;
-  minValue?: number;
+  maxValue?: number | 'auto';
+  minValue?: number | 'auto';
 };
 
 export type WidgetCustomizationSettings = {

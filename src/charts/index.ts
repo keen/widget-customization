@@ -6,6 +6,7 @@ import circularTransformation from './circular';
 import choroplethTransformation from './choropleth';
 import heatmapTransformation from './heatmap';
 import tableTransformation from './table';
+import gaugeTransformation from './gauge';
 
 const chartTransformations = {
   bar: barTransformation,
@@ -16,6 +17,7 @@ const chartTransformations = {
   choropleth: choroplethTransformation,
   heatmap: heatmapTransformation,
   table: tableTransformation,
+  gauge: gaugeTransformation,
 };
 
 export default chartTransformations;
