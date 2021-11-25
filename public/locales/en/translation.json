@@ -94,7 +94,7 @@
     "original_data": "Original data",
     "separator": "Separate groups of thousands with a comma \" , \"",
     "select_precision_first": "Select the precision first",
-    "click_on_columns_to_select_data": "Click on the columns to format the data.",
+    "click_on_columns_to_select_data": "Click on the columns to format the data",
     "column_name_and_data_type": "Column Name & Data Type",
     "column_name": "Column Name",
     "data_type": "Data Type",

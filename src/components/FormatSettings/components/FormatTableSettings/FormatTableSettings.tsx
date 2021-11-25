@@ -25,6 +25,7 @@ import { colors } from '@keen.io/colors';
 import { ChartEvents, TableEvents } from '@keen.io/charts';
 import { extractFormatterType } from '@keen.io/charts-utils';
 import { useKeypress } from '@keen.io/react-hooks';
+import { Icon } from '@keen.io/icons';
 
 import SectionTitle from '../../../SectionTitle';
 import { AppContext } from '../../../../contexts';
@@ -40,6 +41,8 @@ import {
   TitleWrapper,
   TitleActions,
   DropdownInfo,
+  SelectColumnInfoWrapper,
+  InfoIconWrapper,
 } from './FormatTableSettings.styles';
 import { DATA_TYPES, DataTypes } from './constants';
 import {
@@ -205,16 +208,23 @@ const FormatTableSettings: FC<Props> = ({
   return (
     <Container>
       {!dataType ? (
-        <SelectColumnInfo>
-          <BodyText
-            variant="body1"
-            color={transparentize(0.3, colors.black[100])}
-          >
-            {t(
-              'widget_customization_format_value_settings.click_on_columns_to_select_data'
-            )}
-          </BodyText>
-        </SelectColumnInfo>
+        <SelectColumnInfoWrapper>
+          <SelectColumnInfo>
+            <InfoIconWrapper>
+              <Icon
+                type="click-solid"
+                width={21}
+                height={23}
+                fill={colors.green[500]}
+              />
+            </InfoIconWrapper>
+            <BodyText variant="body1" color={colors.green[500]}>
+              {t(
+                'widget_customization_format_value_settings.click_on_columns_to_select_data'
+              )}
+            </BodyText>
+          </SelectColumnInfo>
+        </SelectColumnInfoWrapper>
       ) : (
         <>
           <SettingsColumnLeft>

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
+import { transparentize } from 'polished';
+
 import { colors } from '@keen.io/colors';
 
 const mixin = css`
@@ -59,11 +61,27 @@ export const ControlContainer = styled.div<{ isDisabled?: boolean }>`
     `};
 `;
 
-export const SelectColumnInfo = styled.div`
+export const SelectColumnInfoWrapper = styled.div`
   width: 100%;
-  margin-top: 20px;
   display: flex;
   justify-content: center;
+`;
+
+export const SelectColumnInfo = styled.div`
+  margin-top: 20px;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${transparentize(0.8, colors.green[100])};
+  border: 1px solid ${colors.green[100]};
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 63px;
+`;
+
+export const InfoIconWrapper = styled.div`
+  margin-right: 10px;
 `;
 
 export const FormatInfo = styled.div`

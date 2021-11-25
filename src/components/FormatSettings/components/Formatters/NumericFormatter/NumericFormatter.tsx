@@ -117,6 +117,8 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
 
   const isPrecisionOpen = dropdown === 'precision';
   const isOperationOpen = dropdown === 'operation';
+  const precisionSpecified =
+    precision && precision !== DEFAULT_FORMATTER_PATTERN.value;
 
   const onPrecisionChange = (_e, { value: precisionValue }) => {
     if (patternOption.value === DEFAULT_FORMATTER_PATTERN.value) {
@@ -264,7 +266,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
         </ControlContainer>
       </Row>
       <MousePositionedTooltip
-        isActive={!precision}
+        isActive={!precisionSpecified}
         renderContent={() => (
           <BodyText variant="body2" color={colors.black[100]}>
             {t(
@@ -273,11 +275,11 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
           </BodyText>
         )}
       >
-        <Row isDisabled={!precision}>
+        <Row isDisabled={!precisionSpecified}>
           <BodyText variant="body2" fontWeight="bold">
             {t('widget_customization_format_value_settings.calculate')}
           </BodyText>
-          <MultiControl isDisabled={!precision}>
+          <MultiControl isDisabled={!precisionSpecified}>
             <ControlContainer>
               <DropableContainer
                 variant="secondary"
@@ -359,11 +361,15 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
             </AnimatePresence>
           </MultiControl>
         </Row>
-        <Row marginTop="20px" marginBottom="5px" isDisabled={!precision}>
+        <Row
+          marginTop="20px"
+          marginBottom="5px"
+          isDisabled={!precisionSpecified}
+        >
           <StyledLabel htmlFor="separator" data-testid="separator">
             <Checkbox
               id="separator"
-              disabled={!precision}
+              disabled={!precisionSpecified}
               onChange={() => updateFormat({ separator: !separator })}
               checked={!!separator}
             />
