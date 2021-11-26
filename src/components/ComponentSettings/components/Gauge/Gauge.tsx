@@ -103,6 +103,9 @@ const GaugeSettings: FC<SettingsModifier> = ({
                   validateFields(inputValue, targetValue);
                 }
               }}
+              onBlur={() => {
+                validateFields(minimalValue, targetValue);
+              }}
             />
           </InputContainer>
         </FieldGroup>
@@ -136,6 +139,9 @@ const GaugeSettings: FC<SettingsModifier> = ({
                   setValues((state) => ({ ...state, targetValue: inputValue }));
                   validateFields(minimalValue, inputValue);
                 }
+              }}
+              onBlur={() => {
+                validateFields(minimalValue, targetValue);
               }}
             />
           </InputContainer>
