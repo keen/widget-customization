@@ -1,5 +1,9 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
-import { PieChartSettings, TableChartSettings } from '@keen.io/charts';
+import {
+  GaugeChartSettings,
+  PieChartSettings,
+  TableChartSettings,
+} from '@keen.io/charts';
 
 import chartTransformations from '../charts';
 import { createWidgetSettings } from '../utils';
@@ -92,6 +96,14 @@ const serializeInputSettings = (
       settings = {
         chart: chartTransformations.table.serializeIn(
           chartSettings as TableChartSettings
+        ),
+        widget: createWidgetSettings(widgetSettings),
+      };
+      break;
+    case 'gauge':
+      settings = {
+        chart: chartTransformations.gauge.serializeIn(
+          chartSettings as GaugeChartSettings
         ),
         widget: createWidgetSettings(widgetSettings),
       };
