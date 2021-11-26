@@ -331,6 +331,11 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
           />
         </MultiControl>
       </Row>
+      {hasError && (
+        <Alert type="error" contentWidth>
+          {t(errorMessage)}
+        </Alert>
+      )}
       <Row marginTop="20px" marginBottom="5px" isDisabled={!precisionSpecified}>
         <StyledLabel htmlFor="separator" data-testid="separator">
           <Checkbox
@@ -346,11 +351,6 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
           </LabelText>
         </StyledLabel>
       </Row>
-      {hasError && (
-        <Alert type="error" contentWidth>
-          {t(errorMessage)}
-        </Alert>
-      )}
     </Container>
   );
 };
