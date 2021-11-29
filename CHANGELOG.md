@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.44](https://github.com/keen/query-creator/compare/v0.0.43...v0.0.44) (2021-11-29)
+
+
+### Features
+
+* 🎸 gauge chart settings ([86465ed](https://github.com/keen/query-creator/commit/86465edcccd34953fdd3ca631ef5e35f4da79954))
+
+
+### Bug Fixes
+
+* 🐛 AM/PM added to timeformatter, precision check on numeric ([cc79502](https://github.com/keen/query-creator/commit/cc79502475aa69729ac38cc74314d3e14597211a))
+
 ### [0.0.43](https://github.com/keen/query-creator/compare/v0.0.42...v0.0.43) (2021-11-10)
 
 
