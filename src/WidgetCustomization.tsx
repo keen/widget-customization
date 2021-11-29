@@ -10,6 +10,7 @@ import {
   ChartCustomizationSettings,
   WidgetCustomizationSettings,
 } from './types';
+import { MENU_ITEMS_ENUM } from './constants';
 
 type Props = {
   /** Chart plot settings */
@@ -31,7 +32,9 @@ type Props = {
   /** PubSub used to communicate with chart */
   pubSub?: PubSub;
   /** Callback which will be called on menu section change */
-  onMenuItemChange?: (menuItemId: string) => void;
+  onMenuItemChange?: (menuItemId: MENU_ITEMS_ENUM) => void;
+  /** Active menu item **/
+  activeMenuItem?: MENU_ITEMS_ENUM;
   /** Analysis result */
   analysisResult?: unknown;
 };
@@ -47,6 +50,7 @@ const WidgetCustomization: FC<Props> = ({
   customizationSections = {},
   pubSub,
   onMenuItemChange,
+  activeMenuItem,
   analysisResult,
 }) => {
   return (
@@ -59,6 +63,7 @@ const WidgetCustomization: FC<Props> = ({
         customizationSections={customizationSections}
         analysisResult={analysisResult}
         onMenuItemChange={onMenuItemChange}
+        activeMenuItem={activeMenuItem}
         onUpdateChartSettings={(settings) => {
           onUpdateChartSettings(settings);
         }}

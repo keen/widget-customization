@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PickerWidgets } from '@keen.io/widget-picker';
@@ -40,7 +40,9 @@ type Props = {
   /** Widget type */
   widgetType?: PickerWidgets;
   /** Callback which will be called on menu section change */
-  onMenuItemChange?: (menuItemId: string) => void;
+  onMenuItemChange?: (menuItemId: MENU_ITEMS_ENUM) => void;
+  /** Active menu item */
+  activeMenuItem?: MENU_ITEMS_ENUM;
   /** Analysis result */
   analysisResult?: unknown;
 };
@@ -54,6 +56,7 @@ const App: FC<Props> = ({
   onUpdateWidgetSettings,
   customizationSections,
   onMenuItemChange,
+  activeMenuItem,
   analysisResult,
 }) => {
   const { t } = useTranslation();
@@ -66,16 +69,12 @@ const App: FC<Props> = ({
 
   const { title, subtitle } = widget;
   const { formatValue } = chart;
-  const [activeMenuItemId, setActiveMenuItemId] = useState<MENU_ITEMS_ENUM>(
-    MENU_ITEMS_ENUM.TITLES
-  );
   const TranslatedMenuItems = MENU_ITEMS.map(({ id, label }) => ({
     id,
     label: t(label),
   }));
 
   const onMenuChange = (itemId) => {
-    setActiveMenuItemId(itemId);
     onMenuItemChange && onMenuItemChange(itemId);
   };
 
@@ -85,10 +84,10 @@ const App: FC<Props> = ({
         <SideMenu
           menuItems={TranslatedMenuItems}
           onChange={onMenuChange}
-          activeItemId={activeMenuItemId}
+          activeItemId={activeMenuItem}
         />
       </SideMenuWrapper>
-      {activeMenuItemId === MENU_ITEMS_ENUM.TITLES && (
+      {activeMenuItem === MENU_ITEMS_ENUM.TITLES && (
         <Section>
           <HeadingSettingsContainer>
             <HeadingSettings
@@ -125,7 +124,7 @@ const App: FC<Props> = ({
           </HeadingSettingsContainer>
         </Section>
       )}
-      {activeMenuItemId === MENU_ITEMS_ENUM.FORMATTING && (
+      {activeMenuItem === MENU_ITEMS_ENUM.FORMATTING && (
         <Section>
           <FormatSettings
             widgetType={widgetType}
@@ -148,7 +147,7 @@ const App: FC<Props> = ({
           />
         </Section>
       )}
-      {activeMenuItemId === MENU_ITEMS_ENUM.CHART_ELEMENTS && (
+      {activeMenuItem === MENU_ITEMS_ENUM.CHART_ELEMENTS && (
         <Section>
           <ComponentSettings
             widgetType={widgetType}
