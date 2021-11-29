@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/keen/query-creator/compare/v0.0.45...v0.1.0) (2021-11-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Prop instead of inner state for active menu item
+
+### Features
+
+* 🎸 Active menu item as a prop ([38ffef3](https://github.com/keen/query-creator/commit/38ffef3100f91d760045295dabc9adb8e4c39133))
+
 ### [0.0.45](https://github.com/keen/query-creator/compare/v0.0.44...v0.0.45) (2021-11-29)
 
 
