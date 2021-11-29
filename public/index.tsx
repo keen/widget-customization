@@ -9,6 +9,7 @@ import { createWidgetSettings } from '../src/utils';
 import {
   ChartCustomizationSettings,
   WidgetCustomizationSettings,
+  MENU_ITEMS_ENUM,
 } from '../src';
 
 import createI18n from './i18n';
@@ -59,6 +60,10 @@ const App = () => {
     datavizRef.current.render(tableData);
   }, [chartSettings, widgetSettings]);
 
+  const [activeMenuItem, setActiveMenuItem] = useState<MENU_ITEMS_ENUM>(
+    MENU_ITEMS_ENUM.TITLES
+  );
+
   return (
     <>
       <div ref={visualizationContainer} style={{ height: 500 }} />
@@ -69,7 +74,10 @@ const App = () => {
         widgetSettings={widgetSettings}
         onUpdateWidgetSettings={(settings) => setWidgetSettings(settings)}
         onUpdateChartSettings={(settings) => setChartSettings(settings)}
-        onMenuItemChange={(currentMenuItemId) => console.log(currentMenuItemId)}
+        activeMenuItem={activeMenuItem}
+        onMenuItemChange={(currentMenuItemId) =>
+          setActiveMenuItem(currentMenuItemId)
+        }
         modalContainer="#modal-root"
         savedQueryName="Last purchases"
         customizationSections={{
