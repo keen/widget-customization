@@ -59,6 +59,17 @@
     "title": "Donut & Pie Chart Components",
     "label": "Value Mode"
   },
+  "widget_customization_gauge_settings": {
+    "title": "Gauge Chart Settings",
+    "minimal_value": "Minimal Value",
+    "target_value": "Target Value",
+    "target_value_placeholder": "What is your goal?",
+    "current_value": "The current value is",
+    "validation": "The Target Value must be greater than the Minimal Value",
+    "validation_target_value": "Please provide correct Target Value",
+    "validation_minimal_value": "Please provide correct Minimal Value",
+    "validation_comma": "Use dot instead of comma if you want to separate decimal value"
+  },
   "widget_customization_heading_settings": {
     "section_title": "Basic Info",
     "section_description": "(Add context to your data by applying Title and Subtitle)",
@@ -83,7 +94,7 @@
     "original_data": "Original data",
     "separator": "Separate groups of thousands with a comma \" , \"",
     "select_precision_first": "Select the precision first",
-    "click_on_columns_to_select_data": "Click on the columns to format the data.",
+    "click_on_columns_to_select_data": "Click on the columns to format the data",
     "column_name_and_data_type": "Column Name & Data Type",
     "column_name": "Column Name",
     "data_type": "Data Type",

@@ -6,6 +6,7 @@ import CircularSettings from './Circular';
 import ChoroplethSettings from './Choropleth';
 import MetricSettings from './Metric';
 import TableSettings from './Table';
+import GaugeSettings from './Gauge';
 import ComponentSettingsNotAvailable from './ComponentSettingsNotAvailable';
 import GridSettings from './GridSettings';
 import LegendSettings from './LegendSettings';
@@ -18,6 +19,7 @@ export {
   MetricSettings,
   TableSettings,
   HeatmapSettings,
+  GaugeSettings,
   CircularSettings,
   ComponentSettingsNotAvailable,
   GridSettings,

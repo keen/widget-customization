@@ -152,21 +152,20 @@ test('thousands separator is enabled when precision is set', () => {
   expect(separatorCheckbox).not.toBeDisabled();
 });
 
-test('Shows tooltip when comma typed inside the input', async () => {
+test('Shows validation message when comma typed inside the input', async () => {
   const {
-    wrapper: { getByTestId },
+    wrapper: { getByTestId, getByText },
   } = render();
 
-  const input = getByTestId('input-prefix');
+  const input = getByTestId('input-value');
   const inputValue = '12,';
 
-  act(() => {
-    fireEvent.change(input, { target: { value: inputValue } });
-    fireEvent.blur(input);
-  });
+  fireEvent.change(input, { target: { value: inputValue } });
 
   await waitFor(() => {
-    const validationTooltip = getByTestId('validation-tooltip');
-    expect(validationTooltip).toHaveStyle('opacity: 0;');
+    const validationTooltip = getByText(
+      'widget_customization_format_value_settings.use_dot_instead_of_comma'
+    );
+    expect(validationTooltip).toBeInTheDocument();
   });
 });
