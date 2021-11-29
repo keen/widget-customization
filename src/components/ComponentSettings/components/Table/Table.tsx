@@ -6,7 +6,7 @@ import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
 
-const MetricSettings: FC<SettingsModifier> = ({
+const TableSettings: FC<SettingsModifier> = ({
   widgetSettings,
   chartSettings,
   onUpdateWidgetSettings,
@@ -46,4 +46,4 @@ const MetricSettings: FC<SettingsModifier> = ({
   );
 };
 
-export default MetricSettings;
+export default TableSettings;

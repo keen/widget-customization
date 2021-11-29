@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <>
-      <div ref={visualizationContainer} />
+      <div ref={visualizationContainer} style={{ height: 500 }} />
       <WidgetCustomization
         widgetType="table"
         pubSub={pubSub}

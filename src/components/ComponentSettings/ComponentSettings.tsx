@@ -12,6 +12,7 @@ import {
   TableSettings,
   MetricSettings,
   HeatmapSettings,
+  GaugeSettings,
   CircularSettings,
   ComponentSettingsNotAvailable,
 } from './components';
@@ -39,9 +40,11 @@ type Props = {
   onUpdateWidgetSettings: (widget: WidgetCustomizationSettings) => void;
   /** Component settings configuration */
   componentSettingsConfig: ComponentSettings;
+  /** Analysis result */
+  analysisResult?: unknown;
 };
 
-const getSettingsComponent = (widgetType: PickerWidgets) => {
+const getSettingsComponent = (widgetType: PickerWidgets | 'gauge') => {
   switch (widgetType) {
     case 'table':
       return TableSettings;
@@ -61,6 +64,8 @@ const getSettingsComponent = (widgetType: PickerWidgets) => {
       return CircularSettings;
     case 'choropleth':
       return ChoroplethSettings;
+    case 'gauge':
+      return GaugeSettings;
     default:
       return null;
   }
@@ -73,6 +78,7 @@ const ComponentSettings: FC<Props> = ({
   onUpdateWidgetSettings,
   onUpdateChartSettings,
   componentSettingsConfig,
+  analysisResult,
 }) => {
   const { modalContainer } = useContext(AppContext);
   const { isDisabled } = componentSettingsConfig;
@@ -101,6 +107,7 @@ const ComponentSettings: FC<Props> = ({
           onUpdateWidgetSettings,
           onUpdateChartSettings,
           hiddenOptions,
+          analysisResult,
         })}
       </SettingsContainer>
     </MousePositionedTooltip>

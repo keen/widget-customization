@@ -41,6 +41,8 @@ type Props = {
   widgetType?: PickerWidgets;
   /** Callback which will be called on menu section change */
   onMenuItemChange?: (menuItemId: string) => void;
+  /** Analysis result */
+  analysisResult?: unknown;
 };
 
 const App: FC<Props> = ({
@@ -52,6 +54,7 @@ const App: FC<Props> = ({
   onUpdateWidgetSettings,
   customizationSections,
   onMenuItemChange,
+  analysisResult,
 }) => {
   const { t } = useTranslation();
 
@@ -154,6 +157,7 @@ const App: FC<Props> = ({
             onUpdateWidgetSettings={onUpdateWidgetSettings}
             onUpdateChartSettings={onUpdateChartSettings}
             componentSettingsConfig={componentSettings}
+            analysisResult={analysisResult}
           />
         </Section>
       )}

@@ -35,6 +35,8 @@ const serializeOutputSettings = (
       return chartTransformations.bar.serializeOut(chartSettings);
     case 'table':
       return chartTransformations.table.serializeOut(chartSettings);
+    case 'gauge':
+      return chartTransformations.gauge.serializeOut(chartSettings);
     default:
       return {};
   }
