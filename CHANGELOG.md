@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.45](https://github.com/keen/query-creator/compare/v0.0.44...v0.0.45) (2021-11-29)
+
+
+### Bug Fixes
+
+* 🐛 apply formatter for gauge tooltip ([ca5f7eb](https://github.com/keen/query-creator/commit/ca5f7ebcb83070d905fcd09f98ce453239be1eac))
+
 ### [0.0.44](https://github.com/keen/query-creator/compare/v0.0.43...v0.0.44) (2021-11-29)
 
 
