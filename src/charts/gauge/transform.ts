@@ -12,6 +12,7 @@ const transform: WidgetTransform<GaugeChartSettings> = {
   serializeOut: ({ minValue, maxValue, formatValue }) => {
     return {
       formatValue,
+      formatTooltip: formatValue,
       minValue,
       maxValue,
     };
