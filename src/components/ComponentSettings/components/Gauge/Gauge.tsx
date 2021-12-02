@@ -28,6 +28,11 @@ const GaugeSettings: FC<SettingsModifier> = ({
 
   const validateFields = useCallback(
     (minimalValue: string, targetValue?: string) => {
+      onUpdateChartSettings({
+        ...chartSettings,
+        minValue: +minimalValue,
+        maxValue: targetValue ? +targetValue : null,
+      });
       if (targetValue === '' || targetValue === 'auto')
         return setError({
           hasError: true,
@@ -47,11 +52,6 @@ const GaugeSettings: FC<SettingsModifier> = ({
         });
 
       setError({ hasError: false, message: '' });
-      onUpdateChartSettings({
-        ...chartSettings,
-        minValue: +minimalValue,
-        maxValue: +targetValue,
-      });
     },
     [minimalValue, targetValue]
   );
@@ -78,6 +78,9 @@ const GaugeSettings: FC<SettingsModifier> = ({
           </Label>
           <InputContainer>
             <Input
+              placeholder={t(
+                'widget_customization_gauge_settings.minimal_value_placeholder'
+              )}
               variant="solid"
               type="number"
               hasError={hasError && !minimalValue}
