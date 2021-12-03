@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/keen/query-creator/compare/v0.1.0...v0.1.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* 🐛 emoty target value state ([415e765](https://github.com/keen/query-creator/commit/415e7658a57e2b8a35383191693a4ed0602ce23a))
+
 ## [0.1.0](https://github.com/keen/query-creator/compare/v0.0.45...v0.1.0) (2021-11-29)
 
 
