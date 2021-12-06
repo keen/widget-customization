@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'react-use';
@@ -69,7 +68,7 @@ const NumericFormatter: FC<Props> = ({ formatValue, onUpdateFormatValue }) => {
   const { hasError, message: errorMessage } = error;
 
   useEffect(() => {
-    const { separator, ...settings } = createFormatterSettings(
+    const settings = createFormatterSettings(
       formatValue,
       'number'
     ) as NumericFormatter;
