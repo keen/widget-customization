@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/keen/query-creator/compare/v0.1.1...v0.1.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* 🐛 handle numeric separator ([15ca7df](https://github.com/keen/query-creator/commit/15ca7df63dbfa1d4cfbe888be4aa1c0be6513096))
+
 ### [0.1.1](https://github.com/keen/query-creator/compare/v0.1.0...v0.1.1) (2021-12-03)
 
 
