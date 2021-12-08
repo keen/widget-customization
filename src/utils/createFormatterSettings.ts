@@ -7,7 +7,7 @@ import { FormatterSettings } from '../types';
  *
  */
 
-const regexp = /\${(.+)}/g;
+const regexp = /\${(.*)}/g;
 
 const createFormatterSettings = (
   formatValue: string | null,
