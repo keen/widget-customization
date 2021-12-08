@@ -21,7 +21,7 @@ export const DEFAULT_FORMATTER_PATTERN = {
   value: '-',
 };
 
-export const BASIC_FORMATTER_PATTERN = '${number}';
+export const BASIC_FORMATTER_PATTERN = '${}';
 
 export enum MENU_ITEMS_ENUM {
   TITLES = 'titles',

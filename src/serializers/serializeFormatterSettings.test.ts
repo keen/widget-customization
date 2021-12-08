@@ -25,7 +25,7 @@ test('serialize formatter settings for prefix only', () => {
   };
   const result = serializeFormatterSettings(settings);
 
-  expect(result).toMatchInlineSnapshot(`"prefix\${number}"`);
+  expect(result).toMatchInlineSnapshot(`"prefix\${}"`);
 });
 
 test('serialize formatter settings for basic formatting option', () => {
