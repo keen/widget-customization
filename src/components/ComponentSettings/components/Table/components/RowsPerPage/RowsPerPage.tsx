@@ -23,9 +23,9 @@ import {
   DropdownWrapper,
   RowsPerPageWrapper,
 } from './RowsPerPage.styles';
-import { DisabledPaginationInfo } from '../DisabledPaginationInfo';
+import { DisabledPaginationInfo } from './components';
 
-type Props = {
+export type Props = {
   /** Value mode */
   rowsPerPage: typeof PER_PAGE_OPTIONS[number];
   /** Update settings event handler */
@@ -145,7 +145,11 @@ const RowsPerPage: FC<Props> = ({
                 </DropableContainer>
               </DroppableContainerWrapper>
               <DynamicPortal>
-                <DropdownWrapper x={contentPosition.x} y={contentPosition.y}>
+                <DropdownWrapper
+                  x={contentPosition.x}
+                  y={contentPosition.y}
+                  data-testid="rows-per-page-select"
+                >
                   <Dropdown isOpen={dropdownOpen}>
                     <DropdownListContainer scrollToActive maxHeight={150}>
                       {(activeItemRef) => (

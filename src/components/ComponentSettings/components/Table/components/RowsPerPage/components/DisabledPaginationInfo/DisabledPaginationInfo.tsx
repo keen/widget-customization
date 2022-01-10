@@ -7,12 +7,13 @@ import { Icon } from '@keen.io/icons';
 import { colors } from '@keen.io/colors';
 import { BodyText } from '@keen.io/typography';
 
+import { paginationSettingsMotion } from '../../../../motion';
+
 import {
   IconWrapper,
   PaginationWarning,
   TextWrapper,
 } from './DisabledPaginationInfo.styles';
-import { paginationSettingsMotion } from '../../motion';
 
 type Props = {
   /** Is pagination disabled */
