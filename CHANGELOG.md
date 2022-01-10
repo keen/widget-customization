@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/keen/query-creator/compare/v0.1.3...v0.1.4) (2022-01-10)
+
+
+### Features
+
+* 🎸 Table pagination settings ([b931f7b](https://github.com/keen/query-creator/commit/b931f7b1ee4d9067f00fef9ec374a210ba548676))
+
+
+### Bug Fixes
+
+* 🐛 Default value fix ([4475262](https://github.com/keen/query-creator/commit/4475262d6fc9684ed6bd6310ede9a5039cc7815b))
+
 ### [0.1.3](https://github.com/keen/query-creator/compare/v0.1.2...v0.1.3) (2021-12-08)
 
 
