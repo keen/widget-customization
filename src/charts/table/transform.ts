@@ -1,4 +1,5 @@
 import { TableChartSettings } from '@keen.io/charts';
+import { PER_PAGE_OPTIONS } from '@keen.io/ui-core';
 import { WidgetTransform } from '../../types';
 
 const transform: WidgetTransform<TableChartSettings> = {
@@ -7,8 +8,8 @@ const transform: WidgetTransform<TableChartSettings> = {
       formatValue,
       columnsNamesMapping,
       rowsSelection,
-      pagination,
-      rowsPerPage,
+      pagination = true,
+      rowsPerPage = PER_PAGE_OPTIONS[3],
     } = settings;
 
     return {
