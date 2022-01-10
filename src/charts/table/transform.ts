@@ -7,15 +7,15 @@ const transform: WidgetTransform<TableChartSettings> = {
       formatValue,
       columnsNamesMapping,
       rowsSelection,
-      pagination = true,
-      rowsPerPage = 50,
+      pagination,
+      rowsPerPage,
     } = settings;
 
     return {
       formatTableColumns: formatValue || {},
       columnsNamesMapping: columnsNamesMapping || {},
       rowsSelection,
-      pagination: pagination,
+      pagination,
       rowsPerPage,
     };
   },
