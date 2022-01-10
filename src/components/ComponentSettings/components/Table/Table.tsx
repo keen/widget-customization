@@ -5,6 +5,7 @@ import SettingsItem from '../../../SettingsItem';
 import SectionTitle from '../../../SectionTitle';
 
 import { SettingsModifier } from '../types';
+import { RowsPerPage } from './components';
 
 const TableSettings: FC<SettingsModifier> = ({
   widgetSettings,
@@ -31,6 +32,27 @@ const TableSettings: FC<SettingsModifier> = ({
           }}
         />
       )}
+      <SettingsItem
+        id="table-pagination"
+        isEnabled={chartSettings.pagination}
+        label={t('widget_customization_table_settings.pagination')}
+        onChange={(pagination) => {
+          onUpdateChartSettings({
+            ...chartSettings,
+            pagination,
+          });
+        }}
+      />
+      <RowsPerPage
+        rowsPerPage={chartSettings.rowsPerPage}
+        isPaginationEnabled={chartSettings.pagination}
+        onChange={(rowsPerPage) =>
+          onUpdateChartSettings({
+            ...chartSettings,
+            rowsPerPage,
+          })
+        }
+      />
       <SettingsItem
         id="table-selectable-rows"
         isEnabled={chartSettings.rowsSelection}

@@ -6,6 +6,7 @@ import {
   waitFor,
 } from '@testing-library/react';
 import { KEYBOARD_KEYS } from '@keen.io/ui-core';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 
 import DateTimeFormatter from './DateTimeFormatter';
 import { AppContext } from '../../../../../contexts';
@@ -45,6 +46,9 @@ beforeEach(() => {
     document.body.appendChild(modalRoot);
   }
 });
+
+mockAllIsIntersecting(true);
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
 
 test('applies date formatters to selects', async () => {
   const { prefix, suffix } = createFormatterSettings(
