@@ -9,7 +9,9 @@ const render = (overProps: any = {}) => {
       card: true,
     },
     widgetSettings: {},
-    chartSettings: {},
+    chartSettings: {
+      pagination: true,
+    },
     ...overProps,
     onUpdateChartSettings: jest.fn(),
   };
@@ -45,5 +47,22 @@ test('allows user to enable rows selection', () => {
   expect(props.onUpdateChartSettings).toHaveBeenCalledWith({
     ...props.chartSettings,
     rowsSelection: true,
+  });
+});
+
+test('allows user to disable pagination', () => {
+  const {
+    wrapper: { getByTestId },
+    props,
+  } = render();
+
+  const section = getByTestId('table-pagination');
+
+  const toggle = within(section).getByText('on');
+  fireEvent.click(toggle);
+
+  expect(props.onUpdateChartSettings).toHaveBeenCalledWith({
+    ...props.chartSettings,
+    pagination: false,
   });
 });

@@ -1,4 +1,6 @@
 import { PickerWidgets } from '@keen.io/widget-picker';
+import { PER_PAGE_OPTIONS } from '@keen.io/ui-core';
+
 import {
   GaugeChartSettings,
   PieChartSettings,
@@ -127,6 +129,8 @@ const serializeInputSettings = (
       iconEnabled: false,
       iconStyle: 'solid',
       iconType: AvailableIcons[0],
+      pagination: true,
+      rowsPerPage: PER_PAGE_OPTIONS[3],
       ...settings.chart,
     },
     widget: settings.widget,

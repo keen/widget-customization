@@ -1,4 +1,6 @@
 import React from 'react';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
+
 import {
   render as rtlRender,
   fireEvent,
@@ -40,6 +42,9 @@ afterEach(() => {
 afterAll(() => {
   jest.useRealTimers();
 });
+
+mockAllIsIntersecting(true);
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
 
 test('renders formatter options', () => {
   const {

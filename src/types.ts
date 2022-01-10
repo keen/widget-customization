@@ -1,5 +1,5 @@
 import { LegendSettings, TextSettings } from '@keen.io/widgets';
-import { CardSettings, Layout } from '@keen.io/ui-core';
+import { CardSettings, Layout, PER_PAGE_OPTIONS } from '@keen.io/ui-core';
 import { IconType } from '@keen.io/icons';
 
 import { IconStyles } from './constants';
@@ -21,6 +21,8 @@ export type ChartCustomizationSettings = {
   rowsSelection?: boolean;
   maxValue?: number | 'auto';
   minValue?: number | 'auto';
+  pagination?: boolean;
+  rowsPerPage?: typeof PER_PAGE_OPTIONS[number];
 };
 
 export type WidgetCustomizationSettings = {

@@ -5,6 +5,8 @@ import {
   fireEvent,
   render as rtlRender,
 } from '@testing-library/react';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
+
 import { ChartEvents, TableEvents, ColumnSelection } from '@keen.io/charts';
 import { PubSub } from '@keen.io/pubsub';
 import { KEYBOARD_KEYS } from '@keen.io/ui-core';
@@ -36,6 +38,9 @@ const render = (overProps: any = {}) => {
     chartEvents,
   };
 };
+
+mockAllIsIntersecting(true);
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
 
 test('renders notification about selecting column', async () => {
   const {
